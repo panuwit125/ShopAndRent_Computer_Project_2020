@@ -1,6 +1,8 @@
 import { Form, Button } from "antd";
 const FormItem = Form.Item;
 import React from 'react'
+import router from 'next/router'
+
 
 function home() {
     return (
@@ -12,12 +14,12 @@ function home() {
             <div className="br-body">
                 <div className="br-body-1">
                     <div className="br-circle" />
-                    <Button className="br-btn">RENT</Button>
+                    <Button className="br-btn" onClick={()=>router.push("/page.shop")} >RENT</Button>
                     <h2 style={{color:"black"}}>เช่าโน๊ตบุคราคาเริ่มต้น 200 บาท/วัน</h2>
                 </div>
                 <div className="br-body-1 br-body-2">
                     <div className="br-circle" />
-                    <Button className="br-btn">SHOP</Button>
+                    <Button className="br-btn" onClick={()=>router.push("/page.shop")}>SHOP</Button>
                     <h2 style={{color:"black"}}>ซื้อคอมพิวเตอร์ราคาถูก คุณภาพดี</h2>
                 </div>
             </div>

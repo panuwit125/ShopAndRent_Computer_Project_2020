@@ -74,6 +74,12 @@ body {
 // End --> Home page
 
 // Start --> Shop page
+.sp {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 100%;
+}
 .sp-body-1 {
   display: flex;
   flex-basis: 150;
@@ -87,6 +93,7 @@ body {
   align-items: center;
   flex-direction: column;
   width: 100%;
+  height: auto;
   background: burlywood;
   padding: 20px;
 }
@@ -132,3 +139,143 @@ body {
   width: 200px !important;
 }
 // End --> Chatbot page
+
+// Start --> Description page 
+.dt-body-2-header {
+  width: 100%;
+}
+.dt-body-2-body {
+  width: 100%;
+  background: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.dt-img {
+  width: 300px;
+  margin: 10px;
+}
+.dt-img-1 {
+  width: 100px;
+  margin: 10px;
+}
+.dt-decription {
+  padding:50px;
+  display: flex;
+  flex-direction: column;
+}
+
+.dt-btn {
+  max-width: 250px !important;
+  width: 100% !important;
+}
+// End --> Description page 
+
+// Start --> Payment Page
+.pm-body {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.pm-back {
+  justify-content: space-between;
+  display: flex;
+  padding: 10px;
+  border-bottom: 1px solid black
+}
+.pm-address {
+  padding: 10px;
+  border-bottom: 1px solid black
+}
+.pm-address-1 {
+  display: flex;
+  flex-direction: row;
+}
+.pm-address-2 {
+  padding: 5px 50px;
+}
+.pm-product-img {
+  width: 150px;
+}
+.pm-product {
+  padding: 10px 50px;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+.pm-product-des-1 {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+}
+.pm-product-des {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 10px;
+}
+.pm-option {
+  background: sandybrown;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding:5px 50px;
+}
+.pm-payment {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.pm-payment-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 20px;
+}
+.pm-payment-body-1 {
+  display: flex;
+  justify-content: space-between;
+  padding:0px 70px
+}
+.pm-footer {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  padding: 40px
+}
+.pm-footer-btn {
+  max-width: 100px !important;
+  width: 100% !important;
+  margin: 10px !important;
+}
+// End --> Payment Page
+
+// Start --> Login Page
+.lg {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+}
+.lg-card {
+  background: rgb(44, 42, 42);
+  border-radius: 10px;
+  display: flex;
+  max-width: 500px;
+  width: auto;
+  justify-content: space-around;
+  padding: 20px;
+} 
+
+.lg-input {
+  max-width: 200px !important;
+  width: 100% !important;
+}
+.lg-btn {
+  margin: 5px 0px;
+}
+// End --> Login Page

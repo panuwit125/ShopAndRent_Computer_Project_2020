@@ -26,7 +26,7 @@ const CardProduct = () => {
 function ShopPage() {
   return (
     <FormItem style={{ margin: "0px" }}>
-      <div className="br">
+      <div className="sp">
         <div className="br-header">
           <h1>Header</h1>
         </div>
