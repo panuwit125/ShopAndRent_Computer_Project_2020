@@ -6,13 +6,14 @@ const lessToJS = require('less-vars-to-js')
 const fs = require('fs')
 const path = require('path')
 const withImages = require('next-images')
+const withAssetsImport = require('next-assets-import')
 
 // Where your antd-custom.less file lives
 const themeVariables = lessToJS(
     fs.readFileSync(path.resolve(__dirname, './styles/theme/antd.less'), 'utf8')
 )
 
-module.exports = withImages(withCss(withSass(withLess({
+module.exports = withAssetsImport(withCss(withSass(withLess({
     lessLoaderOptions: {
         javascriptEnabled: true,
         modifyVars: themeVariables, // make your antd custom effective
@@ -36,7 +37,7 @@ module.exports = withImages(withCss(withSass(withLess({
             config.module.rules.unshift({
                 test: antStyles,
                 use: 'null-loader',
-            })
+            });
         }
         return config
     },
