@@ -42,7 +42,7 @@ body {
   justify-content: center;
   align-items: center;
   background: skyblue;
-  flex-basis: 100px;
+  flex-basis: 150px;
 }
 .br-body {
   display: flex;
@@ -84,9 +84,7 @@ body {
   display: flex;
   flex-basis: 150;
   flex-direction: column;
-  height: 100%;
-  background: salmon;
-  padding: 25px;
+  height: auto;
 }
 .sp-body-2 {
   display: flex;
@@ -94,18 +92,14 @@ body {
   flex-direction: column;
   width: 100%;
   height: auto;
-  background: burlywood;
+  background: white;
   padding: 20px;
 }
 .sp-btn-1 {
   margin-bottom:10px !important;
 }
-.sp-body-2-header {
-  background: red;
-}
 .sp-body-2-body {
   width: 100%;
-  background: white;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -279,3 +273,19 @@ body {
   margin: 5px 0px;
 }
 // End --> Login Page
+
+// Start --> Navbar Page
+#components-layout-demo-responsive .logo {
+  height: 32px !important;
+  background: rgba(255, 255, 255, 0.2) !important;
+  margin: 16px !important;
+}
+
+.site-layout-sub-header-background {
+  background: #fff !important;
+}
+
+.site-layout-background {
+  background: #fff !important;
+}
+//End --> Navbar Page

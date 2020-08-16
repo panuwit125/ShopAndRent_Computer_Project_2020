@@ -9,8 +9,8 @@ const requiredLogin = require('../middleware/requiredLogin')
 
 
 
-router.get("/", (req, res) => {
-  res.send("this is auth");
+router.get("/asd", (req, res) => {
+  res.json({message:"this is auth"});
 });
 
 

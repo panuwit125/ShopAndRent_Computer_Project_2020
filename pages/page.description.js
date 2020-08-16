@@ -1,25 +1,24 @@
-import { Form, Button } from "antd";
+import { Form, Button,  } from "antd";
 const FormItem = Form.Item;
-import React from "react";
+import React , {useState} from "react";
+import Header from "./components/component.header";
+import Navbar from "./components/component.navbar";
 
 function DescriptionPage() {
+  const [nameproduct , setNameproduct] = useState('LENOVO')
   return (
     <FormItem style={{ margin: "0px" }}>
       <div className="br">
         <div className="br-header">
-          <h1>Header</h1>
+          <Header />
         </div>
         <div className="br-body">
           <div className="sp-body-1">
-            <Button className="sp-btn-1">SIGN-IN</Button>
-            <Button className="sp-btn-1">ACER</Button>
-            <Button className="sp-btn-1">DELL</Button>
-            <Button className="sp-btn-1">LENOVO</Button>
-            <Button className="sp-btn-1">MSI</Button>
+          <Navbar setname={setNameproduct} page={"description"} />
           </div>
           <div className="sp-body-2">
             <div className="dt-body-2-header">
-              <h1>ACER 205PI CORE7</h1>
+              <h1 style={{color:"black",textAlign:"center"}}>ACER 205PI CORE7</h1>
             </div>
             <div className="dt-body-2-body">
               <img
@@ -42,12 +41,16 @@ function DescriptionPage() {
               </div>
             </div>
             <div className="dt-decription">
-                <div >
-                    <h1 style={{color:"black"}} >รายละเอียด</h1>
-                </div>
-                <div >
-                    <h2 style={{color:"black"}} >จอภาพแบ็คไลท์แบบ LED ขนาด 13.3 นิ้ว (แนวทแยง) พร้อมเทคโนโลยี IPS ความละเอียดปกติ 2560 x 1600 ที่ 227 พิกเซลต่อนิ้ว และรองรับสีสันนับล้านสี</h2>
-                </div>
+              <div>
+                <h1 style={{ color: "black" }}>รายละเอียด</h1>
+              </div>
+              <div>
+                <h2 style={{ color: "black" }}>
+                  จอภาพแบ็คไลท์แบบ LED ขนาด 13.3 นิ้ว (แนวทแยง) พร้อมเทคโนโลยี
+                  IPS ความละเอียดปกติ 2560 x 1600 ที่ 227 พิกเซลต่อนิ้ว
+                  และรองรับสีสันนับล้านสี
+                </h2>
+              </div>
             </div>
             <Button className="dt-btn">RENT NOW</Button>
           </div>
