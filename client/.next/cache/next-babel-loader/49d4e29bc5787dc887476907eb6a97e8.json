@@ -1,0 +1,1 @@
+{"ast":null,"code":"export var UPDATE_FIRSTNAME = 'UPDATE_FIRSTNAME';\nexport var UPDATE_LASTNAME = 'UPDATE_LASTNAME';\nexport var UPDATE_SSID = 'UPDATE_SSID';\nexport var UPDATE_POST = 'UPDATE_POST';\nexport var UPDATE_BIRD = 'UPDATE_BIRD';\nexport var UPDATE_TIME = 'UPDATE_TIME';\nexport var UPDATE_TOKEN = 'UPDATE_TOKEN';","map":null,"metadata":{},"sourceType":"module"}

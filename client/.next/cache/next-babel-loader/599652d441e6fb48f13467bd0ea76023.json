@@ -1,0 +1,1 @@
+{"ast":null,"code":"const {\n  createProxyMiddleware\n} = require('http-proxy-middleware');\n\nmodule.exports = function (app) {\n  app.use('/api', createProxyMiddleware({\n    target: 'http://localhost:5000',\n    changeOrigin: true\n  }));\n};","map":null,"metadata":{},"sourceType":"script"}

@@ -1,0 +1,1 @@
+{"ast":null,"code":"var __jsx = React.createElement;\nimport React from \"react\";\nimport router from \"next/router\";\n\nvar HeaderComponent = function HeaderComponent() {\n  return __jsx(\"h1\", {\n    style: {\n      fontSize: \"50px\"\n    }\n  }, \"SECONDHAND NOTEBOOK\");\n};\n\nexport default HeaderComponent;","map":null,"metadata":{},"sourceType":"module"}
