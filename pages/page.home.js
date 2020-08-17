@@ -1,6 +1,6 @@
 import { Form, Button } from "antd";
 const FormItem = Form.Item;
-import React from 'react'
+import React , { useEffect } from 'react'
 import router from 'next/router'
 import Header from './components/component.header'
 
@@ -12,6 +12,10 @@ function home() {
         router.push("/page.shop")
         return null;
     }
+
+    useEffect(() => {
+        localStorage.clear();
+    }, [])
 
     return (
       <FormItem style={{margin:"0px"}}>
@@ -27,7 +31,7 @@ function home() {
                 </div>
                 <div className="br-body-1 br-body-2">
                     <div className="br-circle" />
-                    <Button className="br-btn" onClick={()=>router.push("Shop")}>SHOP</Button>
+                    <Button className="br-btn" onClick={()=>nexthandle("Shop")}>SHOP</Button>
                     <h2 style={{color:"black"}}>ซื้อคอมพิวเตอร์ราคาถูก คุณภาพดี</h2>
                 </div>
             </div>

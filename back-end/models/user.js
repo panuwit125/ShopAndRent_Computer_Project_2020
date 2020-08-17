@@ -20,7 +20,8 @@ const userSchema = new mongoose.Schema({
         type:String
     },
     type_user:{
-        type:String
+        type:String,
+        required:true
     }
 })
 

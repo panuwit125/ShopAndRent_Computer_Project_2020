@@ -1,14 +1,14 @@
 import * as types from '../types'
 
-export const updateFirstName = (payload) => async dispatch => {
+export const updateTypeBland = (payload) => async dispatch => {
     dispatch({
-        type: types.UPDATE_FIRSTNAME,
+        type: types.UPDATE_TYPEBLAND,
         payload: payload
     })
 }
-export const updateLastName = (payload) => async dispatch => {
+export const updateNavbar = (payload) => async dispatch => {
     dispatch({
-        type: types.UPDATE_LASTNAME,
+        type: types.UPDATE_NAVBAR,
         payload: payload
     })
 }

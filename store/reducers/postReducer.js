@@ -1,8 +1,8 @@
 import * as types from "../types";
 import moment from "moment";
 const initalState = {
-  FirstName: "",
-  LastName: "",
+  TypeBland: "ACER",
+  Navbar: 2,
   SSID: "",
   BirdDay: moment().format("MMM Do YY"),
   PostId: "",
@@ -14,15 +14,15 @@ const initalState = {
 };
 export const postReducer = (state = initalState, action) => {
   switch (action.type) {
-    case types.UPDATE_FIRSTNAME:
+    case types.UPDATE_TYPEBLAND:
       return {
         ...state,
-        FirstName: action.payload,
+        TypeBland: action.payload,
       };
-    case types.UPDATE_LASTNAME:
+    case types.UPDATE_NAVBAR:
       return {
         ...state,
-        LastName: action.payload,
+        Navbar: action.payload,
       };
     case types.UPDATE_SSID:
       return {
