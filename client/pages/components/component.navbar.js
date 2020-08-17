@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect,useState } from "react";
 import { Layout, Menu } from "antd";
 import {
   UploadOutlined,
@@ -13,15 +13,23 @@ const { Header, Content, Footer, Sider } = Layout;
 function NavbarComponent(props) {
   const dispatch = useDispatch();
   const { Navbar } = useSelector((state) => state.post);
-
+  const [isLoading, setisLoading] = useState(false);
   const ClickMenu = (link, number, bland) => {
     dispatch(updateNavbar(number));
     dispatch(updateTypeBland(bland));
     router.push(link);
     return null;
   };
+  useEffect(()=>{
+    if(props){
+      setisLoading(true)
+    }
+  },[])
 
-  if (props.page === "description") {
+  if (!isLoading) {
+    return null;
+  } else {
+      if (props.page === "description") {
     return (
       <Layout>
         <Sider
@@ -36,11 +44,8 @@ function NavbarComponent(props) {
         >
           <div className="logo" />
           <Menu theme="dark" mode="inline">
-          {props.status ? (
-              <Menu.Item
-                key="1"
-                icon={<UserOutlined />}
-              >
+            {props.status ? (
+              <Menu.Item key="1" icon={<UserOutlined />}>
                 ID : {props.user}
               </Menu.Item>
             ) : (
@@ -79,8 +84,61 @@ function NavbarComponent(props) {
         </Sider>
       </Layout>
     );
-  } else {
-    console.log(props.status)
+  } else if (props.page === "Manage") {
+    return (
+      <Layout>
+        <Sider
+          breakpoint="lg"
+          collapsedWidth="0"
+          onBreakpoint={(broken) => {
+            console.log(broken);
+          }}
+          onCollapse={(collapsed, type) => {
+            console.log(collapsed, type);
+          }}
+        >
+          <div className="logo" />
+          <Menu
+            theme="dark"
+            mode="inline"
+            defaultSelectedKeys={["" + Navbar + ""]}
+          >
+            <Menu.Item key="1" icon={<UserOutlined />}>
+              ID :
+            </Menu.Item>
+            <Menu.Item
+              key="2"
+              icon={<VideoCameraOutlined />}
+              onClick={() => {
+                //
+              }}
+            >
+              เพิ่มสินค้า
+            </Menu.Item>
+            <Menu.Item
+              key="3"
+              icon={<UploadOutlined />}
+              onClick={() => {
+                //
+              }}
+            >
+              แก้ไขสินค้า
+            </Menu.Item>
+            <Menu.Item
+              key="4"
+              icon={<UserOutlined />}
+              onClick={() => {
+                //
+              }}
+            >
+              ออกจากระบบ
+            </Menu.Item>
+          </Menu>
+        </Sider>
+      </Layout>
+    );
+  } else if (props.page === "Shop") {
+    console.log(props.status);
     return (
       <Layout>
         <Sider
@@ -100,12 +158,9 @@ function NavbarComponent(props) {
             defaultSelectedKeys={["" + Navbar + ""]}
           >
             {props.status ? (
-              <Menu.Item
-                key="1"
-                icon={<UserOutlined />}
-              >
-                ID : {props.user}
-              </Menu.Item>
+                <Menu.Item key="1" icon={<UserOutlined />}>
+                  ID : {props.user}
+                </Menu.Item>
             ) : (
               <Menu.Item
                 key="1"
@@ -144,11 +199,20 @@ function NavbarComponent(props) {
             >
               Lenovo
             </Menu.Item>
+            {props.status ? (
+                <Menu.Item key="5" icon={<UserOutlined />} onClick={()=>{router.push('/page.home')}} >
+                  ออกจากระบบ
+                </Menu.Item>
+            ) : (
+              null
+            )}
           </Menu>
         </Sider>
       </Layout>
     );
   }
+  }
+
 }
 
 export default NavbarComponent;

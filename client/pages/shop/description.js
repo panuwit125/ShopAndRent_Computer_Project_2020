@@ -1,32 +1,57 @@
 import { Form, Button } from "antd";
 const FormItem = Form.Item;
 import React, { useState, useEffect } from "react";
-import Header from "./components/component.header";
-import Navbar from "./components/component.navbar";
-import router from "next/router";
+import Header from "../components/component.header";
+import Navbar from "../components/component.navbar";
+//import router from "next/router";
+import { useRouter } from "next/router";
+import Axios from "axios";
 
 function DescriptionPage() {
   const [checkLogin, setCheckLogin] = useState(false);
   const [isLoading, setisLoading] = useState(false);
+  //const [Id,setID] = useState('')
   const [user, setUser] = useState("");
+  const [product, setProduct] = useState();
+  const router = useRouter();
+  const { id, comment } = router.query;
+  const Id = id;
 
   useEffect(() => {
-    let token = localStorage.getItem("token");
-    let user = JSON.parse(localStorage.getItem("user"));
-    console.log("token", token, user);
-    if (token) {
-      setUser(user.user_name);
-      setCheckLogin(true);
+    if (Id) {
+      console.log("id", Id);
+      let token = localStorage.getItem("token");
+      let user = JSON.parse(localStorage.getItem("user"));
+      console.log("token", token, user);
+      if (token) {
+        setUser(user.user_name);
+        setCheckLogin(true);
+      }
+      getProductByid();
     }
-    setisLoading(true);
-  }, []);
+  }, [Id]);
+
+  const getProductByid = () => {
+    let data = { id: "" + id + "" };
+    Axios.post("http://localhost:5000/productbyid", data)
+      .then((res) => {
+        console.log(res);
+        setProduct(res.data);
+        setisLoading(true);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   const ButtonShow = () => {
     if (checkLogin) {
       return (
         <div>
           <Button className="dt-btn">ซื้อสินค้า</Button>
-          <Button className="dt-btn" style={{marginTop:"5px"}}>หยิบใส่ตระกร้า</Button>
+          <Button className="dt-btn" style={{ marginTop: "5px" }}>
+            หยิบใส่ตระกร้า
+          </Button>
         </div>
       );
     } else {
@@ -54,13 +79,14 @@ function DescriptionPage() {
             <div className="sp-body-2">
               <div className="dt-body-2-header">
                 <h1 style={{ color: "black", textAlign: "center" }}>
-                  ACER 205PI CORE7
+                  {/*Post :{id}*/}
+                  {product.name_product}
                 </h1>
               </div>
               <div className="dt-body-2-body">
                 <img
                   className="dt-img"
-                  src="https://www.techmoblog.com/uploads/content_images/202004/img_1586763485_6180709595af.jpg"
+                  src={product.image_product}
                 />
                 <div>
                   <img
@@ -83,9 +109,7 @@ function DescriptionPage() {
                 </div>
                 <div>
                   <h2 style={{ color: "black" }}>
-                    จอภาพแบ็คไลท์แบบ LED ขนาด 13.3 นิ้ว (แนวทแยง) พร้อมเทคโนโลยี
-                    IPS ความละเอียดปกติ 2560 x 1600 ที่ 227 พิกเซลต่อนิ้ว
-                    และรองรับสีสันนับล้านสี
+                    {product.description_product}
                   </h2>
                 </div>
               </div>

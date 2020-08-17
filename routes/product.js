@@ -59,9 +59,11 @@ router.delete("/deleteproduct", (req, res) => {
   });
 });
 
-router.get("/showproduct", (req, res) => {
+router.post("/showproduct", (req, res) => {
   const { bland_product } = req.body;
+  console.log('Check',req.body.bland_product,req.body)
   if (!bland_product) {
+    console.log('please select type')
     return res.status(422).json({ error: "please select type" });
   }
   Product.find({ bland_product: bland_product })
@@ -69,6 +71,7 @@ router.get("/showproduct", (req, res) => {
       if (showProduct) {
         res.json(showProduct);
       } else {
+        console.log('select again')
         return res.status(422).json({ error: "select again" });
       }
     })
@@ -76,5 +79,23 @@ router.get("/showproduct", (req, res) => {
       console.log(error);
     });
 });
+
+router.post('/productbyid',(req,res) => {
+  const { id } = req.body;
+  console.log("ID",id)
+  if (!id ) {
+    console.log('not found id')
+    return res.status(422).json({error: "Error"})
+  }
+  Product.findOne({ _id:id })
+  .then((product)=>{
+    if(product) {
+      res.json(product)
+    } else {
+      console.log('no product by id')
+      return res.status(422).json({error:"error"})
+    }
+  })
+})
 
 module.exports = router;

@@ -7,13 +7,16 @@ import CardProduct from "./components/component.cardproduct";
 import Header from "./components/component.header";
 import { useSelector, useDispatch } from "react-redux";
 import { updateTypeBland } from "../store/actions/postAction";
+import axios from "axios";
 
 function ShopPage() {
   const dispatch = useDispatch();
   const { TypeBland } = useSelector((state) => state.post);
   const [checkLogin, setCheckLogin] = useState(false);
   const [isLoading, setisLoading] = useState(false);
+  const [loadingTypebland , setloadingTypebland] = useState(false);
   const [user,setUser] = useState('');
+  const [product,setProduct] = useState();
   
   useEffect(() => {
     let token = localStorage.getItem("token");
@@ -23,12 +26,34 @@ function ShopPage() {
       setUser(user.user_name)
       setCheckLogin(true);
     }
-    setisLoading(true);
+    getProduct(TypeBland);
   }, []);
+
+  const getProduct = (product) => {
+    let body = { bland_product:product }
+    axios.post("http://localhost:5000/showproduct",body).then(res=>{
+      console.log(res)
+      setProduct(res.data)
+      setisLoading(true);
+    }).catch(err=>{
+      console.log(err)
+    })
+  }
+
+  useEffect(()=>{
+    if(loadingTypebland){
+      getProduct(TypeBland)
+    } else {
+      setloadingTypebland(true)
+    }
+  },[TypeBland])
+
+
 
   if (!isLoading) {
     return null;
   } else {
+    console.log(product)
     return (
       <FormItem style={{ margin: "0px" }}>
         <div className="sp">
@@ -37,7 +62,7 @@ function ShopPage() {
           </div>
           <div className="br-body">
             <div className="sp-body-1">
-              <Navbar page={"shop"} status={checkLogin} user={user} />
+              <Navbar page={"Shop"} status={checkLogin} user={user} />
             </div>
             <div className="sp-body-2">
               <div className="sp-body-2-header">
@@ -46,18 +71,10 @@ function ShopPage() {
                 </h1>
               </div>
               <div className="sp-body-2-body">
-                <CardProduct />
-                <CardProduct />
-                <CardProduct />
-                <CardProduct />
-                <CardProduct />
-                <CardProduct />
-                <CardProduct />
-                <CardProduct />
-                <CardProduct />
-                <CardProduct />
-                <CardProduct />
-                <CardProduct />
+                {product.map((data,index)=>{
+                  console.log(data,index)
+                  return <CardProduct data={data} />    
+                })}
               </div>
             </div>
           </div>
