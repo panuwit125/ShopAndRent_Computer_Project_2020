@@ -31,7 +31,7 @@ function ShopPage() {
 
   const getProduct = (product) => {
     let body = { bland_product:product }
-    axios.post("http://localhost:5000/showproduct",body).then(res=>{
+    axios.post("https://tranquil-beach-43094.herokuapp.com/showproduct",body).then(res=>{
       console.log(res)
       setProduct(res.data)
       setisLoading(true);

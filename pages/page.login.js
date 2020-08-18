@@ -10,40 +10,42 @@ function loginPage() {
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
 
-  const [namelogin ,setNameLogin] = useState('');
-  const [passwordlogin , setPasswordLogin] = useState('');
+  const [namelogin, setNameLogin] = useState("");
+  const [passwordlogin, setPasswordLogin] = useState("");
 
-    useEffect(()=>{
-        localStorage.clear();
-    },[])
+  useEffect(() => {
+    localStorage.clear();
+  }, []);
 
   const loginData = () => {
-      if(!namelogin || !passwordlogin) {
-          alert('กรุณากรอกข้อมูลให้ครบ')
-      } else {
-          let data = {
-              user_name:namelogin,
-              pass_word:passwordlogin,
-          }
-          axios({
-              method:"post",
-              url:"https://tranquil-beach-43094.herokuapp.com/signin",
-              data:data
-          }).then((res)=>{
-              console.log(res)
-              localStorage.setItem('token',res.data.token)
-              localStorage.setItem('user',JSON.stringify(res.data.savedUser))
-              localStorage.setItem('type',"Shop")
-              router.push('/page.shop')
-          }).catch(err=> {
-              console.log(err)
-          })
-      }
-  }
+    if (!namelogin || !passwordlogin) {
+      alert("กรุณากรอกข้อมูลให้ครบ");
+    } else {
+      let data = {
+        user_name: namelogin,
+        pass_word: passwordlogin,
+      };
+      axios({
+        method: "post",
+        url: "https://tranquil-beach-43094.herokuapp.com/signin",
+        data: data,
+      })
+        .then((res) => {
+          console.log(res);
+          localStorage.setItem("token", res.data.token);
+          localStorage.setItem("user", JSON.stringify(res.data.savedUser));
+          localStorage.setItem("type", "Shop");
+          router.push("/page.shop");
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  };
 
   const postData = () => {
     if (!name || !password || !firstname || !lastname) {
-        alert('กรุณากรอกข้อมูลให้ครบ')
+      alert("กรุณากรอกข้อมูลให้ครบ");
     } else {
       let data = {
         user_name: name,
@@ -53,18 +55,37 @@ function loginPage() {
       };
       axios({
         method: "post",
-        url: "http://localhost:5000/signup",
-        headers:{
-            "Content-Type":"application/json"
+        url: "https://tranquil-beach-43094.herokuapp.com/signup",
+        headers: {
+          "Content-Type": "application/json",
         },
-        data:data
-      }).then(res=>{
-        console.log(res);
-        router.push('/page.login')
+        data: data,
       })
-      .catch(error=>{
-          console.log("ERROR",error);
-      })
+        .then((res) => {
+          console.log(res);
+          let data = {
+            user_name: name,
+            pass_word: password,
+          };
+          axios({
+            method: "post",
+            url: "https://tranquil-beach-43094.herokuapp.com/signin",
+            data: data,
+          })
+            .then((res) => {
+              console.log(res);
+              localStorage.setItem("token", res.data.token);
+              localStorage.setItem("user", JSON.stringify(res.data.savedUser));
+              localStorage.setItem("type", "Shop");
+              router.push("/page.shop");
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        })
+        .catch((error) => {
+          console.log("ERROR", error);
+        });
     }
   };
 
@@ -103,30 +124,28 @@ function loginPage() {
               value={lastname}
               onChange={(e) => setLastname(e.target.value)}
             />
-            <Button
-              className="lg-btn"
-              onClick={() => postData()}
-            >
+            <Button className="lg-btn" onClick={() => postData()}>
               สมัครสมาชิก
             </Button>
           </div>
           <div>
             <h2>เข้าสู่ระบบ</h2>
             <h3>ชื่อผู้ใช้งาน</h3>
-            <Input className="lg-input" placeholder="ชื่อผู้ใช้งาน" value={namelogin}
-              onChange={(e) => setNameLogin(e.target.value)} />
+            <Input
+              className="lg-input"
+              placeholder="ชื่อผู้ใช้งาน"
+              value={namelogin}
+              onChange={(e) => setNameLogin(e.target.value)}
+            />
             <h3>รหัสผ่าน</h3>
             <Input
-            value={passwordlogin}
-            onChange={(e) => setPasswordLogin(e.target.value)}
+              value={passwordlogin}
+              onChange={(e) => setPasswordLogin(e.target.value)}
               className="lg-input"
               type="password"
               placeholder="รหัสผ่าน"
             />
-            <Button
-              className="lg-btn"
-              onClick={() => loginData()}
-            >
+            <Button className="lg-btn" onClick={() => loginData()}>
               เข้าสู่ระบบ
             </Button>
           </div>

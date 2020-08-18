@@ -6,6 +6,7 @@ import Navbar from "../components/component.navbar";
 //import router from "next/router";
 import { useRouter } from "next/router";
 import Axios from "axios";
+import { route } from "next/dist/next-server/server/router";
 
 function DescriptionPage() {
   const [checkLogin, setCheckLogin] = useState(false);
@@ -24,7 +25,7 @@ function DescriptionPage() {
       let user = JSON.parse(localStorage.getItem("user"));
       console.log("token", token, user);
       if (token) {
-        setUser(user.user_name);
+        setUser(user);
         setCheckLogin(true);
       }
       getProductByid();
@@ -33,7 +34,7 @@ function DescriptionPage() {
 
   const getProductByid = () => {
     let data = { id: "" + id + "" };
-    Axios.post("http://localhost:5000/productbyid", data)
+    Axios.post("https://tranquil-beach-43094.herokuapp.com/productbyid", data)
       .then((res) => {
         console.log(res);
         setProduct(res.data);
@@ -48,8 +49,8 @@ function DescriptionPage() {
     if (checkLogin) {
       return (
         <div>
-          <Button className="dt-btn">ซื้อสินค้า</Button>
-          <Button className="dt-btn" style={{ marginTop: "5px" }}>
+          <Button className="dt-btn" onClick={()=>saveDataInventory("buy")}>ซื้อสินค้า</Button>
+          <Button className="dt-btn" onClick={()=>saveDataInventory("push")} style={{ marginTop: "5px" }}>
             หยิบใส่ตระกร้า
           </Button>
         </div>
@@ -63,6 +64,25 @@ function DescriptionPage() {
     }
   };
 
+  const saveDataInventory = (check) => {
+    let data = {
+      id_user:user._id,
+      id_product:product._id
+    }
+    console.log(data)
+    Axios.post("https://tranquil-beach-43094.herokuapp.com/inventory",data)
+    .then(data=>{
+      console.log(data)
+      if(check === "buy") {
+        router.push('/page.payment')
+      } else {
+        router.push('/page.shop')
+      }
+    }).catch(err=>{
+      console.log(err)
+    })
+  }
+
   if (!isLoading) {
     return null;
   } else {
@@ -74,7 +94,7 @@ function DescriptionPage() {
           </div>
           <div className="br-body">
             <div className="sp-body-1">
-              <Navbar page={"description"} status={checkLogin} user={user} />
+              <Navbar page={"description"} status={checkLogin} user={user.user_name} />
             </div>
             <div className="sp-body-2">
               <div className="dt-body-2-header">

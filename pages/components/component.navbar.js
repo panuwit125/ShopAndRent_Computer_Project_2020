@@ -200,7 +200,14 @@ function NavbarComponent(props) {
               Lenovo
             </Menu.Item>
             {props.status ? (
-                <Menu.Item key="5" icon={<UserOutlined />} onClick={()=>{router.push('/page.home')}} >
+                <Menu.Item key="5" icon={<UserOutlined />} onClick={()=>{router.push('/page.payment')}} >
+                  ไปที่ตระกร้า
+                </Menu.Item>
+            ) : (
+              null
+            )}
+            {props.status ? (
+                <Menu.Item key="6" icon={<UserOutlined />} onClick={()=>{router.push('/page.home')}} >
                   ออกจากระบบ
                 </Menu.Item>
             ) : (
