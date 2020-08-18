@@ -1,16 +1,18 @@
-import { Form, Button, Select } from "antd";
+import { Form, Button, Select, Spin, Space } from "antd";
 const FormItem = Form.Item;
 import React, { useState, useEffect } from "react";
 import { EnvironmentOutlined } from "@ant-design/icons";
 const { Option } = Select;
 import router from "next/router";
 import Axios from "axios";
+import LoadingComponent from './components/component.loading'
 
 function PaymentPage() {
   const [user, setUser] = useState();
   const [token, setToken] = useState("");
   const [inventory, setInventory] = useState([]);
   const [isLoading, setisLoading] = useState(false);
+  const [fetchLoading ,setfetchLoading] = useState(false)
   const [price, setPrice] = useState(0);
 
   useEffect(() => {
@@ -34,7 +36,6 @@ function PaymentPage() {
       },
     })
       .then((data) => {
-        console.log(data.data);
         if (data.data.code === 100) {
           console.log("1");
           setisLoading(true);
@@ -69,20 +70,73 @@ function PaymentPage() {
           <h2 style={{ color: "black" }}>{props.data.name_product}</h2>
           <div className="pm-product-des-1">
             <h3 style={{ color: "red" }}>ราคา {props.data.price_product}</h3>
-            <h3 style={{ color: "black" }}>จำนวน 1 ชิ้น </h3>
+            <div style={{ textAlign: "center" }}>
+              <Button
+                onClick={() => {
+                  deleteProductInventory(props.data._id);
+                }}
+              >
+                เอาออกจากตระกร้า
+              </Button>
+              <h3 style={{ color: "black" }}>จำนวน 1 ชิ้น </h3>
+            </div>
           </div>
         </div>
       </div>
     );
   };
 
+  const postBuyProduct = () => {
+    setfetchLoading(true);
+    let data = {
+      id_product: inventory,
+    };
+    Axios({
+      method: "post",
+      url: "https://tranquil-beach-43094.herokuapp.com/soldproduct",
+      data,
+    })
+      .then((data) => {
+        setfetchLoading(false);
+        console.log("ทำการซื้อสำเร็จแล้ว", data);
+        alert("ทำรายการซื้อสำเร็จแล้ว");
+        router.push("/page.shop");
+      })
+      .catch((error) => {
+        console.log("ทำรายการซื้อไม่สำเร็จ", error);
+      });
+  };
+
+  const deleteProductInventory = (value) => {
+    setfetchLoading(true);
+    let data = {
+      id_product_inven: value,
+    };
+    Axios({
+      method: "post",
+      url: "https://tranquil-beach-43094.herokuapp.com/deleteproductinventory",
+      data,
+    })
+      .then((res) => {
+        setfetchLoading(false);
+        console.log("ลบสำเร็จแล้ว", res);
+        location.reload();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   if (!isLoading) {
-    return null;
+    return (
+      <LoadingComponent type={"pageloading"} status={true} />
+    );
   } else {
     console.log(inventory);
     if (inventory.length <= 0) {
       return (
         <FormItem style={{ margin: "0px" }}>
+          <LoadingComponent type={"fetchloading"} status={fetchLoading} />
           <div className="br">
             <div className="br-header">
               <h1>Header</h1>
@@ -93,8 +147,8 @@ function PaymentPage() {
                 <h2 style={{ color: "black" }}>PAYMENT SELL</h2>
                 <a style={{ color: "black" }}>Edit</a>
               </div>
-              <div className="pm-address" style={{textAlign:"center"}}>
-                <h1 style={{color:"black"}}>ตระกร้าของคุณไม่มีสินค้า</h1>
+              <div className="pm-address" style={{ textAlign: "center" }}>
+                <h1 style={{ color: "black" }}>ตระกร้าของคุณไม่มีสินค้า</h1>
               </div>
             </div>
           </div>
@@ -103,6 +157,7 @@ function PaymentPage() {
     } else {
       return (
         <FormItem style={{ margin: "0px" }}>
+          <LoadingComponent type={"fetchloading"} status={fetchLoading} />
           <div className="br">
             <div className="br-header">
               <h1>Header</h1>
@@ -179,7 +234,12 @@ function PaymentPage() {
                 <h2 style={{ color: "red", margin: "10px" }}>
                   {price + 600 + 600} THB.
                 </h2>
-                <Button className="pm-footer-btn">BUY</Button>
+                <Button
+                  className="pm-footer-btn"
+                  onClick={() => postBuyProduct()}
+                >
+                  ทำรายการซื้อ
+                </Button>
               </div>
             </div>
           </div>

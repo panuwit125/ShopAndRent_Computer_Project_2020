@@ -177,6 +177,8 @@ function NavbarComponent(props) {
               icon={<VideoCameraOutlined />}
               onClick={() => {
                 dispatch(updateTypeBland("ACER"));
+                dispatch(updateNavbar("2"));
+                props.loading(false);
               }}
             >
               Acer
@@ -186,6 +188,8 @@ function NavbarComponent(props) {
               icon={<UploadOutlined />}
               onClick={() => {
                 dispatch(updateTypeBland("DELL"));
+                dispatch(updateNavbar("3"));
+                props.loading(false);
               }}
             >
               Dell
@@ -195,6 +199,8 @@ function NavbarComponent(props) {
               icon={<UserOutlined />}
               onClick={() => {
                 dispatch(updateTypeBland("LENOVO"));
+                dispatch(updateNavbar("4"));
+                props.loading(false);
               }}
             >
               Lenovo

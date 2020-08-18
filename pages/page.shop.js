@@ -7,6 +7,7 @@ import CardProduct from "./components/component.cardproduct";
 import Header from "./components/component.header";
 import { useSelector, useDispatch } from "react-redux";
 import { updateTypeBland } from "../store/actions/postAction";
+import LoadingComponent from './components/component.loading'
 import axios from "axios";
 
 function ShopPage() {
@@ -51,7 +52,7 @@ function ShopPage() {
 
 
   if (!isLoading) {
-    return null;
+    return <LoadingComponent />
   } else {
     console.log(product)
     return (
@@ -62,7 +63,7 @@ function ShopPage() {
           </div>
           <div className="br-body">
             <div className="sp-body-1">
-              <Navbar page={"Shop"} status={checkLogin} user={user} />
+              <Navbar page={"Shop"} status={checkLogin} user={user} loading={setisLoading} />
             </div>
             <div className="sp-body-2">
               <div className="sp-body-2-header">
