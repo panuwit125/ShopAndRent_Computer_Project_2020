@@ -32,9 +32,6 @@ function homeSeller() {
               <div className="sp-body-2-header">
               </div>
               <div className="sp-body-2-body">
-                <CardProduct />
-                <CardProduct />
-                <CardProduct />
               </div>
             </div>
           </div>

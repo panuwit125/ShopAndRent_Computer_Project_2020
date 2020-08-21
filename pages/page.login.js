@@ -16,7 +16,9 @@ function loginPage() {
   const [passwordlogin, setPasswordLogin] = useState("");
 
   useEffect(() => {
-    localStorage.clear();
+    //localStorage.clear();
+    localStorage.removeItem("token")
+    localStorage.removeItem("user")
     setisLoading(true);
   }, []);
 
@@ -39,7 +41,6 @@ function loginPage() {
           console.log(res);
           localStorage.setItem("token", res.data.token);
           localStorage.setItem("user", JSON.stringify(res.data.savedUser));
-          localStorage.setItem("type", "Shop");
           setfetchLoading(false)
           router.push("/page.shop");
         })
@@ -84,7 +85,6 @@ function loginPage() {
               console.log(res);
               localStorage.setItem("token", res.data.token);
               localStorage.setItem("user", JSON.stringify(res.data.savedUser));
-              localStorage.setItem("type", "Shop");
               setfetchLoading(false)
               router.push("/page.shop");
             })
