@@ -10,6 +10,19 @@ const CardProductComponent = (props) => {
       setisLoading(true);
     }
   }, []);
+
+  const StatusShow = () => {
+    if(props.page === "Shop"){
+      return null
+    } else {
+      if(props.data.status_product){
+        return <Meta description={"สถานะ : พร้อมให้เช่า"} />
+      } else {
+        return <Meta description={"สถานะ : ไม่พร้อมให้เช่า"} />
+      }
+    }
+  }
+
   if (!isLoading) {
     return null;
   } else {
@@ -37,6 +50,7 @@ const CardProductComponent = (props) => {
         >
           <h3 style={{ color: "black" }}>{props.data.description_product}</h3>
         </div>
+        <StatusShow />
         {props.page === "Shop" ? (
           <Meta description={"ราคา " + props.data.price_product + " บาท "} />
         ) : (

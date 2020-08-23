@@ -64,6 +64,16 @@ function DescriptionPage() {
     }
   };
 
+  const checkStatus = () => {
+    if (product.status_product) {
+      localStorage.removeItem("itemforrent");
+      localStorage.setItem("itemforrent", JSON.stringify(product));
+      router.push("/page.payment");
+    } else {
+      alert("สินค้าไม่พร้อมให้เช่า");
+    }
+  };
+
   const ButtonShow = () => {
     if (checkLogin) {
       if (type === "Shop") {
@@ -84,7 +94,9 @@ function DescriptionPage() {
       } else {
         return (
           <div>
-            <Button className="dt-btn">เช่าสินค้า</Button>
+            <Button className="dt-btn" onClick={() => checkStatus()}>
+              เช่าสินค้า
+            </Button>
           </div>
         );
       }

@@ -5,9 +5,10 @@ import React, { useState, useEffect } from "react";
 import Navbar from "./components/component.navbar";
 import CardProduct from "./components/component.cardproduct";
 import Header from "./components/component.header";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector, useDispatch, useStore } from "react-redux";
 import { updateTypeBland } from "../store/actions/postAction";
 import LoadingComponent from "./components/component.loading";
+import ShowListRentComponent from "./components/component.listRentItem";
 import axios from "axios";
 
 function ShopPage() {
@@ -17,20 +18,24 @@ function ShopPage() {
   const [isLoading, setisLoading] = useState(false);
   const [loadingTypebland, setloadingTypebland] = useState(false);
   const [user, setUser] = useState("");
+  const [userId, setUserId] = useState("");
   const [product, setProduct] = useState();
-  const [type,setType] = useState('');
+  const [type, setType] = useState("");
+  const [checkListShow , setCheckListShow] = useState("none");
 
   useEffect(() => {
     let token = localStorage.getItem("token");
     let user = JSON.parse(localStorage.getItem("user"));
     let typePage = localStorage.getItem("type");
-    setType(typePage)
+    setType(typePage);
     console.log("token", token, user, typePage);
     if (typePage) {
       if (token) {
         setUser(user.user_name);
+        setUserId(user._id)
         setCheckLogin(true);
       }
+      console.log('dasds')
       getProduct(TypeBland, typePage);
     }
   }, []);
@@ -77,6 +82,7 @@ function ShopPage() {
     console.log(product);
     return (
       <FormItem style={{ margin: "0px" }}>
+        <ShowListRentComponent check={checkListShow} user={userId} click={setCheckListShow}/>
         <div className="sp">
           <div className="br-header">
             <Header page={type} />
@@ -84,10 +90,11 @@ function ShopPage() {
           <div className="br-body">
             <div className="sp-body-1">
               <Navbar
-                page={"Shop"}
+                page={type}
                 status={checkLogin}
                 user={user}
                 loading={setisLoading}
+                click={setCheckListShow}
               />
             </div>
             <div className="sp-body-2">
