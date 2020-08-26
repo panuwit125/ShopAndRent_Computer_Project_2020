@@ -1,0 +1,35 @@
+import React, { useState, useEffect } from "react";
+import router from "next/router";
+import DehazeIcon from "@material-ui/icons/Dehaze";
+
+const HeaderComponent = (props) => {
+  const [isLoading, setisLoading] = useState(false);
+  useEffect(() => {
+    if (props) {
+      setisLoading(true);
+    }
+  }, []);
+
+  if (!isLoading) {
+    return null;
+  } else {
+    return (
+      <div className="br-header">
+        <div>
+          <DehazeIcon style={{ color: "white" }} onClick={()=>console.log('dfd')} />
+        </div>
+        <div>
+          <h1 className="br-header-font">SECONDHAND</h1>
+          <h1 className="br-header-font">NOTEBOOK</h1>
+        </div>
+        <div>
+          {props.page === "Home" ? (
+            <DehazeIcon style={{ opacity: "0" }} />
+          ) : <h1 className="header-typepage">{props.page}</h1>}
+        </div>
+      </div>
+    );
+  }
+};
+
+export default HeaderComponent;

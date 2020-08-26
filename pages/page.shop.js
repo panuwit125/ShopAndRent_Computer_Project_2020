@@ -9,7 +9,10 @@ import { useSelector, useDispatch, useStore } from "react-redux";
 import { updateTypeBland } from "../store/actions/postAction";
 import LoadingComponent from "./components/component.loading";
 import ShowListRentComponent from "./components/component.listRentItem";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 import axios from "axios";
+import HeaderNavbar from "./components/HeaderNavbar";
+import NavbarSide from "./components/Navbar";
 
 function ShopPage() {
   const dispatch = useDispatch();
@@ -21,7 +24,8 @@ function ShopPage() {
   const [userId, setUserId] = useState("");
   const [product, setProduct] = useState();
   const [type, setType] = useState("");
-  const [checkListShow , setCheckListShow] = useState("none");
+  const [checkListShow, setCheckListShow] = useState("none");
+  const matches = useMediaQuery("(min-width:600px)");
 
   useEffect(() => {
     let token = localStorage.getItem("token");
@@ -32,10 +36,10 @@ function ShopPage() {
     if (typePage) {
       if (token) {
         setUser(user.user_name);
-        setUserId(user._id)
+        setUserId(user._id);
         setCheckLogin(true);
       }
-      console.log('dasds')
+      console.log("dasds");
       getProduct(TypeBland, typePage);
     }
   }, []);
@@ -80,39 +84,74 @@ function ShopPage() {
     return <LoadingComponent />;
   } else {
     console.log(product);
-    return (
-      <FormItem style={{ margin: "0px" }}>
-        <ShowListRentComponent check={checkListShow} user={userId} click={setCheckListShow}/>
-        <div className="sp">
-          <div className="br-header">
-            <Header page={type} />
-          </div>
-          <div className="br-body">
-            <div className="sp-body-1">
-              <Navbar
-                page={type}
-                status={checkLogin}
-                user={user}
-                loading={setisLoading}
-                click={setCheckListShow}
-              />
+    if (matches) {
+      return (
+        <FormItem style={{ margin: "0px" }}>
+          <ShowListRentComponent
+            check={checkListShow}
+            user={userId}
+            click={setCheckListShow}
+          />
+          <div className="sp">
+            <div className="br-header">
+              <Header page={type} />
             </div>
-            <div className="sp-body-2">
-              <div className="sp-body-2-header">
-                <h1 style={{ color: "black", fontSize: "40px" }}>
-                  {TypeBland}
-                </h1>
+            <div className="br-body">
+              <div className="sp-body-1">
+                <Navbar
+                  page={type}
+                  status={checkLogin}
+                  user={user}
+                  loading={setisLoading}
+                  click={setCheckListShow}
+                />
               </div>
-              <div className="sp-body-2-body">
-                {product.map((data, index) => {
-                  return <CardProduct data={data} page={type} />;
-                })}
+              <div className="sp-body-2">
+                <div className="sp-body-2-header">
+                  <h1 style={{ color: "black", fontSize: "40px" }}>
+                    {TypeBland}
+                  </h1>
+                </div>
+                <div className="sp-body-2-body">
+                  {product.map((data, index) => {
+                    return <CardProduct data={data} page={type} />;
+                  })}
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </FormItem>
-    );
+        </FormItem>
+      );
+    } else {
+      return (
+        <FormItem style={{ margin: "0px" }}>
+          <ShowListRentComponent
+            check={checkListShow}
+            user={userId}
+            click={setCheckListShow}
+          />
+          <NavbarSide />
+          <div className="sp">
+            <HeaderNavbar page={"Shop"} />
+            <div className="br-body">
+              <div className="sp-body-1"></div>
+              <div className="sp-body-2">
+                <div className="sp-body-2-header">
+                  <h1 style={{ color: "black", fontSize: "40px" }}>
+                    {TypeBland}
+                  </h1>
+                </div>
+                <div className="sp-body-2-body">
+                  {product.map((data, index) => {
+                    return <CardProduct data={data} page={type} />;
+                  })}
+                </div>
+              </div>
+            </div>
+          </div>
+        </FormItem>
+      );
+    }
   }
 }
 
