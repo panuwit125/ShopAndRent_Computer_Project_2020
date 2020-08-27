@@ -26,7 +26,7 @@ function InsertProductRent() {
     let token =
       "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjM5ODNmMzhhNDM4MjY5ZDA2ZmJhMzUiLCJpYXQiOjE1OTc2Mzg2MTd9.JEeHZBwagb1jltAu1_--YKfjQDWOqnQNMIiDypfbG-Y";
     if (url1) {
-      fetch("http://localhost:5000/insertproductrent", {
+      fetch("https://tranquil-beach-43094.herokuapp.com/insertproductrent", {
         method: "post",
         headers: {
           "Content-Type": "application/json",

@@ -10,6 +10,7 @@ import LoadingComponent from "../components/component.loading";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import HeaderNavbar from "../components/HeaderNavbar";
 import DescriptionProduct from "../components/DescriptionProduct";
+import NavbarSide from "../components/Navbar";
 
 function DescriptionPage() {
   const [checkLogin, setCheckLogin] = useState(false);
@@ -23,6 +24,7 @@ function DescriptionPage() {
   const { id, comment } = router.query;
   const Id = id;
   const matches = useMediaQuery("(min-width:600px)");
+  const [showNavbar , setShowNavbar] = useState(0)
 
   useEffect(() => {
     if (Id) {
@@ -163,7 +165,7 @@ function DescriptionPage() {
     };
     Axios({
       method: "post",
-      url: "http://localhost:5000/checkproductbyid",
+      url: "https://tranquil-beach-43094.herokuapp.com/checkproductbyid",
       data,
     })
       .then((value) => {
@@ -303,8 +305,10 @@ function DescriptionPage() {
       return (
         <FormItem style={{ margin: "0px" }}>
           <LoadingComponent type={"fetchloading"} status={fetchLoading} />
+          <NavbarSide show={showNavbar} setshow={setShowNavbar} status={checkLogin}
+                  user={user.user_name} />
           <div className="br">
-            <HeaderNavbar page={"Shop"} />
+            <HeaderNavbar page={"Shop"} setshow={setShowNavbar}  />
             <div className="des-res-body">
               <div className="sp-body-2">
                 <div className="dt-body-2-header">

@@ -26,9 +26,8 @@ function ShopPage() {
   const [product, setProduct] = useState();
   const [type, setType] = useState("");
   const [checkListShow, setCheckListShow] = useState("none");
-  const [showNavbar , setShowNavbar] = useState(0)
+  const [showNavbar, setShowNavbar] = useState(0);
   const matches = useMediaQuery("(min-width:600px)");
-
 
   useEffect(() => {
     let token = localStorage.getItem("token");
@@ -63,7 +62,7 @@ function ShopPage() {
     } else {
       let body = { bland_product: product };
       axios
-        .post("http://localhost:5000/showproductrent", body)
+        .post("https://tranquil-beach-43094.herokuapp.com/showproductrent", body)
         .then((res) => {
           console.log(res);
           setProduct(res.data);
@@ -77,7 +76,7 @@ function ShopPage() {
 
   useEffect(() => {
     if (loadingTypebland) {
-      getProduct(TypeBland,type);
+      getProduct(TypeBland, type);
     } else {
       setloadingTypebland(true);
     }
@@ -128,16 +127,21 @@ function ShopPage() {
     } else {
       return (
         <FormItem style={{ margin: "0px" }}>
-          <NavbarSide show={showNavbar} setshow={setShowNavbar} />
+          <NavbarSide
+            show={showNavbar}
+            setshow={setShowNavbar}
+            status={checkLogin}
+            user={user}
+          />
           <div className="sp">
-            <HeaderNavbar page={"Shop"} setshow={setShowNavbar}  />
+            <HeaderNavbar page={"Shop"} setshow={setShowNavbar} />
             <div className="br-body">
               <div className="sp-body-2">
                 <div className="sp-body-2-header">
                   {/*<h1 style={{ color: "black", fontSize: "40px" }}>
                     {TypeBland}
                 </h1>*/}
-                <Tabs  click={setCheckListShow} loading={setisLoading} />
+                  <Tabs click={setCheckListShow} loading={setisLoading} />
                 </div>
                 <div className="sp-body-2-body">
                   {product.map((data, index) => {

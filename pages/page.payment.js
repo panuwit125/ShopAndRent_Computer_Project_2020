@@ -81,7 +81,7 @@ function PaymentPage() {
       let idproduct = JSON.parse(localStorage.getItem("itemforrent"));
       Axios({
         method: "post",
-        url: "http://localhost:5000/productrentbyid",
+        url: "https://tranquil-beach-43094.herokuapp.com/productrentbyid",
         data: { id: idproduct._id },
       })
         .then((productpost) => {
@@ -279,7 +279,7 @@ function PaymentPage() {
       };
       Axios({
         method: "post",
-        url: "http://localhost:5000/checkandrentproduct",
+        url: "https://tranquil-beach-43094.herokuapp.com/checkandrentproduct",
         data,
       })
         .then((datapost) => {

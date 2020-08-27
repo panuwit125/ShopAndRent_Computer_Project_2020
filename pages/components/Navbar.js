@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Layout, Menu,Button } from "antd";
+import { Layout, Menu, Button } from "antd";
 import {
   UploadOutlined,
   UserOutlined,
   VideoCameraOutlined,
-  CloseOutlined
+  CloseOutlined,
 } from "@ant-design/icons";
 import router from "next/router";
 import { updateNavbar, updateTypeBland } from "../../store/actions/postAction";
@@ -26,19 +26,30 @@ function NavbarComponent(props) {
     return null;
   } else {
     return (
-      <div className="navbar" style={{width:props.show}}>
-        <div style={{textAlign:"end",marginRight:"15px"}}>
-          <CloseOutlined style={{color:"white"}} onClick={()=>props.setshow(0)} />
+      <div className="navbar" style={{ width: props.show }}>
+        <div style={{ textAlign: "end", marginRight: "15px" }}>
+          <CloseOutlined
+            style={{ color: "white" }}
+            onClick={() => props.setshow(0)}
+          />
         </div>
-        <a href="#home">
-          <i class="fa fa-fw fa-home">Home</i> 
+        <a href="/page.shop">
+          <i class="fa fa-fw fa-home">Home</i>
         </a>
-        <a href="#services">
-          <i class="fa fa-fw fa-wrench">Login</i> 
-        </a>
-        <a href="#clients">
-          <i class="fa fa-fw fa-user">Inventory</i>
-        </a>
+        {props.status ? (
+          <a href="#">
+            <i class="fa fa-fw fa-wrench">ID : {props.user}</i>
+          </a>
+        ) : (
+          <a href="/page.login">
+            <i class="fa fa-fw fa-wrench">Login</i>
+          </a>
+        )}
+        {props.status ? (
+          <a href="/page.payment">
+            <i class="fa fa-fw fa-user">Inventory</i>
+          </a>
+        ) : null}
       </div>
     );
   }
