@@ -11,7 +11,7 @@ const ListRentItem = (props) => {
     if (props) {
       Axios({
         method: "post",
-        url: "http://localhost:5000/showitemlistrent",
+        url: "https://tranquil-beach-43094.herokuapp.com/showitemlistrent",
         data: { user_id: props.user },
       })
         .then((data) => {
