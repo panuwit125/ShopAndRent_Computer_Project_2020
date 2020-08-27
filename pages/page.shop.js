@@ -13,6 +13,7 @@ import useMediaQuery from "@material-ui/core/useMediaQuery";
 import axios from "axios";
 import HeaderNavbar from "./components/HeaderNavbar";
 import NavbarSide from "./components/Navbar";
+import Tabs from "./components/Tabs";
 
 function ShopPage() {
   const dispatch = useDispatch();
@@ -25,7 +26,9 @@ function ShopPage() {
   const [product, setProduct] = useState();
   const [type, setType] = useState("");
   const [checkListShow, setCheckListShow] = useState("none");
+  const [showNavbar , setShowNavbar] = useState(0)
   const matches = useMediaQuery("(min-width:600px)");
+
 
   useEffect(() => {
     let token = localStorage.getItem("token");
@@ -74,7 +77,7 @@ function ShopPage() {
 
   useEffect(() => {
     if (loadingTypebland) {
-      getProduct(TypeBland);
+      getProduct(TypeBland,type);
     } else {
       setloadingTypebland(true);
     }
@@ -125,21 +128,16 @@ function ShopPage() {
     } else {
       return (
         <FormItem style={{ margin: "0px" }}>
-          <ShowListRentComponent
-            check={checkListShow}
-            user={userId}
-            click={setCheckListShow}
-          />
-          <NavbarSide />
+          <NavbarSide show={showNavbar} setshow={setShowNavbar} />
           <div className="sp">
-            <HeaderNavbar page={"Shop"} />
+            <HeaderNavbar page={"Shop"} setshow={setShowNavbar}  />
             <div className="br-body">
-              <div className="sp-body-1"></div>
               <div className="sp-body-2">
                 <div className="sp-body-2-header">
-                  <h1 style={{ color: "black", fontSize: "40px" }}>
+                  {/*<h1 style={{ color: "black", fontSize: "40px" }}>
                     {TypeBland}
-                  </h1>
+                </h1>*/}
+                <Tabs  click={setCheckListShow} loading={setisLoading} />
                 </div>
                 <div className="sp-body-2-body">
                   {product.map((data, index) => {

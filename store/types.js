@@ -1,6 +1,6 @@
 export const UPDATE_TYPEBLAND = 'UPDATE_TYPEBLAND';
 export const UPDATE_NAVBAR = 'UPDATE_NAVBAR';
-export const UPDATE_SSID = 'UPDATE_SSID';
+export const UPDATE_NAVBARRES = 'UPDATE_NAVBARRES';
 export const UPDATE_POST = 'UPDATE_POST';
 export const UPDATE_BIRD = 'UPDATE_BIRD';
 export const UPDATE_TIME = 'UPDATE_TIME';

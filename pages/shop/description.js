@@ -7,6 +7,9 @@ import Navbar from "../components/component.navbar";
 import { useRouter } from "next/router";
 import Axios from "axios";
 import LoadingComponent from "../components/component.loading";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
+import HeaderNavbar from "../components/HeaderNavbar";
+import DescriptionProduct from "../components/DescriptionProduct";
 
 function DescriptionPage() {
   const [checkLogin, setCheckLogin] = useState(false);
@@ -19,6 +22,7 @@ function DescriptionPage() {
   const router = useRouter();
   const { id, comment } = router.query;
   const Id = id;
+  const matches = useMediaQuery("(min-width:600px)");
 
   useEffect(() => {
     if (Id) {
@@ -104,6 +108,49 @@ function DescriptionPage() {
       return (
         <Button className="dt-btn" onClick={() => router.push("/page.login")}>
           กรุณาเข้าสู่ระบบ
+        </Button>
+      );
+    }
+  };
+
+  const ButtonShowRes = () => {
+    if (checkLogin) {
+      if (type === "Shop") {
+        return (
+          <div className="des-res-flex-btn">
+            <div className="des-res-flex-body" style={{marginLeft:"18px",marginRight:"0.5px"}} >
+              <Button
+                className="des-res-btn"
+                onClick={() => checkProductByid("push")}
+                style={{ borderRadius: "35px 0px 0px 35px" }}
+              >
+                PUSH INVENTORY
+              </Button>
+            </div>
+            <div className="des-res-flex-body" style={{marginRight:"18px",marginLeft:"0.5px"}} >
+              <Button
+                className="des-res-btn"
+                style={{ borderRadius: "0px 35px 35px 0px" }}
+                onClick={() => checkProductByid("buy")}
+              >
+                BUY
+              </Button>
+            </div>
+          </div>
+        );
+      } else {
+        return (
+          <div>
+            <Button className="dt-btn" onClick={() => checkStatus()}>
+              เช่าสินค้า
+            </Button>
+          </div>
+        );
+      }
+    } else {
+      return (
+        <Button className="dt-btn" onClick={() => router.push("/page.login")}>
+          Login Plese
         </Button>
       );
     }
@@ -205,52 +252,102 @@ function DescriptionPage() {
   if (!isLoading) {
     return <LoadingComponent type={"pageloading"} status={true} />;
   } else {
-    return (
-      <FormItem style={{ margin: "0px" }}>
-        <LoadingComponent type={"fetchloading"} status={fetchLoading} />
-        <div className="br">
-          <div className="br-header">
-            <Header page={type} />
-          </div>
-          <div className="br-body">
-            <div className="sp-body-1">
-              <Navbar
-                page={"description"}
-                status={checkLogin}
-                user={user.user_name}
-              />
+    if (matches) {
+      return (
+        <FormItem style={{ margin: "0px" }}>
+          <LoadingComponent type={"fetchloading"} status={fetchLoading} />
+          <div className="br">
+            <div className="br-header">
+              <Header page={type} />
             </div>
-            <div className="sp-body-2">
-              <div className="dt-body-2-header">
-                <h1 style={{ color: "black", textAlign: "center" }}>
-                  {/*Post :{id}*/}
-                  {product.name_product}
-                </h1>
+            <div className="br-body">
+              <div className="sp-body-1">
+                <Navbar
+                  page={"description"}
+                  status={checkLogin}
+                  user={user.user_name}
+                />
               </div>
-              <div className="dt-body-2-body">
-                <img className="dt-img" src={product.image_product} />
-                <div>
-                  <img
-                    className="dt-img-1"
-                    src="https://www.beartai.com/wp-content/uploads/2018/10/MacBook-Pro-2018-Gris-2-1200x675.jpg"
-                  />
-                  <img
-                    className="dt-img-1"
-                    src="https://www.beartai.com/wp-content/uploads/2018/10/MacBook-Pro-2018-Gris-2-1200x675.jpg"
-                  />
-                  <img
-                    className="dt-img-1"
-                    src="https://www.beartai.com/wp-content/uploads/2018/10/MacBook-Pro-2018-Gris-2-1200x675.jpg"
-                  />
+              <div className="sp-body-2">
+                <div className="dt-body-2-header">
+                  <h1 style={{ color: "black", textAlign: "center" }}>
+                    {/*Post :{id}*/}
+                    {product.name_product}
+                  </h1>
+                </div>
+                <div className="dt-body-2-body">
+                  <img className="dt-img" src={product.image_product} />
+                  <div>
+                    <img
+                      className="dt-img-1"
+                      src="https://www.beartai.com/wp-content/uploads/2018/10/MacBook-Pro-2018-Gris-2-1200x675.jpg"
+                    />
+                    <img
+                      className="dt-img-1"
+                      src="https://www.beartai.com/wp-content/uploads/2018/10/MacBook-Pro-2018-Gris-2-1200x675.jpg"
+                    />
+                    <img
+                      className="dt-img-1"
+                      src="https://www.beartai.com/wp-content/uploads/2018/10/MacBook-Pro-2018-Gris-2-1200x675.jpg"
+                    />
+                  </div>
+                </div>
+                <DescriptionShow />
+                <ButtonShow />
+              </div>
+            </div>
+          </div>
+        </FormItem>
+      );
+    } else {
+      return (
+        <FormItem style={{ margin: "0px" }}>
+          <LoadingComponent type={"fetchloading"} status={fetchLoading} />
+          <div className="br">
+            <HeaderNavbar page={"Shop"} />
+            <div className="des-res-body">
+              <div className="sp-body-2">
+                <div className="dt-body-2-header">
+                  <h1
+                    style={{
+                      color: "black",
+                      textAlign: "center",
+                      textShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+                      fontWeight: "bold",
+                      fontSize: "24px ",
+                    }}
+                  >
+                    {product.name_product}
+                  </h1>
+                </div>
+                <div className="dt-body-2-body">
+                  <img className="dt-img" src={product.image_product} />
+                  <div>
+                    <img
+                      className="dt-img-1"
+                      src="https://www.beartai.com/wp-content/uploads/2018/10/MacBook-Pro-2018-Gris-2-1200x675.jpg"
+                    />
+                    <img
+                      className="dt-img-1"
+                      src="https://www.beartai.com/wp-content/uploads/2018/10/MacBook-Pro-2018-Gris-2-1200x675.jpg"
+                    />
+                    <img
+                      className="dt-img-1"
+                      src="https://www.beartai.com/wp-content/uploads/2018/10/MacBook-Pro-2018-Gris-2-1200x675.jpg"
+                    />
+                  </div>
                 </div>
               </div>
-              <DescriptionShow />
-              <ButtonShow />
+              <DescriptionProduct
+                description={product.description_product}
+                price={product.price_product}
+              />
+              <ButtonShowRes />
             </div>
           </div>
-        </div>
-      </FormItem>
-    );
+        </FormItem>
+      );
+    }
   }
 }
 

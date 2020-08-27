@@ -12,16 +12,16 @@ const CardProductComponent = (props) => {
   }, []);
 
   const StatusShow = () => {
-    if(props.page === "Shop"){
-      return null
+    if (props.page === "Shop") {
+      return null;
     } else {
-      if(props.data.status_product){
-        return <Meta description={"สถานะ : พร้อมให้เช่า"} />
+      if (props.data.status_product) {
+        return <Meta description={"สถานะ : พร้อมให้เช่า"} />;
       } else {
-        return <Meta description={"สถานะ : ไม่พร้อมให้เช่า"} />
+        return <Meta description={"สถานะ : ไม่พร้อมให้เช่า"} />;
       }
     }
-  }
+  };
 
   if (!isLoading) {
     return null;
@@ -33,29 +33,27 @@ const CardProductComponent = (props) => {
         cover={
           <img
             alt="example"
-            style={{ height: 200 }}
+            style={{ height: 152, width: 242, background: "white" }}
             src={props.data.image_product}
           />
         }
         className="sp-card"
         onClick={() => router.push("/shop/description?id=" + props.data._id)}
       >
-        <h3 style={{ color: "black" }}>{props.data.name_product}</h3>
-        <div
-          style={{
-            height: "50px",
-            overflowY: "hidden",
-            textOverflow: "ellipsis",
-          }}
-        >
-          <h3 style={{ color: "black" }}>{props.data.description_product}</h3>
-        </div>
-        <StatusShow />
-        {props.page === "Shop" ? (
-          <Meta description={"ราคา " + props.data.price_product + " บาท "} />
-        ) : (
-          <Meta description={"ราคาเช่า " + props.data.price_product + " บาทต่อวัน "} />
-        )}
+          <h3 style={{ color: "black" }}>{props.data.name_product}</h3>
+          <StatusShow />
+          {props.page === "Shop" ? (
+            <Meta
+              className="sp-meta-font"
+              description={"Price " + props.data.price_product + " THB. "}
+            />
+          ) : (
+            <Meta
+              description={
+                "ราคาเช่า " + props.data.price_product + " บาทต่อวัน "
+              }
+            />
+          )}
       </Card>
     );
   }

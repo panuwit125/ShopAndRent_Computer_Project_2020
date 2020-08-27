@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Kanit&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
 body {
   background: white !important;
   font-family: "Roboto Condensed", sans-serif;
@@ -11,7 +12,7 @@ body {
     width: 100vw;
     height: 100vh;
     content: "";
-    background: snow;
+    background: white;
     /*background: transparent
       radial-gradient(closest-side at 50% 50%, #303030 0%, #202020 100%) 0% 0%
       no-repeat padding-box;*/
@@ -104,7 +105,6 @@ body {
   flex-direction: column;
   width: 100%;
   height: auto;
-  background: white;
   padding: 20px;
 }
 .sp-btn-1 {
@@ -119,6 +119,21 @@ body {
 .sp-card {
   margin: 20px !important;
   border: 1px solid rgba(196, 196, 196, 0.233) !important;
+  font-family: "Roboto Condensed", sans-serif !important;
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-size: 14px !important;
+  color: #000000;
+}
+.sp-meta-font {
+  font-family: "Roboto Condensed", sans-serif !important;
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-size: 14px !important;
+  color: #000000 !important;
+}
+.ant-card-body {
+  padding: 10px 15px 15px 15px !important;
 }
 // End --> Shop page
 
@@ -152,19 +167,24 @@ body {
 }
 .dt-body-2-body {
   width: 100%;
-  background: white;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
 }
 .dt-img {
-  width: 300px;
-  margin: 10px;
+  width: 266px;
+  height: 140px;
+  border-radius: 20px;
+  border: 1px solid #f0f0f0;
+  background: white;
 }
 .dt-img-1 {
-  width: 100px;
-  margin: 10px;
+  width: 84px;
+  margin: 2px;
+  border: 1px solid #f0f0f0;
+  box-sizing: border-box;
+  border-radius: 10px;
 }
 .dt-decription {
   padding: 50px;
@@ -175,6 +195,17 @@ body {
 .dt-btn {
   max-width: 250px !important;
   width: 100% !important;
+  height: auto !important;
+  font-family: Roboto Condensed !important;
+  font-style: normal !important;
+  font-weight: bold !important;
+  font-size: 18px !important;
+  color: #ffffff !important;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25) !important;
+  background: linear-gradient(180deg, #fabb02 0%, #ffb628 100%) !important;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25) !important;
+  border-radius: 35px !important;
+  margin-top: 10px;
 }
 // End --> Description page
 
@@ -187,25 +218,30 @@ body {
 .pm-back {
   justify-content: space-between;
   display: flex;
-  padding: 10px;
-  border-bottom: 1px solid black;
+  padding: 12px 20px 12px 20px;
+  border-bottom: 1px solid #dadbdd !important;
 }
 .pm-address {
-  padding: 10px;
-  border-bottom: 1px solid black;
+  padding: 7px 21px 0px 21px;
+  border-bottom: 1px solid #dadbdd !important;
+  display: flex;
+  flex-direction: row;
 }
 .pm-address-1 {
   display: flex;
   flex-direction: row;
 }
 .pm-address-2 {
-  padding: 5px 50px;
+  padding: 5px;
 }
 .pm-product-img {
-  width: 150px;
+  width: 76px;
+  height: 45px;
+  border-radius: 10px;
+  border: 1px solid #dadbdd;
 }
 .pm-product {
-  padding: 10px 50px;
+  padding: 14px 18px 0px 18px;
   display: flex;
   flex-direction: row;
   width: 100%;
@@ -220,41 +256,53 @@ body {
   display: flex;
   flex-direction: column;
   width: 100%;
-  padding: 10px;
 }
 .pm-option {
-  background: sandybrown;
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: flex-end;
-  padding: 5px 50px;
+  flex-direction: column;
+  border-bottom: 1px solid #dadbdd;
+  border-top: 1px solid #dadbdd;
+  margin-top: 15px;
+  padding: 11px 21px 21px 21px;
 }
 .pm-payment {
   width: 100%;
   display: flex;
   flex-direction: column;
+  height: 100%;
 }
 .pm-payment-header {
   display: flex;
   justify-content: space-between;
-  padding: 5px 20px;
+  flex-direction: row;
+  width: 100%;
 }
 .pm-payment-body-1 {
   display: flex;
   justify-content: space-between;
-  padding: 0px 70px;
+  width: 100%;
+}
+.pm-payment-body1 {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  padding: 0px 26px;
+}
+.pm-payment-body2 {
+}
+.pm-payment-body3 {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 .pm-footer {
   width: 100%;
   display: flex;
-  justify-content: flex-end;
-  padding: 40px;
+  border-top: 1px solid #dadbdd;
 }
 .pm-footer-btn {
   max-width: 100px !important;
   width: 100% !important;
-  margin: 10px !important;
 }
 // End --> Payment Page
 
@@ -405,17 +453,16 @@ body {
 }
 //end - responsive - home
 
-
 //start - responsive - navbar
 .navbar {
   height: 100%;
-  width: 160px;
   position: fixed;
   z-index: 1;
   top: 0;
   left: 0;
   background-color: #111;
   overflow-x: hidden;
+  transition: 0.5s;
   padding-top: 16px;
 }
 
@@ -431,3 +478,100 @@ body {
   color: #f1f1f1;
 }
 //end - responsive - navbar
+
+//start - responsive - description
+.des-res-br {
+  margin-top: 10px;
+  border: 1px solid #dadbdd;
+  box-sizing: border-box;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+.des-res-body {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  align-items: center;
+  font-family: Roboto Condensed;
+}
+.des-btn {
+  color: black;
+  border-style: none;
+  background: #fafafa;
+  width: 100%;
+  font-family: Roboto Condensed;
+  font-weight: bold;
+  font-size: 18px;
+  padding-top: 11px;
+  padding-bottom: 11px;
+}
+.des-btn-hover {
+  border-bottom: 2px solid #ffc700;
+  background: none !important;
+}
+.des-div {
+  display: flex;
+  flex-basis: auto;
+  width: 100%;
+  justify-content: center;
+}
+.des-res-text {
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+  font-size: 15px;
+  line-height: 18px;
+  color: #000000;
+}
+.des-res-price {
+  font-family: Roboto Condensed;
+  font-weight: bold;
+  font-size: 18px;
+  color: #62646a;
+  margin: 0px;
+  margin-right: 8px !important;
+}
+.des-res-price-layout {
+  margin: 0px !important;
+  padding: 13px 22px;
+}
+.des-res-btn {
+  width: 100% !important;
+  height: auto !important;
+  font-family: Roboto Condensed !important;
+  font-style: normal !important;
+  font-weight: bold !important;
+  font-size: 18px !important;
+  color: #ffffff !important;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25) !important;
+  background: linear-gradient(180deg, #fabb02 0%, #ffb628 100%) !important;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25) !important;
+  margin-top: 10px;
+}
+.des-res-flex-btn {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+.des-res-flex-body {
+  display: flex;
+  width: 100%;
+}
+.pay-font-hd {
+  font-family: Roboto Condensed !important;
+  font-style: normal !important;
+  font-weight: normal !important;
+}
+//end - responsive - description
+
+//start - res - btn - payment
+.btn-res-pm {
+  width: 125px;
+  height: 100%;
+  background: linear-gradient(180deg, #fabb02 0%, #ffb628 100%);
+  border-style: none;
+  font-size: 18px;
+  color: #ffffff;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+//end - res - btn - payment

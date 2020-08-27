@@ -13,9 +13,9 @@ export const updateNavbar = (payload) => async dispatch => {
     })
 }
 
-export const updateSsid = (payload) => async dispatch => {
+export const updateNavbarres = (payload) => async dispatch => {
     dispatch({
-        type: types.UPDATE_SSID,
+        type: types.UPDATE_NAVBARRES,
         payload: payload
     })
 }

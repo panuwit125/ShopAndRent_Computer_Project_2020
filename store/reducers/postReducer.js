@@ -3,6 +3,7 @@ import moment from "moment";
 const initalState = {
   TypeBland: "ACER",
   Navbar: 2,
+  Navbarres: 0,
   SSID: "",
   BirdDay: moment().format("MMM Do YY"),
   PostId: "",
@@ -24,10 +25,10 @@ export const postReducer = (state = initalState, action) => {
         ...state,
         Navbar: action.payload,
       };
-    case types.UPDATE_SSID:
+    case types.UPDATE_NAVBARRES:
       return {
         ...state,
-        SSID: action.payload,
+        Navbarres: action.payload,
       };
     case types.UPDATE_BIRD:
       return {
