@@ -1,24 +1,21 @@
-import { Form, Button } from "antd";
-const FormItem = Form.Item;
 import React, { useEffect, useState } from "react";
-import router from "next/router";
-import Header from "./components/component.header";
 import axios from "axios";
 import LoadingComponent from "./components/component.loading";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
-import HeaderNavbar from "./components/HeaderNavbar";
+
+//import page -> start
+import HomeMobile from "./pages/mobiles/home";
+import HomePC from "./pages/computer/homePC";
+//import page -> end
+
+//import function --> start
+import {nexthandle} from './functions/home'
+//import function --> end
 
 function home() {
   const [isLoading, setisLoading] = useState(false);
   const matches = useMediaQuery("(min-width:600px)");
-  const nexthandle = (type) => {
-    localStorage.setItem("type", type);
-    router.push("/page.shop");
-    return null;
-  };
-  useEffect(() => {
-    console.log(matches);
-  }, [matches]);
+
   useEffect(() => {
     localStorage.clear();
     axios
@@ -36,57 +33,9 @@ function home() {
     return <LoadingComponent type={"pageloading"} status={true} />;
   } else {
     if (matches) {
-      return (
-        <FormItem style={{ margin: "0px" }}>
-          <div className="br">
-            <HeaderNavbar page={"Home"} />
-            <div className="br-body">
-              <div className="card-res-home">
-                <Button
-                  className="btn-res-home"
-                  onClick={() => nexthandle("Shop")}
-                >
-                  FOR BUY
-                </Button>
-              </div>
-              <div className="card-res-home">
-                <Button
-                  className="btn-res-home"
-                  onClick={() => nexthandle("Rent")}
-                >
-                  FOR RENT
-                </Button>
-              </div>
-            </div>
-          </div>
-        </FormItem>
-      );
+      return <HomePC nextpage={nexthandle} />;
     } else {
-      return (
-        <FormItem style={{ margin: "0px" }}>
-          <div className="br">
-            <HeaderNavbar page={"Home"} />
-            <div className="br-body-res">
-              <div className="card-res-home">
-                <Button
-                  className="btn-res-home"
-                  onClick={() => nexthandle("Shop")}
-                >
-                  FOR BUY
-                </Button>
-              </div>
-              <div className="card-res-home">
-                <Button
-                  className="btn-res-home"
-                  onClick={() => nexthandle("Rent")}
-                >
-                  FOR RENT
-                </Button>
-              </div>
-            </div>
-          </div>
-        </FormItem>
-      );
+      return <HomeMobile nextpage={nexthandle} />;
     }
   }
 }

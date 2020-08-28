@@ -1,19 +1,13 @@
-import { Form, Button, Card } from "antd";
-const FormItem = Form.Item;
-const { Meta } = Card;
 import React, { useState, useEffect } from "react";
-import Navbar from "./components/component.navbar";
-import CardProduct from "./components/component.cardproduct";
-import Header from "./components/component.header";
-import { useSelector, useDispatch, useStore } from "react-redux";
-import { updateTypeBland } from "../store/actions/postAction";
+import { useSelector, useDispatch } from "react-redux";
 import LoadingComponent from "./components/component.loading";
-import ShowListRentComponent from "./components/component.listRentItem";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import axios from "axios";
-import HeaderNavbar from "./components/HeaderNavbar";
-import NavbarSide from "./components/Navbar";
-import Tabs from "./components/Tabs";
+
+//import page --> start
+import ShopMobile from "./pages/mobiles/shop";
+import ShopPC from './pages/computer/shopPC'
+//import page --> end
 
 function ShopPage() {
   const dispatch = useDispatch();
@@ -62,7 +56,10 @@ function ShopPage() {
     } else {
       let body = { bland_product: product };
       axios
-        .post("https://tranquil-beach-43094.herokuapp.com/showproductrent", body)
+        .post(
+          "https://tranquil-beach-43094.herokuapp.com/showproductrent",
+          body
+        )
         .then((res) => {
           console.log(res);
           setProduct(res.data);
@@ -88,70 +85,30 @@ function ShopPage() {
     console.log(product);
     if (matches) {
       return (
-        <FormItem style={{ margin: "0px" }}>
-          <ShowListRentComponent
-            check={checkListShow}
-            user={userId}
-            click={setCheckListShow}
-          />
-          <div className="sp">
-            <div className="br-header">
-              <Header page={type} />
-            </div>
-            <div className="br-body">
-              <div className="sp-body-1">
-                <Navbar
-                  page={type}
-                  status={checkLogin}
-                  user={user}
-                  loading={setisLoading}
-                  click={setCheckListShow}
-                />
-              </div>
-              <div className="sp-body-2">
-                <div className="sp-body-2-header">
-                  <h1 style={{ color: "black", fontSize: "40px" }}>
-                    {TypeBland}
-                  </h1>
-                </div>
-                <div className="sp-body-2-body">
-                  {product.map((data, index) => {
-                    return <CardProduct data={data} page={type} />;
-                  })}
-                </div>
-              </div>
-            </div>
-          </div>
-        </FormItem>
+        <ShopPC
+          checkListShow={checkListShow}
+          userId={userId}
+          setCheckListShow={setCheckListShow}
+          type={type}
+          checkLogin={checkLogin}
+          setisLoading={setisLoading}
+          TypeBland={TypeBland}
+          product={product}
+          user={user}
+        />
       );
     } else {
       return (
-        <FormItem style={{ margin: "0px" }}>
-          <NavbarSide
-            show={showNavbar}
-            setshow={setShowNavbar}
-            status={checkLogin}
-            user={user}
-          />
-          <div className="sp">
-            <HeaderNavbar page={"Shop"} setshow={setShowNavbar} />
-            <div className="br-body">
-              <div className="sp-body-2">
-                <div className="sp-body-2-header">
-                  {/*<h1 style={{ color: "black", fontSize: "40px" }}>
-                    {TypeBland}
-                </h1>*/}
-                  <Tabs click={setCheckListShow} loading={setisLoading} />
-                </div>
-                <div className="sp-body-2-body">
-                  {product.map((data, index) => {
-                    return <CardProduct data={data} page={type} />;
-                  })}
-                </div>
-              </div>
-            </div>
-          </div>
-        </FormItem>
+        <ShopMobile
+          showNavbar={showNavbar}
+          setShowNavbar={setShowNavbar}
+          checkLogin={checkLogin}
+          user={user}
+          setCheckListShow={setCheckListShow}
+          setisLoading={setisLoading}
+          product={product}
+          type={type}
+        />
       );
     }
   }
