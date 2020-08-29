@@ -47,7 +47,7 @@ function NavbarComponent(props) {
         )}
         {props.status ? (
           <a href="/page.payment">
-            <i class="fa fa-fw fa-user">Inventory</i>
+            <i className="fa fa-fw fa-user">Inventory</i>
           </a>
         ) : null}
       </div>

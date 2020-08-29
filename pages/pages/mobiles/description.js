@@ -5,6 +5,7 @@ import HeaderNavbar from "../../components/HeaderNavbar";
 import DescriptionProduct from "../../components/DescriptionProduct";
 import NavbarSide from "../../components/Navbar";
 import LoadingComponent from "../../components/component.loading";
+import router from 'next/router'
 
 function DescriptionMobile({
   fetchLoading,
