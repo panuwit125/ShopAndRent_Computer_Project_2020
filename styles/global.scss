@@ -575,3 +575,63 @@ body {
   text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 //end - res - btn - payment
+
+//start - res - login
+.lg-res-card {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 0 40px;
+}
+.lg-res-header-name {
+  text-align: center;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+.lg-res-name {
+  font-family: Roboto Condensed;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 30px;
+  line-height: 35px;
+  margin-bottom: 0;
+}
+.lg-res-ip {
+  margin-top: 18px;
+}
+.lg-res-input {
+  height: 35px !important;
+  font-family: Roboto Condensed !important;
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-size: 14px !important;
+  //border: 1px solid #d9d9d9 !important;
+  box-sizing: border-box !important;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1) !important;
+  border-radius: 5px !important;
+}
+.lg-res-ip-mg {
+  margin-top: 8px !important;
+}
+.lg-res-footer-btn {
+  margin-top: 11px;
+  width: 100%;
+  text-align: center;
+}
+.lg-res-btn {
+  width: 100% !important;
+  height: 31px !important;
+  background: linear-gradient(180deg, #fabb02 0%, #ffb628 100%) !important;
+  border-radius: 5px !important;
+  filter: drop-shadow(0px 2px 1px rgba(0, 0, 0, 0.25)) !important;
+}
+.lg-res-under-btn {
+  font-family: Roboto Condensed;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  margin-top: 8px;
+}
+//end - res - login

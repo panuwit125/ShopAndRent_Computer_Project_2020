@@ -34,15 +34,15 @@ function NavbarComponent(props) {
           />
         </div>
         <a href="/page.shop">
-          <i class="fa fa-fw fa-home">Home</i>
+          <i className="fa fa-fw fa-home">Home</i>
         </a>
         {props.status ? (
           <a href="#">
-            <i class="fa fa-fw fa-wrench">ID : {props.user}</i>
+            <i className="fa fa-fw fa-wrench">ID : {props.user}</i>
           </a>
         ) : (
           <a href="/page.login">
-            <i class="fa fa-fw fa-wrench">Login</i>
+            <i className="fa fa-fw fa-wrench">Login</i>
           </a>
         )}
         {props.status ? (
