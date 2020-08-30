@@ -29,7 +29,7 @@ const ListRentItem = (props) => {
     return null;
   } else {
     return (
-      <div style={{ display: props.check }} className="modal">
+      <div style={{ display: props.check }} className="modal md-bg" onClick={()=>props.click("none")}>
         <div className="modal-content">
           <div className="lri-card">
             <div className="lri-header">
@@ -40,13 +40,13 @@ const ListRentItem = (props) => {
               {productlist.map((data, index) => {
                 return (
                   <div className="lri-black">
-                    <h2 style={{ color: "black" }}>
+                    <h4 style={{ color: "black" }}>
                       {index + 1}. {data.name_product}
-                    </h2>
-                    <h2 style={{ color: "black" }}>
+                    </h4>
+                    <h4 style={{ color: "black" }}>
                       สถานะ :{" "}
                       {data.status_rent ? "คืนสินค้าแล้ว" : "ยังไม่ได้คืน"}
-                    </h2>
+                    </h4>
                   </div>
                 );
               })}

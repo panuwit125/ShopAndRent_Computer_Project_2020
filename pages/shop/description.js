@@ -55,7 +55,7 @@ function DescriptionPage() {
         });
     } else {
       let data = { id: "" + id + "" };
-      Axios.post("http://localhost:5000/productrentbyid", data)
+      Axios.post("https://tranquil-beach-43094.herokuapp.com/productrentbyid", data)
         .then((res) => {
           console.log(res);
           setProduct(res.data);

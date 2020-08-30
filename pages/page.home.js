@@ -2,15 +2,12 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import LoadingComponent from "./components/component.loading";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
+import router from 'next/router'
 
 //import page -> start
 import HomeMobile from "./pages/mobiles/home";
 import HomePC from "./pages/computer/homePC";
 //import page -> end
-
-//import function --> start
-import {nexthandle} from './functions/home'
-//import function --> end
 
 function home() {
   const [isLoading, setisLoading] = useState(false);
@@ -28,6 +25,12 @@ function home() {
         console.log("Error", err);
       });
   }, []);
+
+  const nexthandle = (type) => {
+    localStorage.setItem("type", type);
+    router.push("/page.shop");
+    return null;
+  };
 
   if (!isLoading) {
     return <LoadingComponent type={"pageloading"} status={true} />;

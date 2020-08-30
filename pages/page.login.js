@@ -21,6 +21,7 @@ function loginPage() {
   const [namelogin, setNameLogin] = useState("");
   const [passwordlogin, setPasswordLogin] = useState("");
   const matches = useMediaQuery("(min-width:600px)");
+  const [mode,setMode] = useState("login");
 
   useEffect(() => {
     //localStorage.clear();
@@ -52,7 +53,8 @@ function loginPage() {
           router.push("/page.shop");
         })
         .catch((err) => {
-          console.log(err);
+          console.log(err.response);
+          alert(err.response.data.error)
         });
     }
   };
@@ -100,8 +102,8 @@ function loginPage() {
             });
         })
         .catch((error) => {
-          location.reboot();
-          console.log("ERROR", error);
+          console.log("ERROR", error.response);
+          alert(error.response.data.error)
         });
     }
   };
@@ -147,6 +149,8 @@ function loginPage() {
           namelogin={namelogin}
           passwordlogin={passwordlogin}
           postData={postData}
+          mode={mode}
+          setMode={setMode}
         />
       );
     }

@@ -92,9 +92,15 @@ export default function DescriptionProduct(props) {
         <h2 className="des-res-price" style={{ color: "#FFC700" }}>
           {props.price}
         </h2>
+        { props.type === "Shop"  ? 
         <h2 className="des-res-price" style={{ color: "#62646A" }}>
           THB
         </h2>
+        :
+        <h2 className="des-res-price" style={{ color: "#62646A" }}>
+           PER / DAY
+        </h2>
+        }
       </div>
     </div>
   );

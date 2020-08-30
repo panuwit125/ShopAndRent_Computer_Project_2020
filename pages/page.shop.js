@@ -7,6 +7,7 @@ import axios from "axios";
 //import page --> start
 import ShopMobile from "./pages/mobiles/shop";
 import ShopPC from './pages/computer/shopPC'
+import router  from "next/router";
 //import page --> end
 
 function ShopPage() {
@@ -37,6 +38,8 @@ function ShopPage() {
       }
       console.log("dasds");
       getProduct(TypeBland, typePage);
+    } else {
+      router.push('/page.home')
     }
   }, []);
 
@@ -108,6 +111,8 @@ function ShopPage() {
           setisLoading={setisLoading}
           product={product}
           type={type}
+          checkListShow={checkListShow}
+          userId={userId}
         />
       );
     }

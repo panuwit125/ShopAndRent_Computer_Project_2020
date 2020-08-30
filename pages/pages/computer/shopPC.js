@@ -1,4 +1,4 @@
-import React from "react";
+import React , {useState,useEffect} from "react";
 import ShowListRentComponent from "../../components/component.listRentItem";
 import Header from "../../components/component.header";
 import Navbar from "../../components/component.navbar";
@@ -17,7 +17,16 @@ function ShopPC({
   product,
   user
 }) {
-  return (
+
+  const [ispageLoading, setpageisLoading] = useState(false);
+  useEffect(() => {
+    setpageisLoading(true);
+  }, []);
+
+  if(!ispageLoading){
+    return null;
+  } else {
+    return (
     <FormItem style={{ margin: "0px" }}>
       <ShowListRentComponent
         check={checkListShow}
@@ -52,6 +61,8 @@ function ShopPC({
       </div>
     </FormItem>
   );
+  }
+  
 }
 
 export default ShopPC;
