@@ -1,7 +1,7 @@
 import { Form, Button, Select, InputNumber, Upload, message } from "antd";
 const FormItem = Form.Item;
 import React, { useState, useEffect } from "react";
-import { EnvironmentOutlined, UploadOutlined } from "@ant-design/icons";
+import { EnvironmentOutlined, UploadOutlined,DeleteOutlined } from "@ant-design/icons";
 const { Option } = Select;
 import router from "next/router";
 import Axios from "axios";
@@ -155,7 +155,6 @@ function PaymentPage() {
   };
 
   const CardShowProductRes = (props) => {
-    console.log("DAY", dayforrent);
     if (type === "Shop") {
       return (
         <div className="pm-product">
@@ -172,6 +171,7 @@ function PaymentPage() {
               {props.data.name_product}
             </h2>
             <div className="pm-product-des-1">
+              
               <div>
                 <h3
                   style={{ color: "red", marginLeft: "8px", fontSize: "14px" }}
@@ -200,6 +200,7 @@ function PaymentPage() {
               </div>
             </div>
           </div>
+          <div style={{display:"flex",justifyContent:"center",alignItems:"center"}}><DeleteOutlined onClick={()=>deleteProductInventory(props.data._id)} /></div>
         </div>
       );
     } else {
@@ -253,14 +254,21 @@ function PaymentPage() {
     };
     Axios({
       method: "post",
-      url: "https://tranquil-beach-43094.herokuapp.com/soldproduct",
+      url: "http://localhost:5000/soldproduct",
       data,
     })
       .then((data) => {
-        setfetchLoading(false);
-        console.log("ทำการซื้อสำเร็จแล้ว", data);
-        alert("ทำรายการซื้อสำเร็จแล้ว");
-        router.push("/page.shop");
+        console.log(data.data.code)
+        if (data.data.code === 100) {
+          setfetchLoading(false);
+          console.log("ทำการซื้อสำเร็จแล้ว", data);
+          alert("ทำรายการซื้อสำเร็จแล้ว");
+          router.push("/page.shop");
+        } else if (data.data.code === 101) {
+          setfetchLoading(false);
+          console.log("รายการของถูกซื้อไปแล้ว", data.data.product);
+          alert(`รายการ ${data.data.product} ถูกซื้อไปแล้วกรุณาลบออกและทำรายการใหม่`);
+        }
       })
       .catch((error) => {
         console.log("ทำรายการซื้อไม่สำเร็จ", error);
@@ -698,17 +706,31 @@ function PaymentPage() {
                     </div>
                   </div>
                   <div className="pm-footer">
-                    <div style={{width:"100%",display:"flex",flexDirection:"row",padding:"15px 14px"}}>
-                      <h2 style={{ color: "black",fontSize:"18px",marginBottom:0,marginRight:5}}>
+                    <div
+                      style={{
+                        width: "100%",
+                        display: "flex",
+                        flexDirection: "row",
+                        padding: "15px 14px",
+                      }}
+                    >
+                      <h2
+                        style={{
+                          color: "black",
+                          fontSize: "18px",
+                          marginBottom: 0,
+                          marginRight: 5,
+                        }}
+                      >
                         ยอดชำระทั้งหมด
                       </h2>
-                      <h2 style={{ color: "red",fontSize:"18px",margin:0 }}>
+                      <h2 style={{ color: "red", fontSize: "18px", margin: 0 }}>
                         {price + 600 + 600} THB
                       </h2>
                     </div>
                     <div>
                       <button
-                        className="btn-res-pm" 
+                        className="btn-res-pm"
                         onClick={() => postBuyProduct()}
                       >
                         สั่งซื้อสินค้า

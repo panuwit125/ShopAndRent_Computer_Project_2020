@@ -15,6 +15,7 @@ function NavbarComponent(props) {
   const dispatch = useDispatch();
   const { Navbar } = useSelector((state) => state.post);
   const [isLoading, setisLoading] = useState(false);
+  let type = localStorage.getItem("type");
 
   useEffect(() => {
     if (props) {
@@ -43,6 +44,15 @@ function NavbarComponent(props) {
         ) : (
           <a href="/page.login">
             <i className="fa fa-fw fa-wrench">Login</i>
+          </a>
+        )}
+        {type === "Shop" ? (
+          <a onClick={()=>{localStorage.setItem('type',"Rent");location.reload();}}>
+            <i className="fa fa-fw fa-wrench" >Go Rent</i>
+          </a>
+        ) : (
+          <a onClick={()=>{localStorage.setItem('type',"Shop");location.reload();}} >
+            <i className="fa fa-fw fa-wrench">Go Shop</i>
           </a>
         )}
         {props.status ? (
