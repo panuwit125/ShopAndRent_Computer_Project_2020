@@ -1,4 +1,4 @@
-import React , {useState,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import ShowListRentComponent from "../../components/component.listRentItem";
 import Header from "../../components/component.header";
 import Navbar from "../../components/component.navbar";
@@ -15,54 +15,65 @@ function ShopPC({
   setisLoading,
   TypeBland,
   product,
-  user
+  user,
 }) {
-
   const [ispageLoading, setpageisLoading] = useState(false);
   useEffect(() => {
-    setpageisLoading(true);
+    setpageisLoading(false);
   }, []);
 
-  if(!ispageLoading){
-    return null;
+  if (!ispageLoading) {
+    return (
+      <FormItem style={{ margin: "0px" }}>
+        <div className="shop-res-container">
+          <div className="shop-res-navbar">
+            Navbar
+          </div>
+          <div className="shop-res-body">
+            Body
+          </div>
+        </div>
+      </FormItem>
+    );
   } else {
     return (
-    <FormItem style={{ margin: "0px" }}>
-      <ShowListRentComponent
-        check={checkListShow}
-        user={userId}
-        click={setCheckListShow}
-      />
-      <div className="sp">
-        <div className="br-header">
-          <Header page={type} />
-        </div>
-        <div className="br-body">
-          <div className="sp-body-1">
-            <Navbar
-              page={type}
-              status={checkLogin}
-              user={user}
-              loading={setisLoading}
-              click={setCheckListShow}
-            />
+      <FormItem style={{ margin: "0px" }}>
+        <ShowListRentComponent
+          check={checkListShow}
+          user={userId}
+          click={setCheckListShow}
+        />
+        <div className="sp">
+          <div className="br-header">
+            <Header page={type} />
           </div>
-          <div className="sp-body-2">
-            <div className="sp-body-2-header">
-              <h1 style={{ color: "black", fontSize: "40px" }}>{TypeBland}</h1>
+          <div className="br-body">
+            <div className="sp-body-1">
+              <Navbar
+                page={type}
+                status={checkLogin}
+                user={user}
+                loading={setisLoading}
+                click={setCheckListShow}
+              />
             </div>
-            <div className="sp-body-2-body">
-              {product.map((data, index) => {
-                return <CardProduct data={data} page={type} />;
-              })}
+            <div className="sp-body-2">
+              <div className="sp-body-2-header">
+                <h1 style={{ color: "black", fontSize: "40px" }}>
+                  {TypeBland}
+                </h1>
+              </div>
+              <div className="sp-body-2-body">
+                {product.map((data, index) => {
+                  return <CardProduct data={data} page={type} />;
+                })}
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </FormItem>
-  );
+      </FormItem>
+    );
   }
-  
 }
 
 export default ShopPC;
