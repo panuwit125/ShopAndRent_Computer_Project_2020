@@ -88,12 +88,11 @@ function DescriptionMobile({
         <div className="br">
           <HeaderNavbar page={"Shop"} setshow={setShowNavbar} />
           <div className="des-res-body">
-            <div className="sp-body-2">
-              <div className="dt-body-2-header">
+            <div className="sp-body-2" style={{padding:"10px 20px 30px 20px"}}>
+              <div className="dt-body-2-header" style={{justifyContent:"center"}}>
                 <h1
                   style={{
                     color: "black",
-                    textAlign: "center",
                     textShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
                     fontWeight: "bold",
                     fontSize: "20px ",

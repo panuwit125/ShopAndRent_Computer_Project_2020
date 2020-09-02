@@ -29,11 +29,11 @@ const CardProductComponent = (props) => {
     return (
       <Card
         hoverable
-        style={{ width: 240, overflowY: "hidden", overflowX: "hidden" }}
+        style={{ width: "240px",minWidth:"240px", overflowY: "hidden", overflowX: "hidden" }}
         cover={
           <img
             alt="example"
-            style={{ height: 152, width: 242, background: "white" }}
+            style={{ height: "152px", width: "242px", background: "white" }}
             src={props.data.image_product}
           />
         }
