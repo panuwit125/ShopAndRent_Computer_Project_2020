@@ -98,6 +98,7 @@ function ShopPage() {
           TypeBland={TypeBland}
           product={product}
           user={user}
+          setShowNavbar={setShowNavbar}
         />
       );
     } else {

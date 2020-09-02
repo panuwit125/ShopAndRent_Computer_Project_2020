@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import ShowListRentComponent from "../../components/component.listRentItem";
-import Header from "../../components/component.header";
-import Navbar from "../../components/component.navbar";
+import Navbar from "../../components/componentspc/NavbarPc";
 import CardProduct from "../../components/component.cardproduct";
+import Tabs from "../../components/Tabs";
 import { Form } from "antd";
 const FormItem = Form.Item;
 
 function ShopPC({
+  setShowNavbar,
   checkListShow,
   userId,
   setCheckListShow,
@@ -19,55 +20,42 @@ function ShopPC({
 }) {
   const [ispageLoading, setpageisLoading] = useState(false);
   useEffect(() => {
-    setpageisLoading(false);
+    setpageisLoading(true);
   }, []);
 
   if (!ispageLoading) {
-    return (
-      <FormItem style={{ margin: "0px" }}>
-        <div className="shop-res-container">
-          <div className="shop-res-navbar">
-            Navbar
-          </div>
-          <div className="shop-res-body">
-            Body
-          </div>
-        </div>
-      </FormItem>
-    );
+    return null;
   } else {
     return (
       <FormItem style={{ margin: "0px" }}>
-        <ShowListRentComponent
-          check={checkListShow}
-          user={userId}
-          click={setCheckListShow}
-        />
-        <div className="sp">
-          <div className="br-header">
-            <Header page={type} />
-          </div>
-          <div className="br-body">
-            <div className="sp-body-1">
-              <Navbar
-                page={type}
-                status={checkLogin}
-                user={user}
-                loading={setisLoading}
-                click={setCheckListShow}
-              />
+        {type === "Rent" && checkLogin ? (
+          <ShowListRentComponent
+            check={checkListShow}
+            user={userId}
+            click={setCheckListShow}
+          />
+        ) : (
+          null
+        )}
+        <div className="shop-res-container">
+          <Navbar
+            status={checkLogin}
+            user={user}
+            type={type}
+            click={setCheckListShow}
+            setshow={setShowNavbar}
+          />
+          <div className="shop-res-body">
+            <div className="shop-res-body-header">
+              <div className="shop-res-card-type">{type}</div>
+              <div className="shop-res-changetype">
+                <Tabs loading={setisLoading} page={"PC"} />
+              </div>
             </div>
-            <div className="sp-body-2">
-              <div className="sp-body-2-header">
-                <h1 style={{ color: "black", fontSize: "40px" }}>
-                  {TypeBland}
-                </h1>
-              </div>
-              <div className="sp-body-2-body">
-                {product.map((data, index) => {
-                  return <CardProduct data={data} page={type} />;
-                })}
-              </div>
+            <div className="shop-res-body-body">
+              {product.map((data, index) => {
+                return <CardProduct data={data} page={type} />;
+              })}
             </div>
           </div>
         </div>

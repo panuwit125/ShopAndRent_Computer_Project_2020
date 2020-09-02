@@ -96,7 +96,7 @@ function DescriptionMobile({
                     textAlign: "center",
                     textShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
                     fontWeight: "bold",
-                    fontSize: "24px ",
+                    fontSize: "20px ",
                   }}
                 >
                   {product.name_product}

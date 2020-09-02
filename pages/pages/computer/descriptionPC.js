@@ -1,9 +1,10 @@
-import React,{ useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Form, Button } from "antd";
 const FormItem = Form.Item;
 import Header from "../../components/component.header";
-import Navbar from "../../components/component.navbar";
+import Navbar from "../../components/componentspc/NavbarPc";
 import LoadingComponent from "../../components/component.loading";
+import DescriptionResPc from "../../components/DescriptionProduct";
 
 function DescriptionPC({
   fetchLoading,
@@ -57,13 +58,18 @@ function DescriptionPC({
   const DescriptionShow = () => {
     if (type === "Shop") {
       return (
-        <div className="dt-decription">
-          <div>
+        <div className="dt-res-description">
+          <DescriptionResPc
+            description={product.description_product}
+            price={product.price_product}
+            type={type}
+          />
+          {/*<div>
             <h1 style={{ color: "black" }}>รายละเอียด</h1>
           </div>
           <div>
             <h2 style={{ color: "black" }}>{product.description_product}</h2>
-          </div>
+          </div>*/}
         </div>
       );
     } else {
@@ -97,9 +103,6 @@ function DescriptionPC({
       <FormItem style={{ margin: "0px" }}>
         <LoadingComponent type={"fetchloading"} status={fetchLoading} />
         <div className="br">
-          <div className="br-header">
-            <Header page={type} />
-          </div>
           <div className="br-body">
             <div className="sp-body-1">
               <Navbar
@@ -109,25 +112,25 @@ function DescriptionPC({
               />
             </div>
             <div className="sp-body-2">
-              <div className="dt-body-2-header">
-                <h1 style={{ color: "black", textAlign: "center" }}>
-                  {/*Post :{id}*/}
+              <div className="dt-res-body-2-header">
+                <div className="shop-res-card-type">SHOP</div>
+                <div className="shop-res-card-type" style={{ width: "100%" }}>
                   {product.name_product}
-                </h1>
+                </div>
               </div>
               <div className="dt-body-2-body">
-                <img className="dt-img" src={product.image_product} />
+                <img className="dt-res-img1" src={product.image_product} />
                 <div>
                   <img
-                    className="dt-img-1"
+                    className="dt-res-img2"
                     src="https://www.beartai.com/wp-content/uploads/2018/10/MacBook-Pro-2018-Gris-2-1200x675.jpg"
                   />
                   <img
-                    className="dt-img-1"
+                    className="dt-res-img2"
                     src="https://www.beartai.com/wp-content/uploads/2018/10/MacBook-Pro-2018-Gris-2-1200x675.jpg"
                   />
                   <img
-                    className="dt-img-1"
+                    className="dt-res-img2"
                     src="https://www.beartai.com/wp-content/uploads/2018/10/MacBook-Pro-2018-Gris-2-1200x675.jpg"
                   />
                 </div>

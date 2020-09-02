@@ -51,9 +51,6 @@ function Shop({
           <div className="br-body">
             <div className="sp-body-2">
               <div className="sp-body-2-header">
-                {/*<h1 style={{ color: "black", fontSize: "40px" }}>
-                    {TypeBland}
-                </h1>*/}
                 <Tabs loading={setisLoading} />
               </div>
               <div className="sp-body-2-body">

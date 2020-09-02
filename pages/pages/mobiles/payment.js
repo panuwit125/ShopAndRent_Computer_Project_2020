@@ -66,7 +66,7 @@ function PaymentMobile({
     return (
       <FormItem style={{ margin: "0px" }}>
         <LoadingComponent type={"fetchloading"} status={fetchLoading} />
-        <div className="br">
+        <div className="br-res-mobile">
           <HeaderNavbar page={"Payment"} />
           <div className="pm-body">
             <div className="pm-back pay-font-hd">
