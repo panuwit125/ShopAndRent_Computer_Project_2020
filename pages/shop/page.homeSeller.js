@@ -1,42 +1,48 @@
-import { Form, Button, Input,Layout, Menu,Cards } from "antd";
 import {
-  MenuUnfoldOutlined,
-  MenuFoldOutlined,
-  UserOutlined,
-  VideoCameraOutlined,
-  UploadOutlined,
-} from '@ant-design/icons';
+  Form,
+  Button,
+  Input,
+  Layout,
+  Menu,
+  Card,
+  Col,
+  Row,
+  Avatar,
+  Select
+} from "antd";
 const FormItem = Form.Item;
-import React, { useEffect,useState } from "react";
+import React, { useEffect, useState } from "react";
 import router from "next/router";
-const { Header, Sider, Content } = Layout;
-import Navbar from "../components/component.navbar";
-import CardProduct from "../components/component.cardproduct";
+import DehazeIcon from "@material-ui/icons/Dehaze";
+import {
+  EditOutlined,
+  EllipsisOutlined,
+  SettingOutlined,
+} from "@ant-design/icons";
+import NavbarManage from './componentManage/NavbarManage'
+import HeaderManage from './componentManage/HeaderManage'
+const Meta = Card;
 
 function homeSeller() {
-  const [collapsed,setCollapsed] = useState(false);
-  const [checkLogin, setCheckLogin] = useState(false);
-  const [user,setUser] = useState('');
+  const [show,setShow] = useState(0)
 
   return (
     <FormItem style={{ margin: "0px" }}>
-        <div className="sp">
-          <div className="br-header">
-            <h1>Manage</h1>
-          </div>
-          <div className="br-body">
-            <div className="sp-body-1">
-              <Navbar page={"Manage"} status={checkLogin} user={user} />
-            </div>
-            <div className="sp-body-2">
-              <div className="sp-body-2-header">
-              </div>
-              <div className="sp-body-2-body">
-              </div>
-            </div>
-          </div>
+      <div className="mg-container">
+        <NavbarManage setShow={setShow} show={show} />
+        <div className="mg-navbar">
+          <HeaderManage setShow={setShow} />
         </div>
-      </FormItem>
+        <div className="mg-body">
+          <Card title="จำนวนสินค้าทั้งหมด" className="mg-card" bordered={true}>
+            20 ชิ้น
+          </Card>
+          <Card title="รายได้ทั้งหมด" className="mg-card" bordered={true}>
+            200,000 บาท
+          </Card>
+        </div>
+      </div>
+    </FormItem>
   );
 }
 

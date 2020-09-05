@@ -7,6 +7,8 @@ import router from "next/router";
 import Header from "../components/component.header";
 import axios from "axios";
 import { name } from "file-loader";
+import NavbarManage from "./componentManage/NavbarManage";
+import HeaderManage from "./componentManage/HeaderManage";
 
 function InsertProductRent() {
   const [nameProduct, setNameProduct] = useState("");
@@ -21,6 +23,8 @@ function InsertProductRent() {
   const [url3, set3Url] = useState("");
   const [image4Product, setIamge4Product] = useState("");
   const [url4, set4Url] = useState("");
+
+  const [show, setShow] = useState(0);
 
   useEffect(() => {
     let token =
@@ -89,10 +93,9 @@ function InsertProductRent() {
   return (
     <FormItem style={{ margin: "0px" }}>
       <div className="br">
-        <div className="br-header">
-          <h1>Insert Product For Rent</h1>
-        </div>
-        <div style={{ padding: "50px 100px" }}>
+        <NavbarManage show={show} setShow={setShow} />
+        <HeaderManage setShow={setShow} />
+        <div style={{ padding: "20px 50px" }}>
           <h2 style={{ color: "black" }}>ชื่อสินค้า</h2>
           <Input
             className="ip-iuput"
@@ -113,32 +116,44 @@ function InsertProductRent() {
             onChange={(e) => setPriceProduct(e.target.value)}
           />
           <h2 style={{ color: "black" }}>แบรน์สินค้า</h2>
-          <Input
+          {/*<Input
             className="ip-iuput"
             value={blandProduct}
             onChange={(e) => setBlandProduct(e.target.value)}
-          />
+          />*/}
+          <Select
+            defaultValue="jack"
+            className="ip-iuput"
+            onChange={(e) => setBlandProduct(e.target.value)}
+          >
+            <Option value="jack">ACER</Option>
+            <Option value="lucy">LENOVO</Option>
+            <Option value="disabled" disabled>
+              Disabled
+            </Option>
+            <Option value="Yiminghe">DELL</Option>
+          </Select>
           <h2 style={{ color: "black" }}>รูปสินค้า</h2>
           <div>
             <input
               type="file"
               onChange={(e) => setIamge1Product(e.target.files[0])}
-              style={{ color: "black" }}
+              style={{ color: "black",marginBottom:"10px" }}
             />
             <input
               type="file"
               onChange={(e) => setIamge2Product(e.target.files[0])}
-              style={{ color: "black" }}
+              style={{ color: "black",marginBottom:"10px" }}
             />
             <input
               type="file"
               onChange={(e) => setIamge3Product(e.target.files[0])}
-              style={{ color: "black" }}
+              style={{ color: "black",marginBottom:"10px" }}
             />
             <input
               type="file"
               onChange={(e) => setIamge4Product(e.target.files[0])}
-              style={{ color: "black" }}
+              style={{ color: "black",marginBottom:"10px" }}
             />
           </div>
           <Button
