@@ -10,15 +10,8 @@ import router from "next/router";
 
 let type;
 function NavbarComponent(props) {
-  const [isLoading, setisLoading] = useState(false);
+  const [isLoading, setisLoading] = useState(true);
 
-  useEffect(() => {
-    setisLoading(false);
-    type = localStorage.getItem("type");
-    if (props) {
-      setisLoading(true);
-    }
-  }, [props.res]);
 
   if (!isLoading) {
     return null;
@@ -35,7 +28,7 @@ function NavbarComponent(props) {
           <i className="fa fa-fw fa-home">Home</i>
         </a>
         <a href="/shop/showproduct">
-          <i className="fa fa-fw fa-home">ShowProduct</i>
+          <i className="fa fa-fw fa-home">ShowProduct(ข้อมูลจำลอง)</i>
         </a>
         <a href="/shop/insertproduct">
           <i className="fa fa-fw fa-home">AddProductForBuy</i>
@@ -43,9 +36,9 @@ function NavbarComponent(props) {
         <a href="/shop/insertProductForRent">
           <i className="fa fa-fw fa-home">AddProductForRent</i>
         </a>
-        <a href="#">
+        {/*<a href="#">
           <i className="fa fa-fw fa-home">AddListBland</i>
-        </a>
+    </a>*/}
         <a href="/shop/loginSeller">
           <i className="fa fa-fw fa-home">LogOut</i>
         </a>

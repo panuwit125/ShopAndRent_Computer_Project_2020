@@ -4,7 +4,6 @@ const FormItem = Form.Item;
 const { Option } = Select;
 import React, { useState, useEffect } from "react";
 import router from "next/router";
-import Header from "../components/component.header";
 import axios from "axios";
 import { name } from "file-loader";
 import NavbarManage from "./componentManage/NavbarManage";

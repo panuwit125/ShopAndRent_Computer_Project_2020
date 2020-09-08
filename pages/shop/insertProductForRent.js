@@ -4,12 +4,14 @@ const { Option } = Select;
 import React, { useState, useEffect } from "react";
 import NavbarManage from "./componentManage/NavbarManage";
 import HeaderManage from "./componentManage/HeaderManage";
+import router from "next/router"
+import LoadingComponent from "../../components/component.loading"
 
 function InsertProductRent() {
   const [nameProduct, setNameProduct] = useState("");
   const [descriptionProduct, setDescriptionProduct] = useState("");
   const [priceProduct, setPriceProduct] = useState("");
-  const [blandProduct, setBlandProduct] = useState("");
+  const [blandProduct, setBlandProduct] = useState("ACER");
   const [image1Product, setIamge1Product] = useState("");
   const [url1, set1Url] = useState("");
   const [image2Product, setIamge2Product] = useState("");
@@ -21,9 +23,24 @@ function InsertProductRent() {
 
   const [show, setShow] = useState(0);
 
+  const [isLoading, setisLoading] = useState(false);
+  const [user, setUser] = useState();
+  const [token, setToken] = useState();
+
   useEffect(() => {
-    let token =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjM5ODNmMzhhNDM4MjY5ZDA2ZmJhMzUiLCJpYXQiOjE1OTc2Mzg2MTd9.JEeHZBwagb1jltAu1_--YKfjQDWOqnQNMIiDypfbG-Y";
+    if (
+      localStorage.getItem("tokenmanage") &&
+      JSON.parse(localStorage.getItem("usermanage"))
+    ) {
+      setToken(localStorage.getItem("tokenmanage"));
+      setUser(JSON.parse(localStorage.getItem("usermanage")));
+      setisLoading(true);
+    } else {
+      router.push("/shop/loginSeller");
+    }
+  }, []);
+
+  useEffect(() => {
     if (url1) {
       fetch("https://tranquil-beach-43094.herokuapp.com/insertproductrent", {
         method: "post",
@@ -45,6 +62,9 @@ function InsertProductRent() {
             console.log(data.err);
           } else {
             console.log("create succussfull");
+            alert("เพิ่มสินค้าสำเร็จ")
+            setisLoading(true);
+            router.push("/shop/homemanage")
           }
         })
         .catch((err) => console.log(err));
@@ -71,6 +91,7 @@ function InsertProductRent() {
   };
 
   const postproduct = () => {
+    setisLoading(false);
     console.log(image1Product);
     if (
       !nameProduct ||
@@ -80,88 +101,93 @@ function InsertProductRent() {
       !image1Product
     ) {
       alert("กรุณาใส่ข้อมูลหรือเลือกรูปภาพ");
+      setisLoading(true);
     } else {
       imagefetch(image1Product, set1Url);
     }
   };
 
-  return (
-    <FormItem style={{ margin: "0px" }}>
-      <div className="br">
-        <NavbarManage show={show} setShow={setShow} />
-        <HeaderManage setShow={setShow} />
-        <div style={{ padding: "20px 50px" }}>
-          <h2 style={{ color: "black" }}>ชื่อสินค้า</h2>
-          <Input
-            className="ip-iuput"
-            value={nameProduct}
-            onChange={(e) => setNameProduct(e.target.value)}
-          />
-          <h2 style={{ color: "black" }}>รายละเอียดสินค้า</h2>
-          <Input.TextArea
-            rows="5"
-            className="ip-iuput"
-            value={descriptionProduct}
-            onChange={(e) => setDescriptionProduct(e.target.value)}
-          />
-          <h2 style={{ color: "black" }}>ราคาเช่าต่อวัน</h2>
-          <Input
-            className="ip-iuput"
-            value={priceProduct}
-            onChange={(e) => setPriceProduct(e.target.value)}
-          />
-          <h2 style={{ color: "black" }}>แบรน์สินค้า</h2>
-          {/*<Input
+  if (!isLoading) {
+    return <LoadingComponent type={"pageloading"} status={true} />;
+  } else {
+    return (
+      <FormItem style={{ margin: "0px" }}>
+        <div className="br">
+          <NavbarManage show={show} setShow={setShow} />
+          <HeaderManage setShow={setShow} user={user} />
+          <div style={{ padding: "20px 50px" }}>
+            <h2 style={{ color: "black" }}>ชื่อสินค้า</h2>
+            <Input
+              className="ip-iuput"
+              value={nameProduct}
+              onChange={(e) => setNameProduct(e.target.value)}
+            />
+            <h2 style={{ color: "black" }}>รายละเอียดสินค้า</h2>
+            <Input.TextArea
+              rows="5"
+              className="ip-iuput"
+              value={descriptionProduct}
+              onChange={(e) => setDescriptionProduct(e.target.value)}
+            />
+            <h2 style={{ color: "black" }}>ราคาเช่าต่อวัน</h2>
+            <Input
+              className="ip-iuput"
+              value={priceProduct}
+              onChange={(e) => setPriceProduct(e.target.value)}
+            />
+            <h2 style={{ color: "black" }}>แบรน์สินค้า</h2>
+            {/*<Input
             className="ip-iuput"
             value={blandProduct}
             onChange={(e) => setBlandProduct(e.target.value)}
           />*/}
-          <Select
-            defaultValue="jack"
-            className="ip-iuput"
-            onChange={(e) => setBlandProduct(e.target.value)}
-          >
-            <Option value="jack">ACER</Option>
-            <Option value="lucy">LENOVO</Option>
-            <Option value="disabled" disabled>
-              Disabled
-            </Option>
-            <Option value="Yiminghe">DELL</Option>
-          </Select>
-          <h2 style={{ color: "black" }}>รูปสินค้า</h2>
-          <div>
-            <input
-              type="file"
-              onChange={(e) => setIamge1Product(e.target.files[0])}
-              style={{ color: "black",marginBottom:"10px" }}
-            />
-            <input
-              type="file"
-              onChange={(e) => setIamge2Product(e.target.files[0])}
-              style={{ color: "black",marginBottom:"10px" }}
-            />
-            <input
-              type="file"
-              onChange={(e) => setIamge3Product(e.target.files[0])}
-              style={{ color: "black",marginBottom:"10px" }}
-            />
-            <input
-              type="file"
-              onChange={(e) => setIamge4Product(e.target.files[0])}
-              style={{ color: "black",marginBottom:"10px" }}
-            />
+            <Select
+              defaultValue={blandProduct}
+              className="ip-iuput"
+              onChange={(e) => setBlandProduct(e)}
+            >
+              <Option value="ACER">ACER</Option>
+              <Option value="LENOVO">LENOVO</Option>
+              <Option value="disabled" disabled>
+                Disabled
+              </Option>
+              <Option value="DELL">DELL</Option>
+            </Select>
+            <h2 style={{ color: "black" }}>รูปสินค้า</h2>
+            <div>
+              <input
+                type="file"
+                onChange={(e) => setIamge1Product(e.target.files[0])}
+                style={{ color: "black", marginBottom: "10px" }}
+              />
+              <input
+                type="file"
+                onChange={(e) => setIamge2Product(e.target.files[0])}
+                style={{ color: "black", marginBottom: "10px" }}
+              />
+              <input
+                type="file"
+                onChange={(e) => setIamge3Product(e.target.files[0])}
+                style={{ color: "black", marginBottom: "10px" }}
+              />
+              <input
+                type="file"
+                onChange={(e) => setIamge4Product(e.target.files[0])}
+                style={{ color: "black", marginBottom: "10px" }}
+              />
+            </div>
+            <Button
+              onClick={() => postproduct()}
+              type="primary"
+              style={{ marginTop: "20px" }}
+            >
+              เพิ่มสินค้า
+            </Button>
           </div>
-          <Button
-            onClick={() => postproduct()}
-            type="primary"
-            style={{ marginTop: "20px" }}
-          >
-            เพิ่มสินค้า
-          </Button>
         </div>
-      </div>
-    </FormItem>
-  );
+      </FormItem>
+    );
+  }
 }
 
 export default InsertProductRent;

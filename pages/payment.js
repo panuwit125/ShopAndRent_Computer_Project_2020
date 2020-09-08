@@ -42,6 +42,7 @@ function PaymentPage() {
   const [type, setType] = useState("");
   const matches = useMediaQuery("(min-width:600px)");
   const [dayforrent, setDayForRent] = useState(7);
+  const [UploadBillShow , setUploadBillShow] = useState("none")
 
   useEffect(() => {
     let token = localStorage.getItem("token");
@@ -322,6 +323,8 @@ function PaymentPage() {
             status={status}
             checkLogin={checkLogin}
             user={user}
+            UploadBillShow={UploadBillShow}
+            setUploadBillShow={setUploadBillShow}
           />
         );
       }
@@ -360,6 +363,8 @@ function PaymentPage() {
             CardShowProductRes={CardShowProductRes}
             dayforrent={dayforrent}
             postRentProduct={postRentProduct}
+            UploadBillShow={UploadBillShow}
+            setUploadBillShow={setUploadBillShow}
           />
         );
       }

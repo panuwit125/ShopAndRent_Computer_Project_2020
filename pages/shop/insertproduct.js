@@ -4,12 +4,14 @@ const { Option } = Select;
 import React, { useState, useEffect } from "react";
 import NavbarManage from "./componentManage/NavbarManage";
 import HeaderManage from "./componentManage/HeaderManage";
+import router from "next/router"
+import LoadingComponent from "../../components/component.loading"
 
 function InsertProduct() {
   const [nameProduct, setNameProduct] = useState("");
   const [descriptionProduct, setDescriptionProduct] = useState("");
   const [priceProduct, setPriceProduct] = useState("");
-  const [blandProduct, setBlandProduct] = useState("");
+  const [blandProduct, setBlandProduct] = useState("ACER");
   const [image1Product, setIamge1Product] = useState("");
   const [url1, set1Url] = useState("");
   const [image2Product, setIamge2Product] = useState("");
@@ -21,9 +23,24 @@ function InsertProduct() {
 
   const [show, setShow] = useState(0);
 
+  const [isLoading, setisLoading] = useState(false);
+  const [user, setUser] = useState();
+  const [token, setToken] = useState();
+
   useEffect(() => {
-    let token =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjM5ODNmMzhhNDM4MjY5ZDA2ZmJhMzUiLCJpYXQiOjE1OTc2Mzg2MTd9.JEeHZBwagb1jltAu1_--YKfjQDWOqnQNMIiDypfbG-Y";
+    if (
+      localStorage.getItem("tokenmanage") &&
+      JSON.parse(localStorage.getItem("usermanage"))
+    ) {
+      setToken(localStorage.getItem("tokenmanage"));
+      setUser(JSON.parse(localStorage.getItem("usermanage")));
+      setisLoading(true);
+    } else {
+      router.push("/shop/loginSeller");
+    }
+  },[]);
+
+  useEffect(() => {
     if (url1) {
       fetch("https://tranquil-beach-43094.herokuapp.com/insertproduct", {
         method: "post",
@@ -45,6 +62,9 @@ function InsertProduct() {
             console.log(data.err);
           } else {
             console.log("create succussfull");
+            alert("เพิ่มสินค้าเรียบร้อย")
+            setisLoading(true);
+            router.push("/shop/homemanage")
           }
         })
         .catch((err) => console.log(err));
@@ -71,6 +91,7 @@ function InsertProduct() {
   };
 
   const postproduct = () => {
+    setisLoading(false);
     console.log(image1Product);
     if (
       !nameProduct ||
@@ -79,17 +100,22 @@ function InsertProduct() {
       !blandProduct ||
       !image1Product
     ) {
-      alert("กรุณาใส่ข้อมูลหรือเลือกรูปภาพ");
+      console.log("กรุณาใส่ข้อมูลหรือเลือกรูปภาพ",nameProduct,descriptionProduct,priceProduct,blandProduct);
+      alert("กรุณาใส่ข้อมูลหรือเลือกรูปภาพ",nameProduct,descriptionProduct,priceProduct,blandProduct);
+      setisLoading(true);
     } else {
       imagefetch(image1Product, set1Url);
     }
   };
 
-  return (
+  if (!isLoading) {
+     return <LoadingComponent type={"pageloading"} status={true} />;
+  } else {
+    return (
     <FormItem style={{ margin: "0px" }}>
       <div className="br">
         <NavbarManage show={show} setShow={setShow} />
-        <HeaderManage setShow={setShow} />
+        <HeaderManage setShow={setShow} user={user} />
         <div style={{ padding: "20px 50px" }}>
           <h2 style={{ color: "black" }}>ชื่อสินค้า</h2>
           <Input
@@ -117,16 +143,16 @@ function InsertProduct() {
             onChange={(e) => setBlandProduct(e.target.value)}
           />*/}
           <Select
-            defaultValue="jack"
+            defaultValue={blandProduct}
             className="ip-iuput"
-            onChange={(e) => setBlandProduct(e.target.value)}
+            onChange={(e) => {setBlandProduct(e);}}
           >
-            <Option value="jack">ACER</Option>
-            <Option value="lucy">LENOVO</Option>
+            <Option value="ACER">ACER</Option>
+            <Option value="LENOVO">LENOVO</Option>
             <Option value="disabled" disabled>
               Disabled
             </Option>
-            <Option value="Yiminghe">DELL</Option>
+            <Option value="DELL">DELL</Option>
           </Select>
           <h2 style={{ color: "black" }}>รูปสินค้า</h2>
           <div>
@@ -162,6 +188,8 @@ function InsertProduct() {
       </div>
     </FormItem>
   );
+  }
+  
 }
 
 export default InsertProduct;

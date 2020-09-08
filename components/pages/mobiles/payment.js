@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Form, Button, Select, Upload, message } from "antd";
 import LoadingComponent from "../../component.loading";
 import HeaderNavbar from "../../HeaderNavbar";
+import UploadBillComponent from "../../component.UploadBill"
 import router from 'next/router'
 import {
   EnvironmentOutlined,
@@ -39,6 +40,8 @@ function PaymentMobile({
   CardShowProductRes,
   dayforrent,
   postRentProduct,
+  UploadBillShow,
+  setUploadBillShow
 }) {
   const [isLoading, setisLoading] = useState(false);
   useEffect(() => {
@@ -49,8 +52,8 @@ function PaymentMobile({
     if (type === "Shop") {
       return (
         <>
-          {inventory.map((data) => {
-            return <CardShowProductRes data={data} />;
+          {inventory.map((data,index) => {
+            return <CardShowProductRes key={index} data={data} />;
           })}
         </>
       );
@@ -65,6 +68,7 @@ function PaymentMobile({
     return (
       <FormItem style={{ margin: "0px" }}>
         <LoadingComponent type={"fetchloading"} status={fetchLoading} />
+        <UploadBillComponent UploadBillShow={UploadBillShow} setUploadBillShow={setUploadBillShow} postBuyProduct={postBuyProduct} type={type} postRentProduct={postRentProduct} />
         <div className="br-res-mobile">
           <HeaderNavbar page={"Payment"} />
           <div className="pm-body">
@@ -242,14 +246,14 @@ function PaymentMobile({
                 {type === "Shop" ? (
                   <button
                     className="btn-res-pm"
-                    onClick={() => postBuyProduct()}
+                    onClick={() => /*postBuyProduct()*/setUploadBillShow("block")}
                   >
                     สั่งซื้อสินค้า
                   </button>
                 ) : (
                   <button
                     className="btn-res-pm"
-                    onClick={() => postRentProduct()}
+                    onClick={() => /*postRentProduct()*/setUploadBillShow("block")}
                   >
                     เช่าสินค้า
                   </button>
