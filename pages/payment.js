@@ -338,7 +338,7 @@ function PaymentPage() {
               <HeaderNavbar />
               <div className="pm-body">
                 <div className="pm-back">
-                  <Button onClick={() => router.push("/page.shop")}>
+                  <Button onClick={() => router.push("/shop")}>
                     Back
                   </Button>
                   <h2 style={{ color: "black" }}>PAYMENT SELL</h2>
