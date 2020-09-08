@@ -4,6 +4,7 @@ const FormItem = Form.Item;
 import Navbar from "../../componentspc/NavbarPc";
 import LoadingComponent from "../../component.loading";
 import DescriptionResPc from "../../DescriptionProduct";
+import router from "next/router"
 
 function DescriptionPC({
   fetchLoading,

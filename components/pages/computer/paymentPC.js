@@ -3,6 +3,7 @@ import { Form, Button, Select, Upload, message } from "antd";
 import LoadingComponent from "../../component.loading";
 import Navbar from "../../componentspc/NavbarPc";
 import router from "next/router";
+import UploadBillComponent from "../../component.UploadBill"
 import {
   EnvironmentOutlined,
   UploadOutlined
@@ -40,7 +41,9 @@ function PaymentMobile({
   dayforrent,
   postRentProduct,
   checkLogin,
-  user
+  user,
+  UploadBillShow,
+  setUploadBillShow
 }) {
   const [isLoading, setisLoading] = useState(false);
   useEffect(() => {
@@ -65,6 +68,7 @@ function PaymentMobile({
     return (
       <FormItem style={{ margin: "0px" }}>
         <div className="shop-res-container">
+        <UploadBillComponent UploadBillShow={UploadBillShow} setUploadBillShow={setUploadBillShow} postBuyProduct={postBuyProduct} type={type} postRentProduct={postRentProduct} />
           <Navbar
           status={checkLogin}
             user={user.user_name}
@@ -242,14 +246,14 @@ function PaymentMobile({
                   {type === "Shop" ? (
                     <button
                       className="btn-res-pm"
-                      onClick={() => postBuyProduct()}
+                      onClick={() => setUploadBillShow("block")}
                     >
                       สั่งซื้อสินค้า
                     </button>
                   ) : (
                     <button
                       className="btn-res-pm"
-                      onClick={() => postRentProduct()}
+                      onClick={() => setUploadBillShow("block")}
                     >
                       เช่าสินค้า
                     </button>

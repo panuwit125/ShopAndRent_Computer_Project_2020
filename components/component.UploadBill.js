@@ -42,7 +42,7 @@ const ListRentItem = ({
         className="modal md-bg"
       >
         <div className="modal-content">
-          <div className="lri-card">
+          <div className="lri-card" style={{minWidth:"300px",maxWidth:"500px"}}>
             <div className="lri-header">
               <h2 style={{ color: "black" }}>กระบวนการจ่ายเงิน</h2>
               <Button onClick={() => setUploadBillShow("none")}>

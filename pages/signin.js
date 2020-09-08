@@ -53,6 +53,7 @@ function loginPage() {
           router.push("/shop");
         })
         .catch((err) => {
+          setfetchLoading(false);
           console.log(err.response);
           alert(err.response.data.error)
         });
