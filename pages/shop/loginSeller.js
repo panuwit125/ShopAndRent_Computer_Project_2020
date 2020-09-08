@@ -23,7 +23,7 @@ function LoginSeller() {
       };
       Axios({
         method: "post",
-        url: "http://localhost:5000/managesignin",
+        url: "https://tranquil-beach-43094.herokuapp.com/managesignin",
         data: data,
       })
         .then((res) => {

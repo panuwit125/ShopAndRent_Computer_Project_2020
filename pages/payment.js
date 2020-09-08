@@ -205,7 +205,7 @@ function PaymentPage() {
     };
     Axios({
       method: "post",
-      url: "http://localhost:5000/soldproduct",
+      url: "https://tranquil-beach-43094.herokuapp.com/soldproduct",
       data,
     })
       .then((data) => {
