@@ -3,12 +3,12 @@ const FormItem = Form.Item;
 import React, { useState, useEffect } from "react";
 import router from "next/router";
 import axios from "axios";
-import LoadingComponent from "./components/component.loading";
+import LoadingComponent from "../components/component.loading";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 
 //import page -> start
-import SignInMobile from "./pages/mobiles/signin";
-import SignInPC from "./pages/computer/signinPC";
+import SignInMobile from "../components/pages/mobiles/signin";
+import SignInPC from "../components/pages/computer/signinPC";
 //import page -> end
 
 function loginPage() {
@@ -50,7 +50,7 @@ function loginPage() {
           localStorage.setItem("token", res.data.token);
           localStorage.setItem("user", JSON.stringify(res.data.savedUser));
           setfetchLoading(false);
-          router.push("/page.shop");
+          router.push("/shop");
         })
         .catch((err) => {
           console.log(err.response);
@@ -95,7 +95,7 @@ function loginPage() {
               localStorage.setItem("token", res.data.token);
               localStorage.setItem("user", JSON.stringify(res.data.savedUser));
               setfetchLoading(false);
-              router.push("/page.shop");
+              router.push("/shop");
             })
             .catch((err) => {
               console.log(err);

@@ -38,7 +38,7 @@ const CardProductComponent = (props) => {
           />
         }
         className="sp-card"
-        onClick={() => router.push("/shop/description?id=" + props.data._id)}
+        onClick={() => router.push("/description?id=" + props.data._id)}
       >
           <h3 style={{ color: "black" }}>{props.data.name_product}</h3>
           <StatusShow />

@@ -5,8 +5,8 @@ import LoadingComponent from "../components/component.loading";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 
 // import page -> start
-import DescriptionMobile from "../pages/mobiles/description";
-import DescriptionPC from "../pages/computer/descriptionPC";
+import DescriptionMobile from "../components/pages/mobiles/description";
+import DescriptionPC from "../components/pages/computer/descriptionPC";
 // import page -> end
 
 function DescriptionPage() {
@@ -71,7 +71,7 @@ function DescriptionPage() {
     if (product.status_product) {
       localStorage.removeItem("itemforrent");
       localStorage.setItem("itemforrent", JSON.stringify(product));
-      router.push("/page.payment");
+      router.push("/payment");
     } else {
       alert("สินค้าไม่พร้อมให้เช่า");
     }
@@ -91,7 +91,7 @@ function DescriptionPage() {
         if (value.data.code === 100) {
           if (check === "buy") {
             console.log("ตอนนี้มีสินค้าอยู่ในตระกร้าแล้วครับ");
-            router.push("/page.payment");
+            router.push("/payment");
           } else {
             alert("มีสินค้าอยู่ในตระกร้าแล้วครับ");
           }
@@ -123,10 +123,10 @@ function DescriptionPage() {
         console.log(data);
         setfetchLoading(false);
         if (check === "buy") {
-          router.push("/page.payment");
+          router.push("/payment");
         } else {
           console.log("เก็บสินค้าในตระกร้าเรียบร้อยแล้ว");
-          router.push("/page.shop");
+          router.push("/shop");
         }
       })
       .catch((err) => {

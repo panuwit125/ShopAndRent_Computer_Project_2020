@@ -31,22 +31,22 @@ function NavbarComponent(props) {
             onClick={() => props.setShow(0)}
           />
         </div>
-        <a href="/shop/page.homeSeller">
+        <a href="/shop/homemanage">
           <i className="fa fa-fw fa-home">Home</i>
         </a>
         <a href="/shop/showproduct">
           <i className="fa fa-fw fa-home">ShowProduct</i>
         </a>
-        <a href="/shop/page.insertproduct">
+        <a href="/shop/insertproduct">
           <i className="fa fa-fw fa-home">AddProductForBuy</i>
         </a>
-        <a href="/shop/page.insertProductForRent">
+        <a href="/shop/insertProductForRent">
           <i className="fa fa-fw fa-home">AddProductForRent</i>
         </a>
         <a href="#">
           <i className="fa fa-fw fa-home">AddListBland</i>
         </a>
-        <a href="/shop/page.loginSeller">
+        <a href="/shop/loginSeller">
           <i className="fa fa-fw fa-home">LogOut</i>
         </a>
       </div>

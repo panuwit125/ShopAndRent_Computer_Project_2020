@@ -1,16 +1,11 @@
-import { Form, Button, Input, Upload, Select } from "antd";
-import { UploadOutlined } from "@ant-design/icons";
+import { Form, Button, Input, Select } from "antd";
 const FormItem = Form.Item;
 const { Option } = Select;
 import React, { useState, useEffect } from "react";
-import router from "next/router";
-import Header from "../components/component.header";
-import axios from "axios";
-import { name } from "file-loader";
 import NavbarManage from "./componentManage/NavbarManage";
 import HeaderManage from "./componentManage/HeaderManage";
 
-function InsertProduct() {
+function InsertProductRent() {
   const [nameProduct, setNameProduct] = useState("");
   const [descriptionProduct, setDescriptionProduct] = useState("");
   const [priceProduct, setPriceProduct] = useState("");
@@ -30,7 +25,7 @@ function InsertProduct() {
     let token =
       "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjM5ODNmMzhhNDM4MjY5ZDA2ZmJhMzUiLCJpYXQiOjE1OTc2Mzg2MTd9.JEeHZBwagb1jltAu1_--YKfjQDWOqnQNMIiDypfbG-Y";
     if (url1) {
-      fetch("https://tranquil-beach-43094.herokuapp.com/insertproduct", {
+      fetch("https://tranquil-beach-43094.herokuapp.com/insertproductrent", {
         method: "post",
         headers: {
           "Content-Type": "application/json",
@@ -109,7 +104,7 @@ function InsertProduct() {
             value={descriptionProduct}
             onChange={(e) => setDescriptionProduct(e.target.value)}
           />
-          <h2 style={{ color: "black" }}>ราคาสินค้า</h2>
+          <h2 style={{ color: "black" }}>ราคาเช่าต่อวัน</h2>
           <Input
             className="ip-iuput"
             value={priceProduct}
@@ -169,4 +164,4 @@ function InsertProduct() {
   );
 }
 
-export default InsertProduct;
+export default InsertProductRent;

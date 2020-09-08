@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Form, Button } from "antd";
 const FormItem = Form.Item;
-import HeaderNavbar from "../../components/HeaderNavbar";
-import DescriptionProduct from "../../components/DescriptionProduct";
-import NavbarSide from "../../components/Navbar";
-import LoadingComponent from "../../components/component.loading";
+import HeaderNavbar from "../../HeaderNavbar";
+import DescriptionProduct from "../../DescriptionProduct";
+import NavbarSide from "../../Navbar";
+import LoadingComponent from "../../component.loading";
 import router from "next/router";
 
 function DescriptionMobile({

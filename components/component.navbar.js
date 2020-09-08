@@ -6,7 +6,7 @@ import {
   VideoCameraOutlined,
 } from "@ant-design/icons";
 import router from "next/router";
-import { updateNavbar, updateTypeBland } from "../../store/actions/postAction";
+import { updateNavbar, updateTypeBland } from "../store/actions/postAction";
 import { useSelector, useDispatch } from "react-redux";
 const { Header, Content, Footer, Sider } = Layout;
 

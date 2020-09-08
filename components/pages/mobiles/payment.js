@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Form, Button, Select, InputNumber, Upload, message } from "antd";
-import LoadingComponent from "../../components/component.loading";
-import HeaderNavbar from "../../components/HeaderNavbar";
+import { Form, Button, Select, Upload, message } from "antd";
+import LoadingComponent from "../../component.loading";
+import HeaderNavbar from "../../HeaderNavbar";
 import router from 'next/router'
 import {
   EnvironmentOutlined,
   UploadOutlined,
-  DeleteOutlined,
 } from "@ant-design/icons";
 import MonetizationOnIcon from "@material-ui/icons/MonetizationOn";
 const FormItem = Form.Item;
@@ -71,7 +70,7 @@ function PaymentMobile({
           <div className="pm-body">
             <div className="pm-back pay-font-hd">
               <a
-                onClick={() => router.push("/page.shop")}
+                onClick={() => router.push("/shop")}
                 style={{ color: "#AFAFAF", margin: "0px" }}
               >
                 Back

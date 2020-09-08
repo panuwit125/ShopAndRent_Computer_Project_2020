@@ -1,9 +1,7 @@
 import { Form, Button, Input,Layout } from "antd";
-
 const { Header, Sider, Content } = Layout;
 const FormItem = Form.Item;
 import React, { useEffect, useState } from "react";
-import router from "next/router";
 
 function LoginSeller() {
 

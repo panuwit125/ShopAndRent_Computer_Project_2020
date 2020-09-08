@@ -1,91 +1,46 @@
-import {
-  Form,
-  Select,
-  InputNumber,
-  DatePicker,
-  Switch,
-  Slider,
-  Button,
-} from 'antd'
-import Link from 'next/link'
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import LoadingComponent from "../components/component.loading";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
+import router from 'next/router'
 
-const FormItem = Form.Item
-const Option = Select.Option
+//import page -> start
+import HomeMobile from "../components/pages/mobiles/home";
+import HomePC from "../components/pages/computer/homePC";
+//import page -> end
 
-export default function Home() {
-  return (
-      <div style={{ marginTop: 100 }}>
-        <Form layout="horizontal">
-          <FormItem
-              label="Input Number"
-              labelCol={{ span: 8 }}
-              wrapperCol={{ span: 8 }}
-          >
-            <InputNumber
-                size="large"
-                min={1}
-                max={10}
-                style={{ width: 100 }}
-                defaultValue={3}
-                name="inputNumber"
-            />
-            <a href="#">Link</a>
-          </FormItem>
+function home() {
+  const [isLoading, setisLoading] = useState(false);
+  const matches = useMediaQuery("(min-width:600px)");
 
-          <FormItem
-              label="Switch"
-              labelCol={{ span: 8 }}
-              wrapperCol={{ span: 8 }}
-          >
-            <Switch defaultChecked name="switch" />
-          </FormItem>
+  useEffect(() => {
+    localStorage.clear();
+    axios
+      .get("https://tranquil-beach-43094.herokuapp.com/")
+      .then((res) => {
+        console.log("Success", res);
+        setisLoading(true);
+      })
+      .catch((err) => {
+        console.log("Error", err);
+      });
+  }, []);
 
-          <FormItem
-              label="Slider"
-              labelCol={{ span: 8 }}
-              wrapperCol={{ span: 8 }}
-          >
-            <Slider defaultValue={70} />
-          </FormItem>
+  const nexthandle = (type) => {
+    localStorage.setItem("type", type);
+    router.push("/shop");
+    return null;
+  };
 
-          <FormItem
-              label="Select"
-              labelCol={{ span: 8 }}
-              wrapperCol={{ span: 8 }}
-          >
-            <Select
-                size="large"
-                defaultValue="lucy"
-                style={{ width: 192 }}
-                name="select"
-            >
-              <Option value="jack">jack</Option>
-              <Option value="lucy">lucy</Option>
-              <Option value="disabled" disabled>
-                disabled
-              </Option>
-              <Option value="yiminghe">yiminghe</Option>
-            </Select>
-          </FormItem>
-
-          <FormItem
-              label="DatePicker"
-              labelCol={{ span: 8 }}
-              wrapperCol={{ span: 8 }}
-          >
-            <DatePicker name="startDate" />
-          </FormItem>
-          <FormItem style={{ marginTop: 48 }} wrapperCol={{ span: 8, offset: 8 }}>
-            <Button size="large" type="primary" htmlType="submit">
-              OK
-            </Button>
-            <Button size="large" style={{ marginLeft: 8 }}>
-              Cancel
-            </Button>
-          </FormItem>
-        </Form>
-        
-
-      </div>
-  )
+  if (!isLoading) {
+    return <LoadingComponent type={"pageloading"} status={true} />;
+  } else {
+    if (matches) {
+      return <HomePC nextpage={nexthandle} />;
+    } else {
+      return <HomeMobile nextpage={nexthandle} />;
+    }
+  }
 }
+
+export default home;

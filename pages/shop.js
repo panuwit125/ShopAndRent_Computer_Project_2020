@@ -1,17 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import LoadingComponent from "./components/component.loading";
+import LoadingComponent from "../components/component.loading";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import axios from "axios";
 
 //import page --> start
-import ShopMobile from "./pages/mobiles/shop";
-import ShopPC from './pages/computer/shopPC'
+import ShopMobile from "../components/pages/mobiles/shop";
+import ShopPC from '../components/pages/computer/shopPC'
 import router  from "next/router";
 //import page --> end
 
 function ShopPage() {
-  const dispatch = useDispatch();
   const { TypeBland } = useSelector((state) => state.post);
   const [checkLogin, setCheckLogin] = useState(false);
   const [isLoading, setisLoading] = useState(false);

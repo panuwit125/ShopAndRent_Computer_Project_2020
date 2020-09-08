@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Form, Button } from "antd";
 const FormItem = Form.Item;
-import Header from "../../components/component.header";
-import Navbar from "../../components/componentspc/NavbarPc";
-import LoadingComponent from "../../components/component.loading";
-import DescriptionResPc from "../../components/DescriptionProduct";
+import Navbar from "../../componentspc/NavbarPc";
+import LoadingComponent from "../../component.loading";
+import DescriptionResPc from "../../DescriptionProduct";
 
 function DescriptionPC({
   fetchLoading,

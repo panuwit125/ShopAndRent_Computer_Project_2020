@@ -1,17 +1,17 @@
 import { Form, Button, Select, InputNumber, message } from "antd";
 const FormItem = Form.Item;
 import React, { useState, useEffect } from "react";
-import { EnvironmentOutlined, DeleteOutlined } from "@ant-design/icons";
+import { DeleteOutlined } from "@ant-design/icons";
 const { Option } = Select;
 import router from "next/router";
 import Axios from "axios";
-import LoadingComponent from "./components/component.loading";
+import LoadingComponent from "../components/component.loading";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
-import HeaderNavbar from "./components/HeaderNavbar";
+import HeaderNavbar from "../components/HeaderNavbar";
 
 //import page -> start
-import PaymentMobile from "./pages/mobiles/payment";
-import PaymentPC from "./pages/computer/paymentPC";
+import PaymentMobile from "../components/pages/mobiles/payment";
+import PaymentPC from "../components/pages/computer/paymentPC";
 //import page -> end
 
 const props = {
@@ -34,10 +34,10 @@ const props = {
 
 function PaymentPage() {
   const [user, setUser] = useState();
-  const [token, setToken] = useState("");
   const [inventory, setInventory] = useState([]);
   const [isLoading, setisLoading] = useState(false);
   const [fetchLoading, setfetchLoading] = useState(false);
+  const [checkLogin , setCheckLogin] = useState(false);
   const [price, setPrice] = useState(0);
   const [type, setType] = useState("");
   const matches = useMediaQuery("(min-width:600px)");
@@ -53,8 +53,9 @@ function PaymentPage() {
       if (token) {
         setUser(user);
         getProductInventory(user, typePage);
+        setCheckLogin(true);
       } else {
-        router.push("/page.login");
+        router.push("/signin");
       }
     }
   }, []);
@@ -212,7 +213,7 @@ function PaymentPage() {
           setfetchLoading(false);
           console.log("ทำการซื้อสำเร็จแล้ว", data);
           alert("ทำรายการซื้อสำเร็จแล้ว");
-          router.push("/page.shop");
+          router.push("/shop");
         } else if (data.data.code === 101) {
           setfetchLoading(false);
           console.log("รายการของถูกซื้อไปแล้ว", data.data.product);
@@ -245,10 +246,10 @@ function PaymentPage() {
           console.log(datapost);
           if (datapost.data.code === 100) {
             alert("ทำการเช่าสำเร็จแล้ว");
-            router.push("/page.shop");
+            router.push("/shop");
           } else {
             alert("ไม่สามารถเช่าได้เนื่องจากถูกเช่าไปแล้ว");
-            router.push("/page.shop");
+            router.push("/shop");
           }
         })
         .catch((error) => {
@@ -256,7 +257,7 @@ function PaymentPage() {
         });
     } else {
       alert("ไม่พร้อมให้เช่า");
-      router.push("/page.shop");
+      router.push("/shop");
     }
   };
 
@@ -293,7 +294,7 @@ function PaymentPage() {
               <HeaderNavbar />
               <div className="pm-body">
                 <div className="pm-back">
-                  <Button onClick={() => router.push("/page.shop")}>
+                  <Button onClick={() => router.push("/shop")}>
                     Back
                   </Button>
                   <h2 style={{ color: "black" }}>PAYMENT SELL</h2>
@@ -318,6 +319,9 @@ function PaymentPage() {
             CardShowProductRes={CardShowProductRes}
             dayforrent={dayforrent}
             postRentProduct={postRentProduct}
+            status={status}
+            checkLogin={checkLogin}
+            user={user}
           />
         );
       }

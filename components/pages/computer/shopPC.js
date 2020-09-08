@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import ShowListRentComponent from "../../components/component.listRentItem";
-import Navbar from "../../components/componentspc/NavbarPc";
-import CardProduct from "../../components/component.cardproduct";
-import Tabs from "../../components/Tabs";
+import ShowListRentComponent from "../../component.listRentItem";
+import Navbar from "../../componentspc/NavbarPc";
+import CardProduct from "../../component.cardproduct";
+import Tabs from "../../Tabs";
 import { Form } from "antd";
 const FormItem = Form.Item;
 
@@ -16,7 +16,7 @@ function ShopPC({
   setisLoading,
   TypeBland,
   product,
-  user,
+  user
 }) {
   const [ispageLoading, setpageisLoading] = useState(false);
   useEffect(() => {
@@ -44,6 +44,7 @@ function ShopPC({
             type={type}
             click={setCheckListShow}
             setshow={setShowNavbar}
+            status={checkLogin}
           />
           <div className="shop-res-body">
             <div className="shop-res-body-header">
@@ -54,7 +55,7 @@ function ShopPC({
             </div>
             <div className="shop-res-body-body">
               {product.map((data, index) => {
-                return <CardProduct data={data} page={type} />;
+                return <CardProduct key={index} data={data} page={type} />;
               })}
             </div>
           </div>

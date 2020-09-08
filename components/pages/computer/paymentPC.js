@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Form, Button, Select, InputNumber, Upload, message } from "antd";
-import LoadingComponent from "../../components/component.loading";
-import HeaderNavbar from "../../components/HeaderNavbar";
-import Navbar from "../../components/componentspc/NavbarPc";
+import { Form, Button, Select, Upload, message } from "antd";
+import LoadingComponent from "../../component.loading";
+import Navbar from "../../componentspc/NavbarPc";
 import router from "next/router";
 import {
   EnvironmentOutlined,
-  UploadOutlined,
-  DeleteOutlined,
+  UploadOutlined
 } from "@ant-design/icons";
 import MonetizationOnIcon from "@material-ui/icons/MonetizationOn";
 const FormItem = Form.Item;
@@ -41,6 +39,8 @@ function PaymentMobile({
   CardShowProductRes,
   dayforrent,
   postRentProduct,
+  checkLogin,
+  user
 }) {
   const [isLoading, setisLoading] = useState(false);
   useEffect(() => {
@@ -66,11 +66,10 @@ function PaymentMobile({
       <FormItem style={{ margin: "0px" }}>
         <div className="shop-res-container">
           <Navbar
-          /*status={checkLogin}
-            user={user}
+          status={checkLogin}
+            user={user.user_name}
             type={type}
-            click={setCheckListShow}
-            setshow={setShowNavbar}*/
+            //setshow={setShowNavbar}
           />
           <div className="shop-res-body" style={{ padding: "0px" }}>
             <div className="pm-body">
@@ -78,7 +77,7 @@ function PaymentMobile({
                 className="pm-back"
                 style={{ display: "flex", alignItems: "center" }}
               >
-                <Button onClick={() => router.push("/page.shop")}>Back</Button>
+                <Button onClick={() => router.push("/shop")}>Back</Button>
                 <h2 style={{ color: "black", margin: "0px" }}>PAYMENT SELL</h2>
                 <a style={{ color: "black" }}>Edit</a>
               </div>
@@ -272,7 +271,7 @@ function PaymentMobile({
           </div>
           <div className="pm-body">
             <div className="pm-back">
-              <Button onClick={() => router.push("/page.shop")}>Back</Button>
+              <Button onClick={() => router.push("/shop")}>Back</Button>
               <h2 style={{ color: "black" }}>PAYMENT SELL</h2>
               <a style={{ color: "black" }}>Edit</a>
             </div>

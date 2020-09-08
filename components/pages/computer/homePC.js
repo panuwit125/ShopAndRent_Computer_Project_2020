@@ -1,6 +1,6 @@
 import React from 'react'
-import HeaderNavbar from "../../components/HeaderNavbar";
-import { Form, Button } from "antd";
+import HeaderNavbar from "../../HeaderNavbar";
+import { Form } from "antd";
 const FormItem = Form.Item;
 import img1 from '../../../public/BUY.gif'
 import img2 from '../../../public/RENT.jpg'

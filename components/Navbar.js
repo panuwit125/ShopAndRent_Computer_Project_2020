@@ -1,15 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Layout, Menu, Button } from "antd";
 import {
-  UploadOutlined,
-  UserOutlined,
-  VideoCameraOutlined,
   CloseOutlined,
 } from "@ant-design/icons";
 import router from "next/router";
-import { updateNavbar, updateTypeBland } from "../../store/actions/postAction";
 import { useSelector, useDispatch } from "react-redux";
-const { Header, Content, Footer, Sider } = Layout;
 
 let type;
 function NavbarComponent(props) {
@@ -36,7 +30,7 @@ function NavbarComponent(props) {
             onClick={() => props.setshow(0)}
           />
         </div>
-        <a href="/page.shop">
+        <a href="/shop">
           <i className="fa fa-fw fa-home">Home</i>
         </a>
         {props.status ? (
@@ -44,7 +38,7 @@ function NavbarComponent(props) {
             <i className="fa fa-fw fa-wrench">ID : {props.user}</i>
           </a>
         ) : (
-          <a href="/page.login">
+          <a href="/signin">
             <i className="fa fa-fw fa-wrench">Login</i>
           </a>
         )}
@@ -52,7 +46,7 @@ function NavbarComponent(props) {
           <a
             onClick={() => {
               localStorage.setItem("type", "Rent");
-              router.push("/page.shop");
+              router.push("/shop");
               location.reload();
             }}
           >
@@ -62,7 +56,7 @@ function NavbarComponent(props) {
           <a
             onClick={() => {
               localStorage.setItem("type", "Shop");
-              router.push("/page.shop");
+              router.push("/shop");
               location.reload();
             }}
           >
@@ -70,7 +64,7 @@ function NavbarComponent(props) {
           </a>
         )}
         {props.status && props.type === "Shop" ? (
-          <a href="/page.payment">
+          <a href="/payment">
             <i className="fa fa-fw fa-user">Inventory</i>
           </a>
         ) : null}
@@ -88,7 +82,7 @@ function NavbarComponent(props) {
           <a
             onClick={() => {
               localStorage.clear();
-              router.push("/page.home");
+              router.push("/");
             }}
           >
             <i className="fa fa-fw fa-user">LogOut</i>

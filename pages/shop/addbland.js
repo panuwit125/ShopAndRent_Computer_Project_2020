@@ -1,12 +1,6 @@
-import { Form, Button, Input, Upload, Select } from "antd";
-import { UploadOutlined } from "@ant-design/icons";
+import { Form, Button, Input} from "antd";
 const FormItem = Form.Item;
-const { Option } = Select;
-import React, { useState, useEffect } from "react";
-import router from "next/router";
-import Header from "../components/component.header";
-import axios from "axios";
-import { name } from "file-loader";
+import React, { useState } from "react";
 import NavbarManage from "./componentManage/NavbarManage";
 import HeaderManage from "./componentManage/HeaderManage";
 

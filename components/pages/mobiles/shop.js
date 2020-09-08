@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import HeaderNavbar from "../../components/HeaderNavbar";
-import NavbarSide from "../../components/Navbar";
-import Tabs from "../../components/Tabs";
-import { Form, Button, Card } from "antd";
+import HeaderNavbar from "../../HeaderNavbar";
+import NavbarSide from "../../Navbar";
+import Tabs from "../../Tabs";
+import { Form } from "antd";
 const FormItem = Form.Item;
-import CardProduct from "../../components/component.cardproduct";
-import ShowListRentComponent from "../../components/component.listRentItem";
+import CardProduct from "../../component.cardproduct";
+import ShowListRentComponent from "../../component.listRentItem";
 
 function Shop({
   showNavbar,
@@ -55,7 +55,7 @@ function Shop({
               </div>
               <div className="sp-body-2-body">
                 {product.map((data, index) => {
-                  return <CardProduct data={data} page={type} />;
+                  return <CardProduct key={index} data={data} page={type} />;
                 })}
               </div>
             </div>

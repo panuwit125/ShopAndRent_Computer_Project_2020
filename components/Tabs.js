@@ -6,9 +6,8 @@ import Tab from "@material-ui/core/Tab";
 import {
   updateNavbarres,
   updateTypeBland,
-} from "../../store/actions/postAction";
+} from "../store/actions/postAction";
 import { useSelector, useDispatch } from "react-redux";
-import router from "next/router";
 
 const useStyles = makeStyles({
   root: {

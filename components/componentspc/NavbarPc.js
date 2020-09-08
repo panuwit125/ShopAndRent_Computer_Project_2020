@@ -1,22 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Layout, Menu, Button } from "antd";
-import {
-  UploadOutlined,
-  UserOutlined,
-  VideoCameraOutlined,
-  CloseOutlined,
-} from "@ant-design/icons";
+import { Layout} from "antd";
 import router from "next/router";
-import {
-  updateNavbar,
-  updateTypeBland,
-} from "../../../store/actions/postAction";
 import { useSelector, useDispatch } from "react-redux";
-const { Header, Content, Footer, Sider } = Layout;
 
 let type;
 function NavbarComponent(props) {
-  const dispatch = useDispatch();
   const { Navbar } = useSelector((state) => state.post);
   const [isLoading, setisLoading] = useState(false);
 
@@ -39,7 +27,7 @@ function NavbarComponent(props) {
           NOTEBOOK
         </div>
         <li className="show-res-navbar-li show-res-li-border">
-          <a className="show-res-navbar-li" href="/page.home">
+          <a className="show-res-navbar-li" href="/shop">
             Home
           </a>
         </li>
@@ -49,7 +37,7 @@ function NavbarComponent(props) {
           </li>
         ) : (
           <li className="show-res-navbar-li show-res-li-border">
-            <a className="show-res-navbar-li" href="/page.login">
+            <a className="show-res-navbar-li" href="/signin">
               Login
             </a>
           </li>
@@ -59,7 +47,7 @@ function NavbarComponent(props) {
             className="show-res-navbar-li show-res-li-border"
             onClick={() => {
               localStorage.setItem("type", "Rent");
-              router.push("/page.shop");
+              router.push("/shop");
               location.reload();
             }}
           >
@@ -72,7 +60,7 @@ function NavbarComponent(props) {
             className="show-res-navbar-li show-res-li-border"
             onClick={() => {
               localStorage.setItem("type", "Shop");
-              router.push("/page.shop");
+              router.push("/shop");
               location.reload();
             }}
           >
@@ -83,7 +71,7 @@ function NavbarComponent(props) {
         )}
         {props.status && props.type === "Shop" ? (
           <li className="show-res-navbar-li show-res-li-border">
-            <a className="show-res-navbar-li" href="/page.payment">
+            <a className="show-res-navbar-li" href="/payment">
               Inventory
             </a>
           </li>
@@ -105,7 +93,7 @@ function NavbarComponent(props) {
               className="show-res-navbar-li"
               onClick={() => {
                 localStorage.clear();
-                router.push("/page.home");
+                router.push("/");
               }}
             >
               LogOut

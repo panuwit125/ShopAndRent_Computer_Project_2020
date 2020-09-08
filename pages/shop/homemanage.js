@@ -1,27 +1,11 @@
 import {
   Form,
-  Button,
-  Input,
-  Layout,
-  Menu,
   Card,
-  Col,
-  Row,
-  Avatar,
-  Select
 } from "antd";
 const FormItem = Form.Item;
-import React, { useEffect, useState } from "react";
-import router from "next/router";
-import DehazeIcon from "@material-ui/icons/Dehaze";
-import {
-  EditOutlined,
-  EllipsisOutlined,
-  SettingOutlined,
-} from "@ant-design/icons";
+import React, { useState } from "react";
 import NavbarManage from './componentManage/NavbarManage'
 import HeaderManage from './componentManage/HeaderManage'
-const Meta = Card;
 
 function homeSeller() {
   const [show,setShow] = useState(0)

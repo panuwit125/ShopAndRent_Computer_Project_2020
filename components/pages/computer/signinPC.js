@@ -1,6 +1,6 @@
 import React from "react";
 import { Form, Button, Input } from "antd";
-import LoadingComponent from "../../components/component.loading";
+import LoadingComponent from "../../component.loading";
 const FormItem = Form.Item;
 
 function SignInPC({
