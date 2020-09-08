@@ -65,7 +65,7 @@ function DescriptionMobile({
       }
     } else {
       return (
-        <Button className="dt-btn" onClick={() => router.push("/page.login")}>
+        <Button className="dt-btn" onClick={() => router.push("/signin")}>
           Login Plese
         </Button>
       );
