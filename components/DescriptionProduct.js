@@ -70,11 +70,25 @@ export default function DescriptionProduct(props) {
       return (
         <div style={{ padding: "19px 22px", height: "100%" }}>
           <h1 className="des-res-text">
-            ออกแบบมาให้สะดวกพกพาได้ทั้งวัน ทั้งใช้ทำงานและเพื่อความบันเทิง Swift
-            5 จึงเป็นโน้ตบุ๊กฝาพับขนาด 14 นิ้วที่เบาที่สุด7 โดยมีน้ำหนักเพียง
-            990 กรัม และมีการ์ดกราฟิก NVIDIA® อันทรงพลัง พร้อมทั้ง CPU Intel®
-            Core™ รุ่นล่าสุด ในความบางเพียง 14.95 มม.
-            คุณจึงมั่นใจได้ถึงการออกแบบที่ทรงพลัง
+            CPU : INTEL I7 - 8700K
+          </h1>
+          <h1 className="des-res-text">
+            MAINBOARD : B450 PRO
+          </h1>
+          <h1 className="des-res-text">
+            RAM : BUS 2666 8 GB
+          </h1>
+          <h1 className="des-res-text">
+            HARDDISK : 1000 GB
+          </h1>
+          <h1 className="des-res-text">
+            VGA CARD : RTX 2060 8GB
+          </h1>
+          <h1 className="des-res-text">
+            SSD : ไม่มี
+          </h1>
+          <h1 className="des-res-text">
+            MONITOR : IPS 144 HZ
           </h1>
         </div>
       );
