@@ -2,12 +2,9 @@ import React, { useEffect, useState } from "react";
 import { Form, Button, Select, Upload, message } from "antd";
 import LoadingComponent from "../../component.loading";
 import HeaderNavbar from "../../HeaderNavbar";
-import UploadBillComponent from "../../component.UploadBill"
-import router from 'next/router'
-import {
-  EnvironmentOutlined,
-  UploadOutlined,
-} from "@ant-design/icons";
+import UploadBillComponent from "../../component.UploadBill";
+import router from "next/router";
+import { EnvironmentOutlined, UploadOutlined } from "@ant-design/icons";
 import MonetizationOnIcon from "@material-ui/icons/MonetizationOn";
 const FormItem = Form.Item;
 const { Option } = Select;
@@ -41,7 +38,7 @@ function PaymentMobile({
   dayforrent,
   postRentProduct,
   UploadBillShow,
-  setUploadBillShow
+  setUploadBillShow,
 }) {
   const [isLoading, setisLoading] = useState(false);
   useEffect(() => {
@@ -52,7 +49,7 @@ function PaymentMobile({
     if (type === "Shop") {
       return (
         <>
-          {inventory.map((data,index) => {
+          {inventory.map((data, index) => {
             return <CardShowProductRes key={index} data={data} />;
           })}
         </>
@@ -68,7 +65,13 @@ function PaymentMobile({
     return (
       <FormItem style={{ margin: "0px" }}>
         <LoadingComponent type={"fetchloading"} status={fetchLoading} />
-        <UploadBillComponent UploadBillShow={UploadBillShow} setUploadBillShow={setUploadBillShow} postBuyProduct={postBuyProduct} type={type} postRentProduct={postRentProduct} />
+        <UploadBillComponent
+          UploadBillShow={UploadBillShow}
+          setUploadBillShow={setUploadBillShow}
+          postBuyProduct={postBuyProduct}
+          type={type}
+          postRentProduct={postRentProduct}
+        />
         <div className="br-res-mobile">
           <HeaderNavbar page={"Payment"} />
           <div className="pm-body">
@@ -146,12 +149,16 @@ function PaymentMobile({
                   padding: "11px 26px 5px 26px",
                 }}
               >
-                <h3 style={{ fontSize: "16px" }}>รูปบัตรประชาชน</h3>
-                <Upload {...props}>
-                  <Button>
-                    <UploadOutlined /> Click to Upload
-                  </Button>
-                </Upload>
+                {type === "Shop" ? null : (
+                  <>
+                    <h3 style={{ fontSize: "16px" }}>รูปบัตรประชาชน</h3>
+                    <Upload {...props}>
+                      <Button>
+                        <UploadOutlined /> Click to Upload
+                      </Button>
+                    </Upload>
+                  </>
+                )}
               </div>
               <div className="pm-payment-body1">
                 <div className="pm-payment-body2">
@@ -246,14 +253,18 @@ function PaymentMobile({
                 {type === "Shop" ? (
                   <button
                     className="btn-res-pm"
-                    onClick={() => /*postBuyProduct()*/setUploadBillShow("block")}
+                    onClick={() =>
+                      /*postBuyProduct()*/ setUploadBillShow("block")
+                    }
                   >
                     สั่งซื้อสินค้า
                   </button>
                 ) : (
                   <button
                     className="btn-res-pm"
-                    onClick={() => /*postRentProduct()*/setUploadBillShow("block")}
+                    onClick={() =>
+                      /*postRentProduct()*/ setUploadBillShow("block")
+                    }
                   >
                     เช่าสินค้า
                   </button>

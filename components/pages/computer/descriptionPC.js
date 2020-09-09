@@ -4,7 +4,7 @@ const FormItem = Form.Item;
 import Navbar from "../../componentspc/NavbarPc";
 import LoadingComponent from "../../component.loading";
 import DescriptionResPc from "../../DescriptionProduct";
-import router from "next/router"
+import router from "next/router";
 
 function DescriptionPC({
   fetchLoading,
@@ -14,6 +14,10 @@ function DescriptionPC({
   product,
   checkProductByid,
   checkStatus,
+  imageExpand,
+  setImageExpand,
+  setImageForExpand,
+  ImageExpandShow,
 }) {
   const [isLoading, setisLoading] = useState(false);
   useEffect(() => {
@@ -53,6 +57,11 @@ function DescriptionPC({
         </Button>
       );
     }
+  };
+
+  const SetImage = (image) => {
+    setImageForExpand(image);
+    setImageExpand("block");
   };
 
   const DescriptionShow = () => {
@@ -102,6 +111,7 @@ function DescriptionPC({
     return (
       <FormItem style={{ margin: "0px" }}>
         <LoadingComponent type={"fetchloading"} status={fetchLoading} />
+        <ImageExpandShow />
         <div className="br">
           <div className="br-body">
             <div className="sp-body-1">
@@ -119,20 +129,39 @@ function DescriptionPC({
                 </div>
               </div>
               <div className="dt-body-2-body">
-                <img className="dt-res-img1" src={product.image_product} />
+                <img
+                  className="dt-res-img1"
+                  src={product.image_product}
+                  onClick={() => SetImage(product.image_product)}
+                />
                 <div>
-                  <img
-                    className="dt-res-img2"
-                    src="https://www.beartai.com/wp-content/uploads/2018/10/MacBook-Pro-2018-Gris-2-1200x675.jpg"
-                  />
-                  <img
-                    className="dt-res-img2"
-                    src="https://www.beartai.com/wp-content/uploads/2018/10/MacBook-Pro-2018-Gris-2-1200x675.jpg"
-                  />
-                  <img
-                    className="dt-res-img2"
-                    src="https://www.beartai.com/wp-content/uploads/2018/10/MacBook-Pro-2018-Gris-2-1200x675.jpg"
-                  />
+                  {product.image1_product ? (
+                    <img
+                      className="dt-res-img2"
+                      src={product.image1_product}
+                      onClick={() => SetImage(product.image1_product)}
+                    />
+                  ) : (
+                    <img className="dt-res-img2" src={"/noimage.jpg"} />
+                  )}
+                  {product.image2_product ? (
+                    <img
+                      className="dt-res-img2"
+                      src={product.image2_product}
+                      onClick={() => SetImage(product.image2_product)}
+                    />
+                  ) : (
+                    <img className="dt-res-img2" src={"/noimage.jpg"} />
+                  )}
+                  {product.image3_product ? (
+                    <img
+                      className="dt-res-img2"
+                      src={product.image3_product}
+                      onClick={() => SetImage(product.image3_product)}
+                    />
+                  ) : (
+                    <img className="dt-res-img2" src={"/noimage.jpg"} />
+                  )}
                 </div>
               </div>
               <DescriptionShow />

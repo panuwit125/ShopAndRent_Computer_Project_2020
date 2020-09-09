@@ -3,11 +3,13 @@ import { useSelector, useDispatch } from "react-redux";
 import LoadingComponent from "../components/component.loading";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import axios from "axios";
+import { Button } from "antd";
+import {WechatOutlined} from "@ant-design/icons"
 
 //import page --> start
 import ShopMobile from "../components/pages/mobiles/shop";
-import ShopPC from '../components/pages/computer/shopPC'
-import router  from "next/router";
+import ShopPC from "../components/pages/computer/shopPC";
+import router from "next/router";
 //import page --> end
 
 function ShopPage() {
@@ -38,7 +40,7 @@ function ShopPage() {
       console.log("dasds");
       getProduct(TypeBland, typePage);
     } else {
-      router.push('/page.home')
+      router.push("/page.home");
     }
   }, []);
 
@@ -81,6 +83,14 @@ function ShopPage() {
     }
   }, [TypeBland]);
 
+  const ChatbotShow = () => {
+    return (
+      <Button className="cb-fixed" onClick={()=>alert("เข้าไป Chatbot (จำลอง)")}>
+        <WechatOutlined style={{fontSize:"30px"}} />
+      </Button>
+    );
+  };
+
   if (!isLoading) {
     return <LoadingComponent />;
   } else {
@@ -98,6 +108,7 @@ function ShopPage() {
           product={product}
           user={user}
           setShowNavbar={setShowNavbar}
+          ChatbotShow={ChatbotShow}
         />
       );
     } else {
@@ -113,6 +124,7 @@ function ShopPage() {
           type={type}
           checkListShow={checkListShow}
           userId={userId}
+          ChatbotShow={ChatbotShow}
         />
       );
     }

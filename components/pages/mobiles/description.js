@@ -17,6 +17,10 @@ function DescriptionMobile({
   type,
   checkProductByid,
   checkStatus,
+  imageExpand,
+  setImageExpand,
+  ImageExpandShow,
+  setImageForExpand,
 }) {
   const [isLoading, setisLoading] = useState(false);
   useEffect(() => {
@@ -72,12 +76,18 @@ function DescriptionMobile({
     }
   };
 
+  const SetImage = (image) => {
+    setImageForExpand(image);
+    setImageExpand("block");
+  };
+
   if (!isLoading) {
     return null;
   } else {
     return (
       <FormItem style={{ margin: "0px" }}>
         <LoadingComponent type={"fetchloading"} status={fetchLoading} />
+        <ImageExpandShow />
         <NavbarSide
           show={showNavbar}
           setshow={setShowNavbar}
@@ -88,8 +98,14 @@ function DescriptionMobile({
         <div className="br">
           <HeaderNavbar page={"Shop"} setshow={setShowNavbar} />
           <div className="des-res-body">
-            <div className="sp-body-2" style={{padding:"10px 20px 30px 20px"}}>
-              <div className="dt-body-2-header" style={{justifyContent:"center"}}>
+            <div
+              className="sp-body-2"
+              style={{ padding: "10px 20px 30px 20px" }}
+            >
+              <div
+                className="dt-body-2-header"
+                style={{ justifyContent: "center" }}
+              >
                 <h1
                   style={{
                     color: "black",
@@ -102,20 +118,39 @@ function DescriptionMobile({
                 </h1>
               </div>
               <div className="dt-body-2-body">
-                <img className="dt-img" src={product.image_product} />
+                <img
+                  className="dt-img"
+                  onClick={() => SetImage(product.image_product)}
+                  src={product.image_product}
+                />
                 <div>
-                  <img
-                    className="dt-img-1"
-                    src="https://www.beartai.com/wp-content/uploads/2018/10/MacBook-Pro-2018-Gris-2-1200x675.jpg"
-                  />
-                  <img
-                    className="dt-img-1"
-                    src="https://www.beartai.com/wp-content/uploads/2018/10/MacBook-Pro-2018-Gris-2-1200x675.jpg"
-                  />
-                  <img
-                    className="dt-img-1"
-                    src="https://www.beartai.com/wp-content/uploads/2018/10/MacBook-Pro-2018-Gris-2-1200x675.jpg"
-                  />
+                  {product.image1_product ? (
+                    <img
+                      className="dt-img-1"
+                      onClick={() => SetImage(product.image1_product)}
+                      src={product.image1_product}
+                    />
+                  ) : (
+                    <img className="dt-img-1" src={"/noimage.jpg"} />
+                  )}
+                  {product.image2_product ? (
+                    <img
+                      className="dt-img-1"
+                      onClick={() => SetImage(product.image2_product)}
+                      src={product.image2_product}
+                    />
+                  ) : (
+                    <img className="dt-img-1" src={"/noimage.jpg"} />
+                  )}
+                  {product.image3_product ? (
+                    <img
+                      className="dt-img-1"
+                      onClick={() => SetImage(product.image3_product)}
+                      src={product.image3_product}
+                    />
+                  ) : (
+                    <img className="dt-img-1" src={"/noimage.jpg"} />
+                  )}
                 </div>
               </div>
             </div>

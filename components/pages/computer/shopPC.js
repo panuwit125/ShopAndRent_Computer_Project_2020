@@ -16,7 +16,8 @@ function ShopPC({
   setisLoading,
   TypeBland,
   product,
-  user
+  user,
+  ChatbotShow
 }) {
   const [ispageLoading, setpageisLoading] = useState(false);
   useEffect(() => {
@@ -28,6 +29,7 @@ function ShopPC({
   } else {
     return (
       <FormItem style={{ margin: "0px" }}>
+        <ChatbotShow />
         {type === "Rent" && checkLogin ? (
           <ShowListRentComponent
             check={checkListShow}

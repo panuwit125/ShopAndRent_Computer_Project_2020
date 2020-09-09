@@ -18,6 +18,7 @@ function Shop({
   type,
   userId,
   checkListShow,
+  ChatbotShow
 }) {
   const [ispageLoading, setpageisLoading] = useState(false);
   useEffect(() => {
@@ -29,6 +30,7 @@ function Shop({
   } else {
     return (
       <FormItem style={{ margin: "0px" }}>
+        <ChatbotShow />
         {type === "Rent" && checkLogin ? (
           <ShowListRentComponent
             check={checkListShow}

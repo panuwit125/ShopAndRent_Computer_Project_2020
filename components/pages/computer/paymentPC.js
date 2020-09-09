@@ -3,11 +3,8 @@ import { Form, Button, Select, Upload, message } from "antd";
 import LoadingComponent from "../../component.loading";
 import Navbar from "../../componentspc/NavbarPc";
 import router from "next/router";
-import UploadBillComponent from "../../component.UploadBill"
-import {
-  EnvironmentOutlined,
-  UploadOutlined
-} from "@ant-design/icons";
+import UploadBillComponent from "../../component.UploadBill";
+import { EnvironmentOutlined, UploadOutlined } from "@ant-design/icons";
 import MonetizationOnIcon from "@material-ui/icons/MonetizationOn";
 const FormItem = Form.Item;
 const { Option } = Select;
@@ -43,7 +40,7 @@ function PaymentMobile({
   checkLogin,
   user,
   UploadBillShow,
-  setUploadBillShow
+  setUploadBillShow,
 }) {
   const [isLoading, setisLoading] = useState(false);
   useEffect(() => {
@@ -68,9 +65,15 @@ function PaymentMobile({
     return (
       <FormItem style={{ margin: "0px" }}>
         <div className="shop-res-container">
-        <UploadBillComponent UploadBillShow={UploadBillShow} setUploadBillShow={setUploadBillShow} postBuyProduct={postBuyProduct} type={type} postRentProduct={postRentProduct} />
+          <UploadBillComponent
+            UploadBillShow={UploadBillShow}
+            setUploadBillShow={setUploadBillShow}
+            postBuyProduct={postBuyProduct}
+            type={type}
+            postRentProduct={postRentProduct}
+          />
           <Navbar
-          status={checkLogin}
+            status={checkLogin}
             user={user.user_name}
             type={type}
             //setshow={setShowNavbar}
@@ -141,12 +144,16 @@ function PaymentMobile({
                       padding: "11px 26px 5px 26px",
                     }}
                   >
-                    <h3 style={{ fontSize: "16px" }}>รูปบัตรประชาชน</h3>
-                    <Upload {...props}>
-                      <Button>
-                        <UploadOutlined /> Click to Upload
-                      </Button>
-                    </Upload>
+                    {type === "Shop" ? null : (
+                      <>
+                        <h3 style={{ fontSize: "16px" }}>รูปบัตรประชาชน</h3>
+                        <Upload {...props}>
+                          <Button>
+                            <UploadOutlined /> Click to Upload
+                          </Button>
+                        </Upload>
+                      </>
+                    )}
                   </div>
                   <div className="pm-payment-body1">
                     <div className="pm-payment-body2">

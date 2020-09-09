@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import Axios from "axios";
 import LoadingComponent from "../components/component.loading";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
+import { CloseOutlined } from "@ant-design/icons";
 
 // import page -> start
 import DescriptionMobile from "../components/pages/mobiles/description";
@@ -22,6 +23,8 @@ function DescriptionPage() {
   const Id = id;
   const matches = useMediaQuery("(min-width:600px)");
   const [showNavbar, setShowNavbar] = useState(0);
+  const [imageExpand, setImageExpand] = useState("none");
+  const [imageForExpand, setImageForExpand] = useState();
 
   useEffect(() => {
     if (Id) {
@@ -55,7 +58,10 @@ function DescriptionPage() {
         });
     } else {
       let data = { id: "" + id + "" };
-      Axios.post("https://tranquil-beach-43094.herokuapp.com/productrentbyid", data)
+      Axios.post(
+        "https://tranquil-beach-43094.herokuapp.com/productrentbyid",
+        data
+      )
         .then((res) => {
           console.log(res);
           setProduct(res.data);
@@ -134,6 +140,25 @@ function DescriptionPage() {
       });
   };
 
+  const ImageExpandShow = () => {
+    return (
+      <div style={{ display: imageExpand }} className="modal">
+        <span
+          className="close"
+          onClick={() => {
+            setImageExpand("none");
+            setImageForExpand();
+          }}
+        >
+          <CloseOutlined />
+        </span>
+        <div className="modal-content cl-modal">
+          <img src={imageForExpand} className="modal-contentimage" />
+        </div>
+      </div>
+    );
+  };
+
   if (!isLoading) {
     return <LoadingComponent type={"pageloading"} status={true} />;
   } else {
@@ -147,6 +172,10 @@ function DescriptionPage() {
           product={product}
           checkProductByid={checkProductByid}
           checkStatus={checkStatus}
+          imageExpand={imageExpand}
+          setImageExpand={setImageExpand}
+          ImageExpandShow={ImageExpandShow}
+          setImageForExpand={setImageForExpand}
         />
       );
     } else {
@@ -161,6 +190,10 @@ function DescriptionPage() {
           type={type}
           checkProductByid={checkProductByid}
           checkStatus={checkStatus}
+          imageExpand={imageExpand}
+          setImageExpand={setImageExpand}
+          ImageExpandShow={ImageExpandShow}
+          setImageForExpand={setImageForExpand}
         />
       );
     }
