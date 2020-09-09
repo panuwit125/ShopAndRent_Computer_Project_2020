@@ -2,8 +2,9 @@ import React from "react";
 import NavbarSide from "../../Navbar";
 import { Form } from "antd";
 import HeaderNavbar from "../../HeaderNavbar";
+import CompareSelectComponent from "../../component.CompareSelect";
 
-const FormItem = Form;
+const FormItem = Form.Item;
 
 function CompareMobile({
   showNavbar,
@@ -12,14 +13,27 @@ function CompareMobile({
   user,
   setCheckListShow,
   setisLoading,
-  product,
+  product1,
   type,
   userId,
   checkListShow,
-  ShowTableCompare
+  ShowTableCompare,
+  compareSelectShow,
+  setCompareSelectShow,
+  productAll,
+  setSelectCompare,
+  selectCompare,
+  SelectProduct
 }) {
   return (
     <FormItem style={{ margin: "0px" }}>
+      <CompareSelectComponent
+        compareSelectShow={compareSelectShow}
+        setCompareSelectShow={setCompareSelectShow}
+        productAll={productAll}
+        setSelectCompare={setSelectCompare}
+        SelectProduct={SelectProduct}
+      />
       {type === "Rent" && checkLogin ? (
         <ShowListRentComponent
           check={checkListShow}
@@ -37,7 +51,7 @@ function CompareMobile({
       />
       <div className="sp">
         <HeaderNavbar page={"Shop"} setshow={setShowNavbar} />
-        <div className="des-res-body">
+        <div className="des-res-body" style={{ padding: "10px" }}>
           <ShowTableCompare />
         </div>
       </div>

@@ -123,7 +123,7 @@ function DescriptionPC({
             </div>
             <div className="sp-body-2">
               <div className="dt-res-body-2-header">
-                <div className="shop-res-card-type">SHOP</div>
+                <div className="shop-res-card-type">{type}</div>
                 <div className="shop-res-card-type" style={{ width: "100%" }}>
                   {product.name_product}
                 </div>
