@@ -33,6 +33,9 @@ function NavbarComponent(props) {
         <a href="/shop">
           <i className="fa fa-fw fa-home">Home</i>
         </a>
+        <a href="/compare">
+          <i className="fa fa-fw fa-home">Compare</i>
+        </a>
         {props.status ? (
           <a href="#">
             <i className="fa fa-fw fa-wrench">ID : {props.user}</i>

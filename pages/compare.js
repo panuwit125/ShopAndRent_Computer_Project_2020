@@ -4,6 +4,7 @@ import CompareMobile from "../components/pages/mobiles/compare";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { useSelector, useDispatch } from "react-redux";
 import Axios from "axios";
+import router from "next/router";
 
 function ComparePage() {
   const { TypeBland } = useSelector((state) => state.post);
@@ -34,7 +35,7 @@ function ComparePage() {
         setUserId(user._id);
         setCheckLogin(true);
       }
-      postProduct();
+      postProduct(typePage);
     } else {
       router.push("/page.home");
     }
@@ -255,14 +256,19 @@ function ComparePage() {
               {product2 ? <td>{product2.monitor_product}</td> : <td></td>}
             </tr>
             <tr>
-              <td>Price(THB)</td>
+              {type === "Shop" ? <td>Price</td> : <td>PricePerDay</td>}
+
               {product1 ? (
-                <td style={{ color: "red" }}>{product1.price_product}</td>
+                <td style={{ color: "red" }}>
+                  {product1.price_product + " THB"}
+                </td>
               ) : (
                 <td></td>
               )}
               {product2 ? (
-                <td style={{ color: "red" }}>{product2.price_product}</td>
+                <td style={{ color: "red" }}>
+                  {product2.price_product + " THB"}
+                </td>
               ) : (
                 <td></td>
               )}
@@ -294,16 +300,30 @@ function ComparePage() {
     console.log(product1, product2);
   }, [product1, product2]);
 
-  const postProduct = () => {
-    Axios.get("http://localhost:5000/showproductall")
-      .then((response) => {
-        console.log(response);
-        setProductAll(response.data);
-        setisLoading(true);
-      })
-      .catch((error) => {
-        console.log(error.response);
-      });
+  const postProduct = (typePage) => {
+    if (typePage === "Shop") {
+      Axios.get("http://localhost:5000/showproductall")
+        .then((response) => {
+          console.log(response);
+          setProductAll(response.data);
+          setisLoading(true);
+        })
+        .catch((error) => {
+          console.log(error.response);
+        });
+    } else if (typePage === "Rent") {
+      Axios.get("http://localhost:5000/showproductallrent")
+        .then((response) => {
+          console.log(response);
+          setProductAll(response.data);
+          setisLoading(true);
+        })
+        .catch((error) => {
+          console.log(error.response);
+        });
+    } else {
+      router.push("/");
+    }
   };
 
   if (!isLoading) {

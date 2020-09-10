@@ -31,6 +31,11 @@ function NavbarComponent(props) {
             Home
           </a>
         </li>
+        <li className="show-res-navbar-li show-res-li-border">
+          <a className="show-res-navbar-li" href="/compare">
+            Compare
+          </a>
+        </li>
         {props.status ? (
           <li className="show-res-navbar-li show-res-li-border">
             <a className="show-res-navbar-li">ID : {props.user}</a>

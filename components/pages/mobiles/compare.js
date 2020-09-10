@@ -34,13 +34,6 @@ function CompareMobile({
         setSelectCompare={setSelectCompare}
         SelectProduct={SelectProduct}
       />
-      {type === "Rent" && checkLogin ? (
-        <ShowListRentComponent
-          check={checkListShow}
-          user={userId}
-          click={setCheckListShow}
-        />
-      ) : null}
       <NavbarSide
         show={showNavbar}
         setshow={setShowNavbar}

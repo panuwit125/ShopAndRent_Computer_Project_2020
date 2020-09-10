@@ -14,6 +14,7 @@ import Paper from "@material-ui/core/Paper";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Router from "next/router";
+import Axios from "axios";
 
 const FormItem = Form;
 const { TabPane } = Tabs;
@@ -50,10 +51,11 @@ const ShowProduct = () => {
   const [show, setShow] = useState(0);
   const [visible, setVisible] = useState(false);
   const [value, setValue] = useState(0);
-
   const [isLoading, setisLoading] = useState(false);
   const [user, setUser] = useState();
   const [token, setToken] = useState();
+  const [productShop,setProductShop] = useState();
+  const [productRent,setProductRent] = useState();
 
   useEffect(() => {
     if (
@@ -62,16 +64,52 @@ const ShowProduct = () => {
     ) {
       setToken(localStorage.getItem("tokenmanage"));
       setUser(JSON.parse(localStorage.getItem("usermanage")));
-      setisLoading(true);
+      console.log(JSON.parse(localStorage.getItem("usermanage")))
+      postDataProduct(JSON.parse(localStorage.getItem("usermanage")))
     } else {
       router.push("/shop/loginSeller");
     }
   }, []);
 
+  const postDataProduct = (user) => {
+    let body = { owner_product: user };
+    Axios.post("http://localhost:5000/showproductbyuser",body)
+    .then((response)=>{
+      console.log(response)
+      setProductShop(response.data)
+      postDataProductRent(user)
+    }).catch((error)=>{
+      console.log(error.response)
+    })
+  }
+
+  const postDataProductRent = (user) => {
+    let body = { owner_product: user };
+    Axios.post("http://localhost:5000/showproductrentbyuser",body)
+    .then((response)=>{
+      console.log(response)
+      setProductRent(response.data)
+      setisLoading(true);
+    }).catch((error)=>{
+      console.log(error.response)
+    })
+  }
+
+  /*const deleteProduct = () => {
+    Axios.post
+  }*/
+
   const handleChange = (event, newValue) => {
     console.log(newValue);
     setValue(newValue);
   };
+
+  useEffect(()=>{
+    if(productRent || productShop) {
+      console.log(productShop)
+      console.log(productRent)
+    }
+  },[productRent,productShop])
 
   if (!isLoading) {
     return null;
@@ -100,7 +138,7 @@ const ShowProduct = () => {
               <List
                 header={<div>รายการสินค้าสำหรับขาย</div>}
                 bordered
-                dataSource={data}
+                dataSource={productShop}
                 pagination={{
                   onChange: (page) => {
                     console.log(page);
@@ -112,7 +150,7 @@ const ShowProduct = () => {
                     <Tag color="success" >
                       Update
                     </Tag>
-                    <Tag color="error">Delete</Tag> {item}
+                    <Tag color="error">Delete</Tag> {item.name_product}
                   </List.Item>
                 )}
               />
@@ -120,7 +158,7 @@ const ShowProduct = () => {
               <List
                 header={<div>รายการสินค้าสำหรับเช่า</div>}
                 bordered
-                dataSource={data}
+                dataSource={productRent}
                 pagination={{
                   onChange: (page) => {
                     console.log(page);
@@ -132,7 +170,7 @@ const ShowProduct = () => {
                     <Tag color="success">
                       Update
                     </Tag>
-                    <Tag color="error">Delete</Tag> {item}
+                    <Tag color="error">Delete</Tag> {item.name_product}
                   </List.Item>
                 )}
               />
