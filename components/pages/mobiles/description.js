@@ -158,6 +158,7 @@ function DescriptionMobile({
               description={product.description_product}
               price={product.price_product}
               type={type}
+              product={product}
             />
             <ButtonShowRes />
           </div>

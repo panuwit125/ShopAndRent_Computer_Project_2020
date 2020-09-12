@@ -190,6 +190,7 @@ body {
 }
 .dt-img-1 {
   width: 75px;
+  height: 75px;
   margin: 2px;
   border: 1px solid #f0f0f0;
   box-sizing: border-box;
@@ -330,6 +331,7 @@ body {
   width: auto;
   justify-content: space-around;
   padding: 20px;
+  font-family: Roboto Condensed !important;
 }
 
 .lg-input {
@@ -491,22 +493,25 @@ body {
   z-index: 1;
   top: 0;
   left: 0;
-  background-color: #111;
+  background-color: #033975;
   overflow-x: hidden;
   transition: 0.5s;
   padding-top: 16px;
+  color:white
 }
+
 
 .navbar a {
   padding: 6px 8px 6px 16px;
   text-decoration: none;
   font-size: 20px;
-  color: #818181;
+  color: white;
   display: block;
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .navbar a:hover {
-  color: #f1f1f1;
+  color: red;
 }
 //end - responsive - navbar
 
@@ -617,6 +622,17 @@ body {
   flex-direction: column;
   padding: 0 40px;
 }
+.lg-res-card-pc {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 77px 55px 33px 55px;
+  background: white;
+  box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
 .lg-res-header-name {
   text-align: center;
   text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -664,6 +680,7 @@ body {
   font-weight: bold;
   font-size: 14px;
   margin-top: 8px;
+  cursor: pointer;
 }
 //end - res - login
 
@@ -857,14 +874,19 @@ body {
   width: 100%;
 }
 
-#customers td, #customers th {
+#customers td,
+#customers th {
   border: 1px solid #ddd;
   padding: 8px;
 }
 
-#customers tr:nth-child(even){background-color: #f2f2f2;}
+#customers tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
 
-#customers tr:hover {background-color: #ddd;}
+#customers tr:hover {
+  background-color: #ddd;
+}
 
 #customers th {
   padding-top: 12px;

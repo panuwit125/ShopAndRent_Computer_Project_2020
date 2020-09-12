@@ -4,7 +4,7 @@ import LoadingComponent from "../components/component.loading";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import axios from "axios";
 import { Button } from "antd";
-import {WechatOutlined} from "@ant-design/icons"
+import { WechatOutlined } from "@ant-design/icons";
 
 //import page --> start
 import ShopMobile from "../components/pages/mobiles/shop";
@@ -12,11 +12,12 @@ import ShopPC from "../components/pages/computer/shopPC";
 import router from "next/router";
 //import page --> end
 
+let productData = [];
+
 function ShopPage() {
   const { TypeBland } = useSelector((state) => state.post);
   const [checkLogin, setCheckLogin] = useState(false);
   const [isLoading, setisLoading] = useState(false);
-  const [loadingTypebland, setloadingTypebland] = useState(false);
   const [user, setUser] = useState("");
   const [userId, setUserId] = useState("");
   const [product, setProduct] = useState();
@@ -24,6 +25,7 @@ function ShopPage() {
   const [checkListShow, setCheckListShow] = useState("none");
   const [showNavbar, setShowNavbar] = useState(0);
   const matches = useMediaQuery("(min-width:600px)");
+  const [bland, setBland] = useState();
 
   useEffect(() => {
     let token = localStorage.getItem("token");
@@ -38,36 +40,65 @@ function ShopPage() {
         setCheckLogin(true);
       }
       console.log("dasds");
-      getProduct(TypeBland, typePage);
+      getBland();
     } else {
       router.push("/page.home");
     }
   }, []);
 
-  const getProduct = (product, page) => {
+  const getBland = () => {
+    axios
+      .get("http://localhost:5000/showbland")
+      .then((res) => {
+        console.log(res);
+        setBland(res.data);
+      })
+      .catch((err) => {
+        console.log(err.response);
+      });
+  };
+
+  useEffect(() => {
+    if (bland) {
+      console.log(bland.length);
+      getTodos();
+    }
+  }, [bland]);
+
+  async function getTodos() {
+    const promises = bland.map(async (name, index) =>
+      console.log(
+        `Recei todd ${index + 1}`,
+        await getProduct(name.name_bland, type, index)
+      )
+    );
+    await Promise.all(promises);
+    console.log("Finished!", productData);
+    setisLoading(true);
+  }
+
+  const getProduct = async (product, page, i) => {
+    console.log(page);
     if (page === "Shop") {
       let body = { bland_product: product };
-      axios
+      await axios
         .post("https://tranquil-beach-43094.herokuapp.com/showproduct", body)
         .then((res) => {
-          console.log(res);
-          setProduct(res.data);
-          setisLoading(true);
+          productData[i] = res.data;
         })
         .catch((err) => {
           console.log(err);
         });
-    } else {
+    } else if (page === "Rent") {
+      console.log("asdsfgdg");
       let body = { bland_product: product };
-      axios
+      await axios
         .post(
           "https://tranquil-beach-43094.herokuapp.com/showproductrent",
           body
         )
         .then((res) => {
-          console.log(res);
-          setProduct(res.data);
-          setisLoading(true);
+          productData[i] = res.data;
         })
         .catch((err) => {
           console.log(err);
@@ -75,18 +106,13 @@ function ShopPage() {
     }
   };
 
-  useEffect(() => {
-    if (loadingTypebland) {
-      getProduct(TypeBland, type);
-    } else {
-      setloadingTypebland(true);
-    }
-  }, [TypeBland]);
-
   const ChatbotShow = () => {
     return (
-      <Button className="cb-fixed" onClick={()=>alert("เข้าไป Chatbot (จำลอง)")}>
-        <WechatOutlined style={{fontSize:"30px"}} />
+      <Button
+        className="cb-fixed"
+        onClick={() => alert("เข้าไป Chatbot (จำลอง)")}
+      >
+        <WechatOutlined style={{ fontSize: "30px" }} />
       </Button>
     );
   };
@@ -94,7 +120,7 @@ function ShopPage() {
   if (!isLoading) {
     return <LoadingComponent />;
   } else {
-    console.log(product);
+    console.log(productData);
     if (matches) {
       return (
         <ShopPC
@@ -109,6 +135,8 @@ function ShopPage() {
           user={user}
           setShowNavbar={setShowNavbar}
           ChatbotShow={ChatbotShow}
+          productData={productData}
+          bland={bland}
         />
       );
     } else {
@@ -125,6 +153,8 @@ function ShopPage() {
           checkListShow={checkListShow}
           userId={userId}
           ChatbotShow={ChatbotShow}
+          bland={bland}
+          productData={productData}
         />
       );
     }

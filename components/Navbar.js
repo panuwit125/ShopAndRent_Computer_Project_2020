@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {
-  CloseOutlined,
-} from "@ant-design/icons";
+import { CloseOutlined } from "@ant-design/icons";
 import router from "next/router";
 import { useSelector, useDispatch } from "react-redux";
 

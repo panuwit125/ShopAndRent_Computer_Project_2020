@@ -70,25 +70,25 @@ export default function DescriptionProduct(props) {
       return (
         <div style={{ padding: "19px 22px", height: "100%" }}>
           <h1 className="des-res-text">
-            CPU : INTEL I7 - 8700K
+            CPU : {props.product.cpu_product}
           </h1>
           <h1 className="des-res-text">
-            MAINBOARD : B450 PRO
+            MAINBOARD : {props.product.mainboard_product}
           </h1>
           <h1 className="des-res-text">
-            RAM : BUS 2666 8 GB
+            RAM : {props.product.ram_product}
           </h1>
           <h1 className="des-res-text">
-            HARDDISK : 1000 GB
+            HARDDISK : {props.product.harddisk_product}
           </h1>
           <h1 className="des-res-text">
-            VGA CARD : RTX 2060 8GB
+            VGA CARD : {props.product.vgacard_product}
           </h1>
           <h1 className="des-res-text">
-            SSD : ไม่มี
+            SSD : {props.product.ssd_product}
           </h1>
           <h1 className="des-res-text">
-            MONITOR : IPS 144 HZ
+            MONITOR : {props.product.monitor_product}
           </h1>
         </div>
       );

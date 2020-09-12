@@ -12,6 +12,13 @@ function InsertProductRent() {
   const [descriptionProduct, setDescriptionProduct] = useState("");
   const [priceProduct, setPriceProduct] = useState("");
   const [blandProduct, setBlandProduct] = useState("ACER");
+  const [cpuProduct, setCpuProduct] = useState("");
+  const [mainboardProduct, setMainboardProduct] = useState("");
+  const [vgaProduct, setVgaProduct] = useState("");
+  const [ramProduct, setRamProduct] = useState("");
+  const [harddiskProduct, setHarddiskProduct] = useState("");
+  const [ssdProduct, setSsdProduct] = useState("");
+  const [monitorProduct, setMonitorProduct] = useState("");
   const [image1Product, setIamge1Product] = useState("");
   const [url1, set1Url] = useState("");
   const [image2Product, setIamge2Product] = useState("");
@@ -26,6 +33,8 @@ function InsertProductRent() {
   const [isLoading, setisLoading] = useState(false);
   const [user, setUser] = useState();
   const [token, setToken] = useState();
+
+  const [readyToPost, setReadyToPost] = useState(false);
 
   useEffect(() => {
     if (
@@ -53,7 +62,17 @@ function InsertProductRent() {
           description_product: descriptionProduct,
           price_product: priceProduct,
           bland_product: blandProduct,
+          cpu_product: cpuProduct,
+          mainboard_product: mainboardProduct,
+          ram_product: ramProduct,
+          vgacard_product: vgaProduct,
+          harddisk_product: harddiskProduct,
+          ssd_product: ssdProduct,
+          monitor_product: monitorProduct,
           image_product: url1,
+          image1_product: url2,
+          image2_product: url3,
+          image3_product: url4,
         }),
       })
         .then((res) => res.json())
@@ -69,7 +88,7 @@ function InsertProductRent() {
         })
         .catch((err) => console.log(err));
     }
-  }, [url1]);
+  }, [readyToPost]);
 
   const imagefetch = (image, seturl) => {
     const data = new FormData();
@@ -84,10 +103,86 @@ function InsertProductRent() {
       .then((data) => {
         console.log(data);
         seturl(data.url);
+        image1fetch(image2Product, set2Url);
       })
       .catch((err) => {
         console.log(err);
       });
+  };
+
+  const image1fetch = (image2, seturl) => {
+    if (!image2) {
+      set2Url("")
+      image2fetch(image3Product, set3Url);
+    } else {
+      const data = new FormData();
+      data.append("file", image2);
+      data.append("upload_preset", "shopandrent");
+      data.append("cloud_name", "panuwitdev");
+      fetch("https://api.cloudinary.com/v1_1/panuwitdev/image/upload", {
+        method: "post",
+        body: data,
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          set2Url(data.url);
+          image2fetch(image3Product, set3Url);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  };
+
+  const image2fetch = (image3, seturl) => {
+    if (!image3) {
+      set3Url("")
+      image3fetch(image4Product, set4Url);
+    } else {
+      const data = new FormData();
+      data.append("file", image3);
+      data.append("upload_preset", "shopandrent");
+      data.append("cloud_name", "panuwitdev");
+      fetch("https://api.cloudinary.com/v1_1/panuwitdev/image/upload", {
+        method: "post",
+        body: data,
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          set3Url(data.url);
+          image3fetch(image4Product, set4Url);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  };
+
+  const image3fetch = (image4, seturl) => {
+    if (!image4) {
+      set4Url("")
+      setReadyToPost(true)
+    } else {
+      const data = new FormData();
+      data.append("file", image4);
+      data.append("upload_preset", "shopandrent");
+      data.append("cloud_name", "panuwitdev");
+      fetch("https://api.cloudinary.com/v1_1/panuwitdev/image/upload", {
+        method: "post",
+        body: data,
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          set4Url(data.url);
+          setReadyToPost(true)
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   };
 
   const postproduct = () => {
@@ -98,7 +193,14 @@ function InsertProductRent() {
       !descriptionProduct ||
       !priceProduct ||
       !blandProduct ||
-      !image1Product
+      !image1Product ||
+      !cpuProduct ||
+      !mainboardProduct ||
+      !vgaProduct ||
+      !ramProduct ||
+      !harddiskProduct ||
+      !ssdProduct ||
+      !monitorProduct
     ) {
       alert("กรุณาใส่ข้อมูลหรือเลือกรูปภาพ");
       setisLoading(true);
@@ -128,6 +230,48 @@ function InsertProductRent() {
               className="ip-iuput"
               value={descriptionProduct}
               onChange={(e) => setDescriptionProduct(e.target.value)}
+            />
+            <h2 style={{ color: "black" }}>CPU</h2>
+            <Input
+              className="ip-iuput"
+              value={cpuProduct}
+              onChange={(e) => setCpuProduct(e.target.value)}
+            />
+            <h2 style={{ color: "black" }}>Mainboard</h2>
+            <Input
+              className="ip-iuput"
+              value={mainboardProduct}
+              onChange={(e) => setMainboardProduct(e.target.value)}
+            />
+            <h2 style={{ color: "black" }}>VGACard</h2>
+            <Input
+              className="ip-iuput"
+              value={vgaProduct}
+              onChange={(e) => setVgaProduct(e.target.value)}
+            />
+            <h2 style={{ color: "black" }}>RAM</h2>
+            <Input
+              className="ip-iuput"
+              value={ramProduct}
+              onChange={(e) => setRamProduct(e.target.value)}
+            />
+            <h2 style={{ color: "black" }}>Harddisk</h2>
+            <Input
+              className="ip-iuput"
+              value={harddiskProduct}
+              onChange={(e) => setHarddiskProduct(e.target.value)}
+            />
+            <h2 style={{ color: "black" }}>Solid State Drive</h2>
+            <Input
+              className="ip-iuput"
+              value={ssdProduct}
+              onChange={(e) => setSsdProduct(e.target.value)}
+            />
+            <h2 style={{ color: "black" }}>Monitor Display</h2>
+            <Input
+              className="ip-iuput"
+              value={monitorProduct}
+              onChange={(e) => setMonitorProduct(e.target.value)}
             />
             <h2 style={{ color: "black" }}>ราคาเช่าต่อวัน</h2>
             <Input

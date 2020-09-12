@@ -67,11 +67,12 @@ function DescriptionPC({
   const DescriptionShow = () => {
     if (type === "Shop") {
       return (
-        <div className="dt-res-description">
+        <div className="dt-res-description" style={{maxWidth:"900px",width:"100%"}}>
           <DescriptionResPc
             description={product.description_product}
             price={product.price_product}
             type={type}
+            product={product}
           />
           {/*<div>
             <h1 style={{ color: "black" }}>รายละเอียด</h1>
@@ -164,7 +165,12 @@ function DescriptionPC({
                   )}
                 </div>
               </div>
-              <DescriptionShow />
+              <DescriptionShow
+                description={product.description_product}
+                price={product.price_product}
+                type={type}
+                product={product}
+              />
               <ButtonShow />
             </div>
           </div>

@@ -102,7 +102,7 @@ function ComparePage() {
                     cursor: "pointer",
                   }}
                   onClick={() => {
-                    setSelectCompare("ProductOne");
+                    setSelectCompare("ProductTwo");
                     setCompareSelectShow("block");
                   }}
                 />

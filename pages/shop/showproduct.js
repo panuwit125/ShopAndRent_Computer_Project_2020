@@ -1,4 +1,4 @@
-import { useState , useEffect } from "react";
+import { useState, useEffect } from "react";
 import NavbarManage from "./componentManage/NavbarManage";
 import HeaderManage from "./componentManage/HeaderManage";
 import { List, Typography, Divider, Form, Tag } from "antd";
@@ -13,7 +13,7 @@ import {
 import Paper from "@material-ui/core/Paper";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
-import Router from "next/router";
+import router from "next/router";
 import Axios from "axios";
 
 const FormItem = Form;
@@ -54,8 +54,8 @@ const ShowProduct = () => {
   const [isLoading, setisLoading] = useState(false);
   const [user, setUser] = useState();
   const [token, setToken] = useState();
-  const [productShop,setProductShop] = useState();
-  const [productRent,setProductRent] = useState();
+  const [productShop, setProductShop] = useState();
+  const [productRent, setProductRent] = useState();
 
   useEffect(() => {
     if (
@@ -64,8 +64,8 @@ const ShowProduct = () => {
     ) {
       setToken(localStorage.getItem("tokenmanage"));
       setUser(JSON.parse(localStorage.getItem("usermanage")));
-      console.log(JSON.parse(localStorage.getItem("usermanage")))
-      postDataProduct(JSON.parse(localStorage.getItem("usermanage")))
+      console.log(JSON.parse(localStorage.getItem("usermanage")));
+      postDataProduct(JSON.parse(localStorage.getItem("usermanage")));
     } else {
       router.push("/shop/loginSeller");
     }
@@ -73,43 +73,75 @@ const ShowProduct = () => {
 
   const postDataProduct = (user) => {
     let body = { owner_product: user };
-    Axios.post("http://localhost:5000/showproductbyuser",body)
-    .then((response)=>{
-      console.log(response)
-      setProductShop(response.data)
-      postDataProductRent(user)
-    }).catch((error)=>{
-      console.log(error.response)
-    })
-  }
+    Axios.post("http://localhost:5000/showproductbyuser", body)
+      .then((response) => {
+        console.log(response);
+        setProductShop(response.data);
+        postDataProductRent(user);
+      })
+      .catch((error) => {
+        console.log(error.response);
+      });
+  };
 
   const postDataProductRent = (user) => {
     let body = { owner_product: user };
-    Axios.post("http://localhost:5000/showproductrentbyuser",body)
-    .then((response)=>{
-      console.log(response)
-      setProductRent(response.data)
-      setisLoading(true);
-    }).catch((error)=>{
-      console.log(error.response)
-    })
-  }
+    Axios.post("http://localhost:5000/showproductrentbyuser", body)
+      .then((response) => {
+        console.log(response);
+        setProductRent(response.data);
+        setisLoading(true);
+      })
+      .catch((error) => {
+        console.log(error.response);
+      });
+  };
 
-  /*const deleteProduct = () => {
-    Axios.post
-  }*/
+  const deleteProduct = (id, type) => {
+    console.log(id);
+    let data = { _id: id };
+    if (type === "Shop") {
+      Axios({
+        method: "delete",
+        url: "http://localhost:5000/deleteproduct",
+        headers: { Authorization: `Bearer ${token}` },
+        data,
+      })
+        .then((response) => {
+          console.log(response);
+          location.reload();
+        })
+        .catch((error) => {
+          console.log(error.response);
+        });
+    } else if (type === "Rent") {
+      Axios({
+        method: "delete",
+        url: "http://localhost:5000/deleteproductrent",
+        headers: { Authorization: `Bearer ${token}` },
+        data,
+      })
+        .then((response) => {
+          console.log(response);
+          location.reload();
+        })
+        .catch((error) => {
+          console.log(error.response);
+        });
+    }
+  };
 
   const handleChange = (event, newValue) => {
     console.log(newValue);
     setValue(newValue);
   };
 
-  useEffect(()=>{
-    if(productRent || productShop) {
-      console.log(productShop)
-      console.log(productRent)
+  useEffect(() => {
+    if (productRent || productShop) {
+      console.log(productShop);
+      console.log(productRent);
     }
-  },[productRent,productShop])
+  }, [productRent, productShop]);
 
   if (!isLoading) {
     return null;
@@ -121,19 +153,26 @@ const ShowProduct = () => {
           <div className="mg-navbar">
             <HeaderManage setShow={setShow} user={user} />
           </div>
-          <div className="mg-body" style={{ paddingTop: 0 }}>
-            <Paper square style={{ marginBottom: 10 }}>
-              <Tabs
-                value={value}
-                indicatorColor="primary"
-                textColor="primary"
-                onChange={handleChange}
-                aria-label="disabled tabs example"
-              >
-                <Tab label="สินค้าขาย" />
-                <Tab label="สินค้าเช่า" />
-              </Tabs>
-            </Paper>
+          <div
+            className="mg-body"
+            style={{
+              paddingTop: 0,
+              flexWrap: "nowrap",
+              flexDirection: "column",
+            }}
+          >
+              <Paper square style={{ marginBottom: 10 }}>
+                <Tabs
+                  value={value}
+                  indicatorColor="primary"
+                  textColor="primary"
+                  onChange={handleChange}
+                  aria-label="disabled tabs example"
+                >
+                  <Tab label="สินค้าขาย" />
+                  <Tab label="สินค้าเช่า" />
+                </Tabs>
+              </Paper>
             {value === 0 ? (
               <List
                 header={<div>รายการสินค้าสำหรับขาย</div>}
@@ -147,10 +186,24 @@ const ShowProduct = () => {
                 }}
                 renderItem={(item) => (
                   <List.Item>
-                    <Tag color="success" >
+                    <Tag
+                      color="success"
+                      onClick={() => {
+                        localStorage.setItem("typeUpdate", "Shop");
+                        router.push(`/shop/updateproduct?id=${item._id}`);
+                      }}
+                    >
                       Update
                     </Tag>
-                    <Tag color="error">Delete</Tag> {item.name_product}
+                    <Tag
+                      color="error"
+                      onClick={() => {
+                        deleteProduct(item._id, "Shop");
+                      }}
+                    >
+                      Delete
+                    </Tag>{" "}
+                    {item.name_product}
                   </List.Item>
                 )}
               />
@@ -167,10 +220,24 @@ const ShowProduct = () => {
                 }}
                 renderItem={(item) => (
                   <List.Item>
-                    <Tag color="success">
+                    <Tag
+                      color="success"
+                      onClick={() => {
+                        localStorage.setItem("typeUpdate", "Rent");
+                        router.push(`/shop/updateproduct?id=${item._id}`);
+                      }}
+                    >
                       Update
                     </Tag>
-                    <Tag color="error">Delete</Tag> {item.name_product}
+                    <Tag
+                      color="error"
+                      onClick={() => {
+                        deleteProduct(item._id, "Rent");
+                      }}
+                    >
+                      Delete
+                    </Tag>{" "}
+                    {item.name_product}
                   </List.Item>
                 )}
               />

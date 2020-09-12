@@ -41,15 +41,15 @@ function LoginSeller() {
 
   return (
     <FormItem style={{ margin: "0px" }}>
-      <div className="lg">
-        <div className="lg-card">
+      <div className="lg" style={{background:"#ebeeef"}}>
+        <div className="lg-card" style={{background:"white"}}>
           <div>
-          <h2>Login For Seller</h2>
-          <h3>Username</h3>
+          <h1 style={{textAlign:"center"}}>Manage Store</h1>
+          <h3 style={{marginBottom:0,marginTop:4}}>Username</h3>
           <Input type="text" onChange={(e)=>setUsername(e.target.value)}  />
-          <h3>Password</h3>
+          <h3 style={{marginBottom:0,marginTop:4}}>Password</h3>
           <Input type="password" onChange={(e)=>setPassword(e.target.value)} />
-          <Button onClick={()=>postSignIn()} style={{marginTop:"20px"}} type="primary">เข้าสู่การจัดการ</Button>
+          <Button onClick={()=>postSignIn()} style={{marginTop:"20px",width:"100%",borderRadius:"5px"}} type="primary">เข้าสู่การจัดการ</Button>
           </div>
         </div>
       </div>

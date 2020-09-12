@@ -130,6 +130,8 @@ function loginPage() {
           namelogin={namelogin}
           passwordlogin={passwordlogin}
           postData={postData}
+          mode={mode}
+          setMode={setMode}
         />
       );
     } else {

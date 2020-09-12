@@ -4,6 +4,7 @@ import Navbar from "../../componentspc/NavbarPc";
 import CardProduct from "../../component.cardproduct";
 import Tabs from "../../Tabs";
 import { Form } from "antd";
+import { useSelector, useDispatch } from "react-redux";
 const FormItem = Form.Item;
 
 function ShopPC({
@@ -14,12 +15,14 @@ function ShopPC({
   type,
   checkLogin,
   setisLoading,
-  TypeBland,
   product,
   user,
-  ChatbotShow
+  ChatbotShow,
+  bland,
+  productData
 }) {
   const [ispageLoading, setpageisLoading] = useState(false);
+  const { TypeBland, Navbarres } = useSelector((state) => state.post);
   useEffect(() => {
     setpageisLoading(true);
   }, []);
@@ -52,11 +55,11 @@ function ShopPC({
             <div className="shop-res-body-header">
               <div className="shop-res-card-type">{type}</div>
               <div className="shop-res-changetype">
-                <Tabs loading={setisLoading} page={"PC"} />
+                <Tabs loading={setisLoading} page={"PC"} bland={bland} />
               </div>
             </div>
             <div className="shop-res-body-body">
-              {product.map((data, index) => {
+              {productData[Navbarres].map((data, index) => {
                 return <CardProduct key={index} data={data} page={type} />;
               })}
             </div>

@@ -28,7 +28,7 @@ function NavbarComponent(props) {
           <i className="fa fa-fw fa-home">Home</i>
         </a>
         <a href="/shop/showproduct">
-          <i className="fa fa-fw fa-home">ShowProduct(ข้อมูลจำลอง)</i>
+          <i className="fa fa-fw fa-home">ShowProduct</i>
         </a>
         <a href="/shop/insertproduct">
           <i className="fa fa-fw fa-home">AddProductForBuy</i>

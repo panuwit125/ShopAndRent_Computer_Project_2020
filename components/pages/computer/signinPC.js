@@ -18,9 +18,111 @@ function SignInPC({
   lastname,
   namelogin,
   passwordlogin,
-  postData
+  postData,
+  mode,
+  setMode,
 }) {
-  return (
+  if (mode === "login") {
+    return (
+      <FormItem style={{ margin: "0px" }}>
+        <div className="lg" style={{ background: "#f2f2f2" }}>
+          <div className="lg-res-card-pc">
+            <div className="lg-res-header-name" style={{ marginBottom: 20 }}>
+              <h2 className="lg-res-name">SECONDHAND</h2>
+              <h2 className="lg-res-name">NOTEBOOK</h2>
+            </div>
+            <div className="lg-res-ip">
+              <Input
+                value={namelogin}
+                placeholder="Username"
+                className="lg-res-input"
+                onChange={(e) => setNameLogin(e.target.value)}
+              />
+              <Input
+                value={passwordlogin}
+                type="password"
+                placeholder="Password"
+                className="lg-res-input lg-res-ip-mg"
+                onChange={(e) => setPasswordLogin(e.target.value)}
+              />
+              <Button
+                className="lg-res-btn"
+                style={{ marginTop: 16 }}
+                onClick={() => loginData()}
+              >
+                LOGIN
+              </Button>
+              <h2
+                className="lg-res-under-btn"
+                onClick={() => setMode("register")}
+                style={{ textAlign: "center" }}
+              >
+                Don't have an account.
+              </h2>
+            </div>
+          </div>
+        </div>
+      </FormItem>
+    );
+  } else {
+    return (
+      <FormItem style={{ margin: "0px" }}>
+        <div className="lg" style={{ background: "#f2f2f2" }}>
+          <div className="lg-res-card-pc">
+            <div className="lg-res-header-name" style={{ marginBottom: 20 }}>
+              <h2 className="lg-res-name">SECONDHAND</h2>
+              <h2 className="lg-res-name">NOTEBOOK</h2>
+            </div>
+            <div className="lg-res-ip">
+              <Input
+                value={name}
+                placeholder="Username"
+                className="lg-res-input"
+                onChange={(e) => setName(e.target.value)}
+              />
+              <Input
+                value={password}
+                type="password"
+                placeholder="Password"
+                className="lg-res-input lg-res-ip-mg"
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              <Input
+                value={firstname}
+                type="text"
+                placeholder="FirstName"
+                className="lg-res-input lg-res-ip-mg"
+                onChange={(e) => setFirstname(e.target.value)}
+              />
+              <Input
+                value={lastname}
+                type="text"
+                placeholder="LastName"
+                className="lg-res-input lg-res-ip-mg"
+                onChange={(e) => setLastname(e.target.value)}
+              />
+              <Button
+                className="lg-res-btn"
+                style={{ marginTop: 16 }}
+                onClick={() => postData()}
+              >
+                REGISTER
+              </Button>
+              <h2
+                className="lg-res-under-btn"
+                onClick={() => setMode("login")}
+                style={{ textAlign: "center" }}
+              >
+                Don't have an account.
+              </h2>
+            </div>
+          </div>
+        </div>
+      </FormItem>
+    );
+  }
+
+  /*return (
     <FormItem style={{ margin: "0px" }}>
       <LoadingComponent type={"fetchloading"} status={fetchLoading} />
       <div className="lg">
@@ -84,7 +186,7 @@ function SignInPC({
         </div>
       </div>
     </FormItem>
-  );
+  );*/
 }
 
 export default SignInPC;
