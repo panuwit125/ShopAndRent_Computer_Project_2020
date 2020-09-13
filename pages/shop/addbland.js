@@ -1,13 +1,47 @@
-import { Form, Button, Input} from "antd";
+import { Form, Button, Input } from "antd";
 const FormItem = Form.Item;
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import NavbarManage from "./componentManage/NavbarManage";
 import HeaderManage from "./componentManage/HeaderManage";
+import Axios from "axios";
+import router from "next/router"
 
 function InsertBland() {
   const [blandProduct, setBlandProduct] = useState("");
-
   const [show, setShow] = useState(0);
+  const [token, setToken] = useState("");
+  const [user, setUser] = useState();
+
+  useEffect(() => {
+    if (
+      localStorage.getItem("tokenmanage") &&
+      JSON.parse(localStorage.getItem("usermanage"))
+    ) {
+      setToken(localStorage.getItem("tokenmanage"));
+      setUser(JSON.parse(localStorage.getItem("usermanage")));
+    } else {
+      router.push("/shop/loginSeller");
+    }
+  }, []);
+
+  const postDataAddBland = async () => {
+    let data = { name_bland: blandProduct };
+    Axios({
+      method: "post",
+      url: "http://localhost:5000/insertbland",
+      headers: { Authorization: `Bearer ${token}` },
+      data,
+    })
+      .then((response) => {
+        console.log(response);
+        alert("เพิ่มข้อมูลสำเร็จแล้ว")
+        router.push("/shop/homemanage")
+      })
+      .catch((error) => {
+        console.log(error.response);
+        alert(error.response.data.Error)
+      });
+  };
 
   return (
     <FormItem style={{ margin: "0px" }}>
@@ -22,7 +56,7 @@ function InsertBland() {
             onChange={(e) => setBlandProduct(e.target.value)}
           />
           <Button
-            onClick={() => postproduct()}
+            onClick={() => postDataAddBland()}
             type="primary"
             style={{ marginTop: "20px" }}
           >

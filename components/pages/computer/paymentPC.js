@@ -51,8 +51,8 @@ function PaymentMobile({
     if (type === "Shop") {
       return (
         <>
-          {inventory.map((data) => {
-            return <CardShowProductRes data={data} />;
+          {inventory.map((data,index) => {
+            return <CardShowProductRes key={index} data={data} />;
           })}
         </>
       );

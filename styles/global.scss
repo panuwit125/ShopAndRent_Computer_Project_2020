@@ -896,3 +896,32 @@ body {
   color: white;
 }
 // table - compare - end
+
+// update ems track - start
+.mg-update-track-card {
+  background: white;
+  width: auto;
+  height: auto;
+  border-radius: 10px;
+  padding: 20px;
+}
+.mg-update-track-black {
+  color: black !important;
+  display: flex;
+  justify-content: space-between;
+}
+.mg-update-track-header {
+  border-bottom: 1px solid rgb(199, 199, 199);
+  color: black !important;
+  display: flex;
+  justify-content: space-between;
+}
+.lri-body {
+  padding: 10px;
+}
+.mg-btn-update {
+  margin-top: 5px;
+  width: 100% !important;
+  border-radius: 3px !important;
+}
+// update ems track - end

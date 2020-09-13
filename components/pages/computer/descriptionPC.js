@@ -84,8 +84,14 @@ function DescriptionPC({
       );
     } else {
       return (
-        <div className="dt-decription">
-          <div>
+        <div className="dt-res-description" style={{maxWidth:"900px",width:"100%"}}>
+          <DescriptionResPc
+            description={product.description_product}
+            price={product.price_product}
+            type={type}
+            product={product}
+          />
+          {/*<div>
             <h1 style={{ color: "black" }}>รายละเอียด</h1>
           </div>
           <div>
@@ -100,7 +106,7 @@ function DescriptionPC({
             ) : (
               <h2 style={{ color: "black" }}>ไม่พร้อมให้เช่า</h2>
             )}
-          </div>
+            </div>*/}
         </div>
       );
     }

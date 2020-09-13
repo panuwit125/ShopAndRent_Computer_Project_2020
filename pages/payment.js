@@ -49,7 +49,6 @@ function PaymentPage() {
     let user = JSON.parse(localStorage.getItem("user"));
     let typePage = localStorage.getItem("type");
     setType(typePage);
-    console.log("token", token, user, typePage);
     if (typePage) {
       if (token) {
         setUser(user);
@@ -65,7 +64,7 @@ function PaymentPage() {
     if (type === "Shop") {
       Axios({
         method: "post",
-        url: "https://tranquil-beach-43094.herokuapp.com/showInventoryById",
+        url: "http://localhost:5000/showInventoryById",
         data: {
           id_user: user._id,
         },
@@ -205,7 +204,7 @@ function PaymentPage() {
     };
     Axios({
       method: "post",
-      url: "https://tranquil-beach-43094.herokuapp.com/soldproduct",
+      url: "http://localhost:5000/soldproduct",
       data,
     })
       .then((data) => {
@@ -237,10 +236,11 @@ function PaymentPage() {
         user_name: user.user_name,
         price_rent: inventory.price_product * dayforrent + 600 + 600,
         time_rent: dayforrent,
+        owner_product: inventory.owner_product
       };
       Axios({
         method: "post",
-        url: "https://tranquil-beach-43094.herokuapp.com/checkandrentproduct",
+        url: "http://localhost:5000/checkandrentproduct",
         data,
       })
         .then((datapost) => {

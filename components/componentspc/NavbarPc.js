@@ -81,7 +81,7 @@ function NavbarComponent(props) {
             </a>
           </li>
         ) : null}
-        {props.status && props.type === "Rent" ? (
+        {props.status ? (
           <li
             className="show-res-navbar-li show-res-li-border"
             onClick={() => {

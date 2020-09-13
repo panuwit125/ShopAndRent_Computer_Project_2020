@@ -12,7 +12,6 @@ let type;
 function NavbarComponent(props) {
   const [isLoading, setisLoading] = useState(true);
 
-
   if (!isLoading) {
     return null;
   } else {
@@ -30,15 +29,18 @@ function NavbarComponent(props) {
         <a href="/shop/showproduct">
           <i className="fa fa-fw fa-home">ShowProduct</i>
         </a>
+        <a href="/shop/listsolditem">
+          <i className="fa fa-fw fa-home">ListItem</i>
+        </a>
         <a href="/shop/insertproduct">
           <i className="fa fa-fw fa-home">AddProductForBuy</i>
         </a>
         <a href="/shop/insertProductForRent">
           <i className="fa fa-fw fa-home">AddProductForRent</i>
         </a>
-        {/*<a href="#">
+        <a href="/shop/addbland">
           <i className="fa fa-fw fa-home">AddListBland</i>
-    </a>*/}
+        </a>
         <a href="/shop/loginSeller">
           <i className="fa fa-fw fa-home">LogOut</i>
         </a>

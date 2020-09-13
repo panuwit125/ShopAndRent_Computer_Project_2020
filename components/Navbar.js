@@ -69,7 +69,7 @@ function NavbarComponent(props) {
             <i className="fa fa-fw fa-user">Inventory</i>
           </a>
         ) : null}
-        {props.status && props.type === "Rent" ? (
+        {props.status ? (
           <a
             onClick={() => {
               props.setshow(0);

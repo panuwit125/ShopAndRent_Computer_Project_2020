@@ -33,11 +33,12 @@ function ShopPC({
     return (
       <FormItem style={{ margin: "0px" }}>
         <ChatbotShow />
-        {type === "Rent" && checkLogin ? (
+        {checkLogin ? (
           <ShowListRentComponent
             check={checkListShow}
             user={userId}
             click={setCheckListShow}
+            type={type}
           />
         ) : (
           null

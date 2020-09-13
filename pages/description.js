@@ -124,7 +124,7 @@ function DescriptionPage() {
       id_product: product._id,
     };
     console.log(data);
-    Axios.post("https://tranquil-beach-43094.herokuapp.com/inventory", data)
+    Axios.post("http://localhost:5000/inventory", data)
       .then((data) => {
         console.log(data);
         setfetchLoading(false);
