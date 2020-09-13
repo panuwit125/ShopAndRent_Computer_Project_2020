@@ -44,9 +44,10 @@ function PaymentPage() {
   const matches = useMediaQuery("(min-width:600px)");
   const [dayforrent, setDayForRent] = useState(7);
   const [UploadBillShow, setUploadBillShow] = useState("none");
-  const [check, setCheck] = useState("none");
-  const [showAddress, setShowAddress] = useState("block")
+  const [check, setCheck] = useState("block");
+  const [showAddress, setShowAddress] = useState("none")
   const [address,setAddress] = useState("โมจิ เอนยูสแคว์ซอย 3 ม.1 ต.ท่าโพธิ์ อ.เมือง จ.พิษณุโลก 65000")
+  const [rateValue,setRateValue] = useState(2.5);
 
   useEffect(() => {
     let token = localStorage.getItem("token");
@@ -288,34 +289,6 @@ function PaymentPage() {
       });
   };
 
-  const RateShow = () => {
-    return (
-      <div style={{ display: check }} className="modal md-bg">
-        <div className="modal-content">
-          <div className="mg-update-track-card">
-            <div>
-              <h2 style={{ color: "black", textAlign: "center" }}>
-                ให้คะแนนร้านค้า
-              </h2>
-            </div>
-            <div className="lri-body" style={{ textAlign: "center" }}>
-              <Rate allowHalf defaultValue={2.5} style={{ marginBottom: 15 }} />
-              <Button
-                type="primary"
-                className="mg-btn-update"
-                onClick={() => {
-                  setCheck("none");
-                }}
-              >
-                ยืนยัน
-              </Button>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  };
-
   const EditAddress = () => {
     return (
       <div style={{ display: showAddress }} className="modal md-bg">
@@ -383,7 +356,6 @@ function PaymentPage() {
           <>
             <TitleHeader name={"Payment"} />
             <EditAddress />
-            <RateShow />
             <PaymentPC
               fetchLoading={fetchLoading}
               inventory={inventory}
@@ -432,7 +404,6 @@ function PaymentPage() {
         return (
           <>
             <TitleHeader name={"Payment"} />
-            <RateShow />
             <EditAddress />
             <PaymentMobile
               fetchLoading={fetchLoading}

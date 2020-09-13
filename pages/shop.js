@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import LoadingComponent from "../components/component.loading";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import axios from "axios";
-import { Button } from "antd";
+import { Button, Rate } from "antd";
 import { WechatOutlined } from "@ant-design/icons";
 import TitleHeader from "../components/component.titleheader";
 
@@ -11,6 +11,7 @@ import TitleHeader from "../components/component.titleheader";
 import ShopMobile from "../components/pages/mobiles/shop";
 import ShopPC from "../components/pages/computer/shopPC";
 import router from "next/router";
+import Axios from "axios";
 //import page --> end
 
 let productData = [];
@@ -27,6 +28,10 @@ function ShopPage() {
   const [showNavbar, setShowNavbar] = useState(0);
   const matches = useMediaQuery("(min-width:600px)");
   const [bland, setBland] = useState();
+  const [rateValue, setRateValue] = useState(2.5);
+  const [checkShowRate, setCheckShowRate] = useState("none");
+  const [idRate, setIdRate] = useState();
+  const [idproduct, setIdProduct] = useState();
 
   useEffect(() => {
     let token = localStorage.getItem("token");
@@ -118,6 +123,80 @@ function ShopPage() {
     );
   };
 
+  const RateShow = () => {
+    console.log(idRate, idproduct);
+    return (
+      <div style={{ display: checkShowRate }} className="modal md-bg">
+        <div className="modal-content">
+          <div className="mg-update-track-card">
+            <div>
+              <h2 style={{ color: "black", textAlign: "center" }}>
+                ให้คะแนนร้านค้า
+              </h2>
+            </div>
+            <div className="lri-body" style={{ textAlign: "center" }}>
+              <Rate
+                allowHalf
+                value={rateValue}
+                onChange={(e) => {
+                  setRateValue(e);
+                  console.log(e);
+                }}
+                style={{ marginBottom: 15 }}
+              />
+              <Button
+                type="primary"
+                className="mg-btn-update"
+                onClick={() => updateRate()}
+              >
+                ยืนยัน
+              </Button>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+  const updateRate = () => {
+    console.log("1")
+    let data = {
+      id_seller: idRate,
+      on_number: rateValue,
+      under_number: 1,
+      id_solditem: idproduct,
+    };
+    if (type === "Shop") {
+      console.log("11")
+      Axios({
+        method: "put",
+        url: "http://localhost:5000/updateratesolditem",
+        data,
+      })
+        .then((response) => {
+          console.log(response);
+          setCheckShowRate("none");
+        })
+        .catch((error) => {
+          console.log(error.response);
+        });
+    } else if (type === "Rent") {
+      console.log("22")
+      Axios({
+        method: "put",
+        url: "http://localhost:5000/updateraterentitem",
+        data,
+      })
+        .then((response) => {
+          console.log(response);
+          setCheckShowRate("none");
+        })
+        .catch((error) => {
+          console.log(error.response);
+        });
+    }
+  };
+
   if (!isLoading) {
     return <LoadingComponent />;
   } else {
@@ -125,6 +204,7 @@ function ShopPage() {
     if (matches) {
       return (
         <>
+          <RateShow />
           <TitleHeader name={"Shop"} />
           <ShopPC
             checkListShow={checkListShow}
@@ -140,12 +220,16 @@ function ShopPage() {
             ChatbotShow={ChatbotShow}
             productData={productData}
             bland={bland}
+            setCheckShowRate={setCheckShowRate}
+            setIdRate={setIdRate}
+            setIdProduct={setIdProduct}
           />
         </>
       );
     } else {
       return (
         <>
+          <RateShow />
           <TitleHeader name={"Shop"} />
           <ShopMobile
             showNavbar={showNavbar}
@@ -161,6 +245,9 @@ function ShopPage() {
             ChatbotShow={ChatbotShow}
             bland={bland}
             productData={productData}
+            setCheckShowRate={setCheckShowRate}
+            setIdRate={setIdRate}
+            setIdProduct={setIdProduct}
           />
         </>
       );

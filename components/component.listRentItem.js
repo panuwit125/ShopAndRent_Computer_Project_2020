@@ -1,9 +1,17 @@
 import React, { useState, useEffect } from "react";
 import router from "next/router";
-import { Button } from "antd";
+import { Button, Rate, Tag } from "antd";
 import Axios from "axios";
 
-const ListRentItem = ({ user, check, click, type }) => {
+const ListRentItem = ({
+  user,
+  check,
+  click,
+  type,
+  setCheckShowRate,
+  setIdRate,
+  setIdProduct
+}) => {
   const [isLoading, setisLoading] = useState(false);
   const [productlist, setProductList] = useState([]);
 
@@ -65,13 +73,34 @@ const ListRentItem = ({ user, check, click, type }) => {
                     <div
                       className="lri-black"
                       key={index}
-                      style={{ flexDirection: "column",
-                      borderBottom: "1px solid #c7c7c7" }}
+                      style={{
+                        flexDirection: "column",
+                        borderBottom: "1px solid #c7c7c7",
+                      }}
                     >
                       <h4 style={{ color: "black" }}>
-                        {index + 1}. {data.name_product}
+                        {index + 1}. {data.name_product}{" "}
+                        {data.status_rent ? (
+                          <Tag color="green">ให้คะแนนแล้ว</Tag>
+                        ) : (
+                          <Tag
+                            color="blue"
+                            onClick={() => {
+                              setIdProduct(data._id);
+                              setIdRate(data.owner_product);
+                              setCheckShowRate("block");
+                            }}
+                          >
+                            ยังไม่ได้ให้คะแนนร้านค้า
+                          </Tag>
+                        )}
                       </h4>
-                      <div style={{display:"flex",justifyContent:"space-between"}}>
+                      <div
+                        style={{
+                          display: "flex",
+                          justifyContent: "space-between",
+                        }}
+                      >
                         <h4 style={{ color: "black" }}>
                           หมายเลข EMS :{" "}
                           {data.track_product
@@ -117,6 +146,20 @@ const ListRentItem = ({ user, check, click, type }) => {
                     >
                       <h4 style={{ color: "black" }}>
                         {index + 1}. {data.name_product}
+                        {data.status_rent ? (
+                          <Tag color="green">ให้คะแนนแล้ว</Tag>
+                        ) : (
+                          <Tag
+                            color="blue"
+                            onClick={() => {
+                              setIdProduct(data._id);
+                              setIdRate(data.owner_product);
+                              setCheckShowRate("block");
+                            }}
+                          >
+                            ยังไม่ได้ให้คะแนนร้านค้า
+                          </Tag>
+                        )}
                       </h4>
                       <h4 style={{ color: "black" }}>
                         หมายเลข EMS :{" "}

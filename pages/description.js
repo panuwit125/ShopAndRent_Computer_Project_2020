@@ -27,6 +27,7 @@ function DescriptionPage() {
   const [showNavbar, setShowNavbar] = useState(0);
   const [imageExpand, setImageExpand] = useState("none");
   const [imageForExpand, setImageForExpand] = useState();
+  const [rate,setRate] = useState();
 
   useEffect(() => {
     if (Id) {
@@ -67,7 +68,7 @@ function DescriptionPage() {
         .then((res) => {
           console.log(res);
           setProduct(res.data);
-          setisLoading(true);
+          getRateData(res.data);
         })
         .catch((err) => {
           console.log(err);
@@ -119,6 +120,25 @@ function DescriptionPage() {
       });
   };
 
+  const getRateData = (id) => {
+    let data = {id_seller:id.owner_product}
+    Axios({
+      method:"post",
+      url:"https://tranquil-beach-43094.herokuapp.com/showrate",
+      data
+    }).then(data=>{
+      console.log(data);
+      if(data.data.data[0].under_number === 0) {
+        setRate(0)
+      } else {
+        setRate(data.data.data[0].on_number/data.data.data[0].under_number)
+      }
+      setisLoading(true);
+    }).catch(err=>{
+      console.log(err.response)
+    })
+  }
+
   const saveDataInventory = (check) => {
     setfetchLoading(true);
     let data = {
@@ -162,10 +182,11 @@ function DescriptionPage() {
   };
 
   const RateShow = () => {
+    console.log(rate)
     return (
       <span>
-        <Rate allowHalf disabled defaultValue={2.5} />
-        <span className="ant-rate-text">(2.5)</span>
+        <Rate allowHalf disabled defaultValue={rate} />
+        <span className="ant-rate-text">({rate})</span>
       </span>
     );
   };

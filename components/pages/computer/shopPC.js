@@ -19,7 +19,10 @@ function ShopPC({
   user,
   ChatbotShow,
   bland,
-  productData
+  productData,
+  setCheckShowRate,
+  setIdRate,
+  setIdProduct
 }) {
   const [ispageLoading, setpageisLoading] = useState(false);
   const { TypeBland, Navbarres } = useSelector((state) => state.post);
@@ -39,6 +42,9 @@ function ShopPC({
             user={userId}
             click={setCheckListShow}
             type={type}
+            setCheckShowRate={setCheckShowRate}
+            setIdRate={setIdRate}
+            setIdProduct={setIdProduct}
           />
         ) : (
           null
