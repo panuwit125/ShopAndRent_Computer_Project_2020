@@ -18,6 +18,7 @@ function DescriptionPC({
   setImageExpand,
   setImageForExpand,
   ImageExpandShow,
+  RateShow
 }) {
   const [isLoading, setisLoading] = useState(false);
   useEffect(() => {
@@ -135,13 +136,13 @@ function DescriptionPC({
                   {product.name_product}
                 </div>
               </div>
-              <div className="dt-body-2-body">
+              <div className="dt-body-2-body" >
                 <img
                   className="dt-res-img1"
                   src={product.image_product}
                   onClick={() => SetImage(product.image_product)}
                 />
-                <div>
+                <div style={{marginBottom:20}}>
                   {product.image1_product ? (
                     <img
                       className="dt-res-img2"
@@ -170,6 +171,7 @@ function DescriptionPC({
                     <img className="dt-res-img2" src={"/noimage.jpg"} />
                   )}
                 </div>
+                <RateShow />
               </div>
               <DescriptionShow
                 description={product.description_product}

@@ -26,7 +26,7 @@ const ListRentItem = ({ user, check, click, type }) => {
     } else if (type === "Shop") {
       Axios({
         method: "post",
-        url: "http://localhost:5000/showsolditem",
+        url: "https://tranquil-beach-43094.herokuapp.com/showsolditem",
         headers: { Authorization: `Bearer ${token}` },
       })
         .then((result) => {

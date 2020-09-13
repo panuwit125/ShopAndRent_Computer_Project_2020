@@ -73,7 +73,7 @@ const ShowProduct = () => {
 
   const postDataProduct = (user) => {
     let body = { owner_product: user };
-    Axios.post("http://localhost:5000/showproductbyuser", body)
+    Axios.post("https://tranquil-beach-43094.herokuapp.com/showproductbyuser", body)
       .then((response) => {
         console.log(response);
         setProductShop(response.data);
@@ -86,7 +86,7 @@ const ShowProduct = () => {
 
   const postDataProductRent = (user) => {
     let body = { owner_product: user };
-    Axios.post("http://localhost:5000/showproductrentbyuser", body)
+    Axios.post("https://tranquil-beach-43094.herokuapp.com/showproductrentbyuser", body)
       .then((response) => {
         console.log(response);
         setProductRent(response.data);
@@ -103,7 +103,7 @@ const ShowProduct = () => {
     if (type === "Shop") {
       Axios({
         method: "delete",
-        url: "http://localhost:5000/deleteproduct",
+        url: "https://tranquil-beach-43094.herokuapp.com/deleteproduct",
         headers: { Authorization: `Bearer ${token}` },
         data,
       })
@@ -117,7 +117,7 @@ const ShowProduct = () => {
     } else if (type === "Rent") {
       Axios({
         method: "delete",
-        url: "http://localhost:5000/deleteproductrent",
+        url: "https://tranquil-beach-43094.herokuapp.com/deleteproductrent",
         headers: { Authorization: `Bearer ${token}` },
         data,
       })

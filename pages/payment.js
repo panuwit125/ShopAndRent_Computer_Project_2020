@@ -1,4 +1,4 @@
-import { Form, Button, Select, InputNumber, message } from "antd";
+import { Form, Button, Select, InputNumber, message, Rate,Input } from "antd";
 const FormItem = Form.Item;
 import React, { useState, useEffect } from "react";
 import { DeleteOutlined } from "@ant-design/icons";
@@ -8,6 +8,7 @@ import Axios from "axios";
 import LoadingComponent from "../components/component.loading";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import HeaderNavbar from "../components/HeaderNavbar";
+import TitleHeader from "../components/component.titleheader";
 
 //import page -> start
 import PaymentMobile from "../components/pages/mobiles/payment";
@@ -37,12 +38,15 @@ function PaymentPage() {
   const [inventory, setInventory] = useState([]);
   const [isLoading, setisLoading] = useState(false);
   const [fetchLoading, setfetchLoading] = useState(false);
-  const [checkLogin , setCheckLogin] = useState(false);
+  const [checkLogin, setCheckLogin] = useState(false);
   const [price, setPrice] = useState(0);
   const [type, setType] = useState("");
   const matches = useMediaQuery("(min-width:600px)");
   const [dayforrent, setDayForRent] = useState(7);
-  const [UploadBillShow , setUploadBillShow] = useState("none")
+  const [UploadBillShow, setUploadBillShow] = useState("none");
+  const [check, setCheck] = useState("none");
+  const [showAddress, setShowAddress] = useState("block")
+  const [address,setAddress] = useState("โมจิ เอนยูสแคว์ซอย 3 ม.1 ต.ท่าโพธิ์ อ.เมือง จ.พิษณุโลก 65000")
 
   useEffect(() => {
     let token = localStorage.getItem("token");
@@ -64,7 +68,7 @@ function PaymentPage() {
     if (type === "Shop") {
       Axios({
         method: "post",
-        url: "http://localhost:5000/showInventoryById",
+        url: "https://tranquil-beach-43094.herokuapp.com/showInventoryById",
         data: {
           id_user: user._id,
         },
@@ -204,7 +208,7 @@ function PaymentPage() {
     };
     Axios({
       method: "post",
-      url: "http://localhost:5000/soldproduct",
+      url: "https://tranquil-beach-43094.herokuapp.com/soldproduct",
       data,
     })
       .then((data) => {
@@ -213,7 +217,8 @@ function PaymentPage() {
           setfetchLoading(false);
           console.log("ทำการซื้อสำเร็จแล้ว", data);
           alert("ทำรายการซื้อสำเร็จแล้ว");
-          router.push("/shop");
+          setCheck("block");
+          //router.push("/shop");
         } else if (data.data.code === 101) {
           setfetchLoading(false);
           console.log("รายการของถูกซื้อไปแล้ว", data.data.product);
@@ -236,18 +241,19 @@ function PaymentPage() {
         user_name: user.user_name,
         price_rent: inventory.price_product * dayforrent + 600 + 600,
         time_rent: dayforrent,
-        owner_product: inventory.owner_product
+        owner_product: inventory.owner_product,
       };
       Axios({
         method: "post",
-        url: "http://localhost:5000/checkandrentproduct",
+        url: "https://tranquil-beach-43094.herokuapp.com/checkandrentproduct",
         data,
       })
         .then((datapost) => {
           console.log(datapost);
           if (datapost.data.code === 100) {
             alert("ทำการเช่าสำเร็จแล้ว");
-            router.push("/shop");
+            setCheck("block");
+            //router.push("/shop");
           } else {
             alert("ไม่สามารถเช่าได้เนื่องจากถูกเช่าไปแล้ว");
             router.push("/shop");
@@ -282,6 +288,69 @@ function PaymentPage() {
       });
   };
 
+  const RateShow = () => {
+    return (
+      <div style={{ display: check }} className="modal md-bg">
+        <div className="modal-content">
+          <div className="mg-update-track-card">
+            <div>
+              <h2 style={{ color: "black", textAlign: "center" }}>
+                ให้คะแนนร้านค้า
+              </h2>
+            </div>
+            <div className="lri-body" style={{ textAlign: "center" }}>
+              <Rate allowHalf defaultValue={2.5} style={{ marginBottom: 15 }} />
+              <Button
+                type="primary"
+                className="mg-btn-update"
+                onClick={() => {
+                  setCheck("none");
+                }}
+              >
+                ยืนยัน
+              </Button>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+  const EditAddress = () => {
+    return (
+      <div style={{ display: showAddress }} className="modal md-bg">
+        <div className="modal-content">
+          <div className="mg-update-track-card">
+            <div className="lri-header">
+              <h2 style={{ color: "black" }}>
+                แก้ไขข้อมูลที่อยู่
+              </h2>
+              <Button
+                onClick={() => {
+                  setShowAddress("none");
+                }}
+              >
+                ย้อนกลับ
+              </Button>
+            </div>
+            <div className="lri-body" style={{ textAlign: "center" }}>
+              <Input.TextArea value={address} onChange={(e)=>setAddress(e.target.value)} rows="5" />
+              <Button
+                type="primary"
+                className="mg-btn-update"
+                onClick={() => {
+                  setCheck("none");
+                }}
+              >
+                ยืนยัน
+              </Button>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
   if (!isLoading) {
     return <LoadingComponent type={"pageloading"} status={true} />;
   } else {
@@ -289,83 +358,97 @@ function PaymentPage() {
       console.log(inventory);
       if (inventory.length <= 0) {
         return (
-          <FormItem style={{ margin: "0px" }}>
-            <LoadingComponent type={"fetchloading"} status={fetchLoading} />
-            <div className="br">
-              <HeaderNavbar />
-              <div className="pm-body">
-                <div className="pm-back">
-                  <Button onClick={() => router.push("/shop")}>
-                    Back
-                  </Button>
-                  <h2 style={{ color: "black" }}>PAYMENT SELL</h2>
-                  <a style={{ color: "black" }}>Edit</a>
-                </div>
-                <div className="pm-address" style={{ textAlign: "center" }}>
-                  <h1 style={{ color: "black" }}>ตระกร้าของคุณไม่มีสินค้า</h1>
+          <>
+            <TitleHeader name={"Payment"} />
+            <FormItem style={{ margin: "0px" }}>
+              <LoadingComponent type={"fetchloading"} status={fetchLoading} />
+              <div className="br">
+                <HeaderNavbar />
+                <div className="pm-body">
+                  <div className="pm-back">
+                    <Button onClick={() => router.push("/shop")}>Back</Button>
+                    <h2 style={{ color: "black" }}>PAYMENT SELL</h2>
+                    <a style={{ color: "black" }}>Edit</a>
+                  </div>
+                  <div className="pm-address" style={{ textAlign: "center" }}>
+                    <h1 style={{ color: "black" }}>ตระกร้าของคุณไม่มีสินค้า</h1>
+                  </div>
                 </div>
               </div>
-            </div>
-          </FormItem>
+            </FormItem>
+          </>
         );
       } else {
         return (
-          <PaymentPC
-            fetchLoading={fetchLoading}
-            inventory={inventory}
-            price={price}
-            postBuyProduct={postBuyProduct}
-            type={type}
-            CardShowProduct={CardShowProduct}
-            CardShowProductRes={CardShowProductRes}
-            dayforrent={dayforrent}
-            postRentProduct={postRentProduct}
-            status={status}
-            checkLogin={checkLogin}
-            user={user}
-            UploadBillShow={UploadBillShow}
-            setUploadBillShow={setUploadBillShow}
-          />
+          <>
+            <TitleHeader name={"Payment"} />
+            <EditAddress />
+            <RateShow />
+            <PaymentPC
+              fetchLoading={fetchLoading}
+              inventory={inventory}
+              price={price}
+              postBuyProduct={postBuyProduct}
+              type={type}
+              CardShowProduct={CardShowProduct}
+              CardShowProductRes={CardShowProductRes}
+              dayforrent={dayforrent}
+              postRentProduct={postRentProduct}
+              status={status}
+              checkLogin={checkLogin}
+              user={user}
+              UploadBillShow={UploadBillShow}
+              setUploadBillShow={setUploadBillShow}
+              address={address}
+            />
+          </>
         );
       }
     } else {
       console.log(inventory);
       if (inventory.length <= 0) {
         return (
-          <FormItem style={{ margin: "0px" }}>
-            <LoadingComponent type={"fetchloading"} status={fetchLoading} />
-            <div className="br">
-              <HeaderNavbar />
-              <div className="pm-body">
-                <div className="pm-back">
-                  <Button onClick={() => router.push("/shop")}>
-                    Back
-                  </Button>
-                  <h2 style={{ color: "black" }}>PAYMENT SELL</h2>
-                  <a style={{ color: "black" }}>Edit</a>
-                </div>
-                <div className="pm-address" style={{ textAlign: "center" }}>
-                  <h1 style={{ color: "black" }}>ตระกร้าของคุณไม่มีสินค้า</h1>
+          <>
+            <TitleHeader name={"Payment"} />
+            <FormItem style={{ margin: "0px" }}>
+              <LoadingComponent type={"fetchloading"} status={fetchLoading} />
+              <div className="br">
+                <HeaderNavbar />
+                <div className="pm-body">
+                  <div className="pm-back">
+                    <Button onClick={() => router.push("/shop")}>Back</Button>
+                    <h2 style={{ color: "black" }}>PAYMENT SELL</h2>
+                    <a style={{ color: "black" }}>Edit</a>
+                  </div>
+                  <div className="pm-address" style={{ textAlign: "center" }}>
+                    <h1 style={{ color: "black" }}>ตระกร้าของคุณไม่มีสินค้า</h1>
+                  </div>
                 </div>
               </div>
-            </div>
-          </FormItem>
+            </FormItem>
+          </>
         );
       } else {
         return (
-          <PaymentMobile
-            fetchLoading={fetchLoading}
-            inventory={inventory}
-            price={price}
-            postBuyProduct={postBuyProduct}
-            type={type}
-            CardShowProduct={CardShowProduct}
-            CardShowProductRes={CardShowProductRes}
-            dayforrent={dayforrent}
-            postRentProduct={postRentProduct}
-            UploadBillShow={UploadBillShow}
-            setUploadBillShow={setUploadBillShow}
-          />
+          <>
+            <TitleHeader name={"Payment"} />
+            <RateShow />
+            <EditAddress />
+            <PaymentMobile
+              fetchLoading={fetchLoading}
+              inventory={inventory}
+              price={price}
+              postBuyProduct={postBuyProduct}
+              type={type}
+              CardShowProduct={CardShowProduct}
+              CardShowProductRes={CardShowProductRes}
+              dayforrent={dayforrent}
+              postRentProduct={postRentProduct}
+              UploadBillShow={UploadBillShow}
+              setUploadBillShow={setUploadBillShow}
+              address={address}
+            />
+          </>
         );
       }
     }

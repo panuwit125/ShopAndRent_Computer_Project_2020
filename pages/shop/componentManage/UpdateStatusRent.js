@@ -21,7 +21,7 @@ const UpdateStatusRent = ({
     console.log(data);
     Axios({
       method: "put",
-      url: "http://localhost:5000/listrentupdatestatus",
+      url: "https://tranquil-beach-43094.herokuapp.com/listrentupdatestatus",
       headers: { Authorization: `Bearer ${token}` },
       data,
     })

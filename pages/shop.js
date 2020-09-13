@@ -5,6 +5,7 @@ import useMediaQuery from "@material-ui/core/useMediaQuery";
 import axios from "axios";
 import { Button } from "antd";
 import { WechatOutlined } from "@ant-design/icons";
+import TitleHeader from "../components/component.titleheader";
 
 //import page --> start
 import ShopMobile from "../components/pages/mobiles/shop";
@@ -48,7 +49,7 @@ function ShopPage() {
 
   const getBland = () => {
     axios
-      .get("http://localhost:5000/showbland")
+      .get("https://tranquil-beach-43094.herokuapp.com/showbland")
       .then((res) => {
         console.log(res);
         setBland(res.data);
@@ -123,39 +124,45 @@ function ShopPage() {
     console.log(productData);
     if (matches) {
       return (
-        <ShopPC
-          checkListShow={checkListShow}
-          userId={userId}
-          setCheckListShow={setCheckListShow}
-          type={type}
-          checkLogin={checkLogin}
-          setisLoading={setisLoading}
-          TypeBland={TypeBland}
-          product={product}
-          user={user}
-          setShowNavbar={setShowNavbar}
-          ChatbotShow={ChatbotShow}
-          productData={productData}
-          bland={bland}
-        />
+        <>
+          <TitleHeader name={"Shop"} />
+          <ShopPC
+            checkListShow={checkListShow}
+            userId={userId}
+            setCheckListShow={setCheckListShow}
+            type={type}
+            checkLogin={checkLogin}
+            setisLoading={setisLoading}
+            TypeBland={TypeBland}
+            product={product}
+            user={user}
+            setShowNavbar={setShowNavbar}
+            ChatbotShow={ChatbotShow}
+            productData={productData}
+            bland={bland}
+          />
+        </>
       );
     } else {
       return (
-        <ShopMobile
-          showNavbar={showNavbar}
-          setShowNavbar={setShowNavbar}
-          checkLogin={checkLogin}
-          user={user}
-          setCheckListShow={setCheckListShow}
-          setisLoading={setisLoading}
-          product={product}
-          type={type}
-          checkListShow={checkListShow}
-          userId={userId}
-          ChatbotShow={ChatbotShow}
-          bland={bland}
-          productData={productData}
-        />
+        <>
+          <TitleHeader name={"Shop"} />
+          <ShopMobile
+            showNavbar={showNavbar}
+            setShowNavbar={setShowNavbar}
+            checkLogin={checkLogin}
+            user={user}
+            setCheckListShow={setCheckListShow}
+            setisLoading={setisLoading}
+            product={product}
+            type={type}
+            checkListShow={checkListShow}
+            userId={userId}
+            ChatbotShow={ChatbotShow}
+            bland={bland}
+            productData={productData}
+          />
+        </>
       );
     }
   }

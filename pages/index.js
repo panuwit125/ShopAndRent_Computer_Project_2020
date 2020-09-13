@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import LoadingComponent from "../components/component.loading";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
-import router from 'next/router'
+import router from "next/router";
+import TitleHeader from "../components/component.titleheader";
 
 //import page -> start
 import HomeMobile from "../components/pages/mobiles/home";
@@ -36,9 +37,19 @@ function home() {
     return <LoadingComponent type={"pageloading"} status={true} />;
   } else {
     if (matches) {
-      return <HomePC nextpage={nexthandle} />;
+      return (
+        <>
+          <TitleHeader name={"Home"} />
+          <HomePC nextpage={nexthandle} />
+        </>
+      );
     } else {
-      return <HomeMobile nextpage={nexthandle} />;
+      return (
+        <>
+          <TitleHeader name={"Home"} />
+          <HomeMobile nextpage={nexthandle} />
+        </>
+      );
     }
   }
 }

@@ -5,6 +5,7 @@ import router from "next/router";
 import axios from "axios";
 import LoadingComponent from "../components/component.loading";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
+import TitleHeader from "../components/component.titleheader";
 
 //import page -> start
 import SignInMobile from "../components/pages/mobiles/signin";
@@ -21,7 +22,7 @@ function loginPage() {
   const [namelogin, setNameLogin] = useState("");
   const [passwordlogin, setPasswordLogin] = useState("");
   const matches = useMediaQuery("(min-width:600px)");
-  const [mode,setMode] = useState("login");
+  const [mode, setMode] = useState("login");
 
   useEffect(() => {
     //localStorage.clear();
@@ -55,7 +56,7 @@ function loginPage() {
         .catch((err) => {
           setfetchLoading(false);
           console.log(err.response);
-          alert(err.response.data.error)
+          alert(err.response.data.error);
         });
     }
   };
@@ -104,7 +105,7 @@ function loginPage() {
         })
         .catch((error) => {
           console.log("ERROR", error.response);
-          alert(error.response.data.error)
+          alert(error.response.data.error);
         });
     }
   };
@@ -114,47 +115,53 @@ function loginPage() {
   } else {
     if (matches) {
       return (
-        <SignInPC
-          fetchLoading={fetchLoading}
-          setName={setName}
-          setPassword={setPassword}
-          setFirstname={setFirstname}
-          setLastname={setLastname}
-          setNameLogin={setNameLogin}
-          setPasswordLogin={setPasswordLogin}
-          loginData={loginData}
-          name={name}
-          password={password}
-          firstname={firstname}
-          lastname={lastname}
-          namelogin={namelogin}
-          passwordlogin={passwordlogin}
-          postData={postData}
-          mode={mode}
-          setMode={setMode}
-        />
+        <>
+          <TitleHeader name={"SignIn"} />
+          <SignInPC
+            fetchLoading={fetchLoading}
+            setName={setName}
+            setPassword={setPassword}
+            setFirstname={setFirstname}
+            setLastname={setLastname}
+            setNameLogin={setNameLogin}
+            setPasswordLogin={setPasswordLogin}
+            loginData={loginData}
+            name={name}
+            password={password}
+            firstname={firstname}
+            lastname={lastname}
+            namelogin={namelogin}
+            passwordlogin={passwordlogin}
+            postData={postData}
+            mode={mode}
+            setMode={setMode}
+          />
+        </>
       );
     } else {
       return (
-        <SignInMobile
-          fetchLoading={fetchLoading}
-          setName={setName}
-          setPassword={setPassword}
-          setFirstname={setFirstname}
-          setLastname={setLastname}
-          setNameLogin={setNameLogin}
-          setPasswordLogin={setPasswordLogin}
-          loginData={loginData}
-          name={name}
-          password={password}
-          firstname={firstname}
-          lastname={lastname}
-          namelogin={namelogin}
-          passwordlogin={passwordlogin}
-          postData={postData}
-          mode={mode}
-          setMode={setMode}
-        />
+        <>
+          <TitleHeader name={"SignIn"} />
+          <SignInMobile
+            fetchLoading={fetchLoading}
+            setName={setName}
+            setPassword={setPassword}
+            setFirstname={setFirstname}
+            setLastname={setLastname}
+            setNameLogin={setNameLogin}
+            setPasswordLogin={setPasswordLogin}
+            loginData={loginData}
+            name={name}
+            password={password}
+            firstname={firstname}
+            lastname={lastname}
+            namelogin={namelogin}
+            passwordlogin={passwordlogin}
+            postData={postData}
+            mode={mode}
+            setMode={setMode}
+          />
+        </>
       );
     }
   }

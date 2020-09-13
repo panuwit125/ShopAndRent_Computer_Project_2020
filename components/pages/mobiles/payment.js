@@ -39,6 +39,7 @@ function PaymentMobile({
   postRentProduct,
   UploadBillShow,
   setUploadBillShow,
+  address
 }) {
   const [isLoading, setisLoading] = useState(false);
   useEffect(() => {
@@ -112,7 +113,7 @@ function PaymentMobile({
                   ที่อยู่ในการจัดส่ง
                 </h2>
                 <h3 style={{ color: "black", fontSize: "16px" }}>
-                  โมจิ เอนยูสแคว์ซอย 3 ม.1 ต.ท่าโพธิ์ อ.เมือง จ.พิษณุโลก 65000
+                  {address}
                 </h3>
               </div>
             </div>

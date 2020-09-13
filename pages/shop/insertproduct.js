@@ -51,7 +51,7 @@ function InsertProduct() {
 
   useEffect(() => {
     if (url1) {
-      fetch("http://localhost:5000/insertproduct", {
+      fetch("https://tranquil-beach-43094.herokuapp.com/insertproduct", {
         method: "post",
         headers: {
           "Content-Type": "application/json",

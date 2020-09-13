@@ -4,6 +4,8 @@ import Axios from "axios";
 import LoadingComponent from "../components/component.loading";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { CloseOutlined } from "@ant-design/icons";
+import { Rate } from "antd";
+import TitleHeader from "../components/component.titleheader";
 
 // import page -> start
 import DescriptionMobile from "../components/pages/mobiles/description";
@@ -124,7 +126,7 @@ function DescriptionPage() {
       id_product: product._id,
     };
     console.log(data);
-    Axios.post("http://localhost:5000/inventory", data)
+    Axios.post("https://tranquil-beach-43094.herokuapp.com/inventory", data)
       .then((data) => {
         console.log(data);
         setfetchLoading(false);
@@ -159,42 +161,59 @@ function DescriptionPage() {
     );
   };
 
+  const RateShow = () => {
+    return (
+      <span>
+        <Rate allowHalf disabled defaultValue={2.5} />
+        <span className="ant-rate-text">(2.5)</span>
+      </span>
+    );
+  };
+
   if (!isLoading) {
     return <LoadingComponent type={"pageloading"} status={true} />;
   } else {
     if (matches) {
       return (
-        <DescriptionPC
-          fetchLoading={fetchLoading}
-          type={type}
-          checkLogin={checkLogin}
-          user={user}
-          product={product}
-          checkProductByid={checkProductByid}
-          checkStatus={checkStatus}
-          imageExpand={imageExpand}
-          setImageExpand={setImageExpand}
-          ImageExpandShow={ImageExpandShow}
-          setImageForExpand={setImageForExpand}
-        />
+        <>
+          <TitleHeader name={"Description"} />
+          <DescriptionPC
+            fetchLoading={fetchLoading}
+            type={type}
+            checkLogin={checkLogin}
+            user={user}
+            product={product}
+            checkProductByid={checkProductByid}
+            checkStatus={checkStatus}
+            imageExpand={imageExpand}
+            setImageExpand={setImageExpand}
+            ImageExpandShow={ImageExpandShow}
+            setImageForExpand={setImageForExpand}
+            RateShow={RateShow}
+          />
+        </>
       );
     } else {
       return (
-        <DescriptionMobile
-          fetchLoading={fetchLoading}
-          showNavbar={showNavbar}
-          setShowNavbar={setShowNavbar}
-          checkLogin={checkLogin}
-          user={user}
-          product={product}
-          type={type}
-          checkProductByid={checkProductByid}
-          checkStatus={checkStatus}
-          imageExpand={imageExpand}
-          setImageExpand={setImageExpand}
-          ImageExpandShow={ImageExpandShow}
-          setImageForExpand={setImageForExpand}
-        />
+        <>
+          <TitleHeader name={"Description"} />
+          <DescriptionMobile
+            fetchLoading={fetchLoading}
+            showNavbar={showNavbar}
+            setShowNavbar={setShowNavbar}
+            checkLogin={checkLogin}
+            user={user}
+            product={product}
+            type={type}
+            checkProductByid={checkProductByid}
+            checkStatus={checkStatus}
+            imageExpand={imageExpand}
+            setImageExpand={setImageExpand}
+            ImageExpandShow={ImageExpandShow}
+            setImageForExpand={setImageForExpand}
+            RateShow={RateShow}
+          />
+        </>
       );
     }
   }

@@ -5,6 +5,7 @@ import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { useSelector, useDispatch } from "react-redux";
 import Axios from "axios";
 import router from "next/router";
+import TitleHeader from "../components/component.titleheader";
 
 function ComparePage() {
   const { TypeBland } = useSelector((state) => state.post);
@@ -302,7 +303,7 @@ function ComparePage() {
 
   const postProduct = (typePage) => {
     if (typePage === "Shop") {
-      Axios.get("http://localhost:5000/showproductall")
+      Axios.get("https://tranquil-beach-43094.herokuapp.com/showproductall")
         .then((response) => {
           console.log(response);
           setProductAll(response.data);
@@ -312,7 +313,7 @@ function ComparePage() {
           console.log(error.response);
         });
     } else if (typePage === "Rent") {
-      Axios.get("http://localhost:5000/showproductallrent")
+      Axios.get("https://tranquil-beach-43094.herokuapp.com/showproductallrent")
         .then((response) => {
           console.log(response);
           setProductAll(response.data);
@@ -331,47 +332,53 @@ function ComparePage() {
   } else {
     if (matches) {
       return (
-        <ComparePC
-          showNavbar={showNavbar}
-          setShowNavbar={setShowNavbar}
-          checkLogin={checkLogin}
-          user={user}
-          setCheckListShow={setCheckListShow}
-          setisLoading={setisLoading}
-          product1={product1}
-          type={type}
-          checkListShow={checkListShow}
-          userId={userId}
-          ShowTableCompare={ShowTableCompare}
-          compareSelectShow={compareSelectShow}
-          setCompareSelectShow={setCompareSelectShow}
-          productAll={productAll}
-          selectCompare={selectCompare}
-          setSelectCompare={setSelectCompare}
-          SelectProduct={SelectProduct}
-        />
+        <>
+          <TitleHeader name={"Compare"} />
+          <ComparePC
+            showNavbar={showNavbar}
+            setShowNavbar={setShowNavbar}
+            checkLogin={checkLogin}
+            user={user}
+            setCheckListShow={setCheckListShow}
+            setisLoading={setisLoading}
+            product1={product1}
+            type={type}
+            checkListShow={checkListShow}
+            userId={userId}
+            ShowTableCompare={ShowTableCompare}
+            compareSelectShow={compareSelectShow}
+            setCompareSelectShow={setCompareSelectShow}
+            productAll={productAll}
+            selectCompare={selectCompare}
+            setSelectCompare={setSelectCompare}
+            SelectProduct={SelectProduct}
+          />
+        </>
       );
     } else {
       return (
-        <CompareMobile
-          showNavbar={showNavbar}
-          setShowNavbar={setShowNavbar}
-          checkLogin={checkLogin}
-          user={user}
-          setCheckListShow={setCheckListShow}
-          setisLoading={setisLoading}
-          product1={product1}
-          type={type}
-          checkListShow={checkListShow}
-          userId={userId}
-          ShowTableCompare={ShowTableCompare}
-          compareSelectShow={compareSelectShow}
-          setCompareSelectShow={setCompareSelectShow}
-          productAll={productAll}
-          selectCompare={selectCompare}
-          setSelectCompare={setSelectCompare}
-          SelectProduct={SelectProduct}
-        />
+        <>
+          <TitleHeader name={"Compare"} />
+          <CompareMobile
+            showNavbar={showNavbar}
+            setShowNavbar={setShowNavbar}
+            checkLogin={checkLogin}
+            user={user}
+            setCheckListShow={setCheckListShow}
+            setisLoading={setisLoading}
+            product1={product1}
+            type={type}
+            checkListShow={checkListShow}
+            userId={userId}
+            ShowTableCompare={ShowTableCompare}
+            compareSelectShow={compareSelectShow}
+            setCompareSelectShow={setCompareSelectShow}
+            productAll={productAll}
+            selectCompare={selectCompare}
+            setSelectCompare={setSelectCompare}
+            SelectProduct={SelectProduct}
+          />
+        </>
       );
     }
   }

@@ -54,7 +54,7 @@ const ListSoldItem = () => {
   const getDataSoldItem = (token) => {
     Axios({
       method: "post",
-      url: "http://localhost:5000/showsolditemseller",
+      url: "https://tranquil-beach-43094.herokuapp.com/showsolditemseller",
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((response) => {
@@ -70,7 +70,7 @@ const ListSoldItem = () => {
   const getDataSoldRentItem = (token) => {
     Axios({
       method: "post",
-      url: "http://localhost:5000/showitemlistrentseller",
+      url: "https://tranquil-beach-43094.herokuapp.com/showitemlistrentseller",
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((response) => {

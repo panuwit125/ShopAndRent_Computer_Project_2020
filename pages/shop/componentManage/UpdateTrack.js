@@ -32,7 +32,7 @@ const ListRentItem = ({
     if (value === 0) {
       Axios({
         method: "put",
-        url: "http://localhost:5000/solditemupdatetrack",
+        url: "https://tranquil-beach-43094.herokuapp.com/solditemupdatetrack",
         headers: { Authorization: `Bearer ${token}` },
         data,
       })
@@ -50,7 +50,7 @@ const ListRentItem = ({
     } else if (value === 1) {
       Axios({
         method: "put",
-        url: "http://localhost:5000/listrentupdatetrack",
+        url: "https://tranquil-beach-43094.herokuapp.com/listrentupdatetrack",
         headers: { Authorization: `Bearer ${token}` },
         data,
       })

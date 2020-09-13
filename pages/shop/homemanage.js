@@ -29,7 +29,7 @@ function homeSeller() {
 
   const postDataProduct = (user) => {
     let body = { owner_product: user };
-    Axios.post("http://localhost:5000/showproductbyuser", body)
+    Axios.post("https://tranquil-beach-43094.herokuapp.com/showproductbyuser", body)
       .then((response) => {
         console.log(response);
         setProductShop(response.data);
@@ -42,7 +42,7 @@ function homeSeller() {
 
   const postDataProductRent = (user) => {
     let body = { owner_product: user };
-    Axios.post("http://localhost:5000/showproductrentbyuser", body)
+    Axios.post("https://tranquil-beach-43094.herokuapp.com/showproductrentbyuser", body)
       .then((response) => {
         console.log(response);
         setProductRent(response.data);

@@ -3,7 +3,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
 body {
   background: white !important;
-  font-family: "Roboto Condensed", sans-serif;
+  font-family: 'Kanit', sans-serif !important;
 
   &:before {
     position: fixed;
@@ -382,6 +382,7 @@ body {
   overflow: auto; /* Enable scroll if needed */
   //background-color: rgb(0, 0, 0); /* Fallback color */
   //background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+  font-family: 'Kanit', sans-serif !important;
 }
 
 .md-bg {

@@ -21,6 +21,7 @@ function DescriptionMobile({
   setImageExpand,
   ImageExpandShow,
   setImageForExpand,
+  RateShow
 }) {
   const [isLoading, setisLoading] = useState(false);
   useEffect(() => {
@@ -100,7 +101,7 @@ function DescriptionMobile({
           <div className="des-res-body">
             <div
               className="sp-body-2"
-              style={{ padding: "10px 20px 30px 20px" }}
+              style={{ padding: "10px 20px 10px 20px" }}
             >
               <div
                 className="dt-body-2-header"
@@ -152,6 +153,7 @@ function DescriptionMobile({
                     <img className="dt-img-1" src={"/noimage.jpg"} />
                   )}
                 </div>
+                <RateShow />
               </div>
             </div>
             <DescriptionProduct

@@ -307,7 +307,7 @@ function InsertProduct() {
   useEffect(() => {
     if (url1) {
       if (typeUpdate === "Shop") {
-        fetch("http://localhost:5000/updateproduct", {
+        fetch("https://tranquil-beach-43094.herokuapp.com/updateproduct", {
           method: "put",
           headers: {
             "Content-Type": "application/json",
@@ -345,7 +345,7 @@ function InsertProduct() {
           })
           .catch((err) => console.log(err));
       } else if (typeUpdate === "Rent") {
-        fetch("http://localhost:5000/updateproductrent", {
+        fetch("https://tranquil-beach-43094.herokuapp.com/updateproductrent", {
           method: "put",
           headers: {
             "Content-Type": "application/json",

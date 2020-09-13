@@ -28,7 +28,7 @@ function InsertBland() {
     let data = { name_bland: blandProduct };
     Axios({
       method: "post",
-      url: "http://localhost:5000/insertbland",
+      url: "https://tranquil-beach-43094.herokuapp.com/insertbland",
       headers: { Authorization: `Bearer ${token}` },
       data,
     })
