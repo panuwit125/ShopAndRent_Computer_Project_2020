@@ -32,7 +32,7 @@ function DescriptionMobile({
     if (checkLogin) {
       if (type === "Shop") {
         return (
-          <div className="des-res-flex-btn">
+          <div className="des-res-flex-btn" style={{marginBottom:20}}>
             <div
               className="des-res-flex-body"
               style={{ marginLeft: "18px", marginRight: "0.5px" }}
@@ -61,7 +61,7 @@ function DescriptionMobile({
         );
       } else {
         return (
-          <div>
+          <div style={{marginBottom:20}}>
             <Button className="dt-btn" onClick={() => checkStatus()}>
               เช่าสินค้า
             </Button>
@@ -70,7 +70,7 @@ function DescriptionMobile({
       }
     } else {
       return (
-        <Button className="dt-btn" onClick={() => router.push("/signin")}>
+        <Button className="dt-btn" onClick={() => router.push("/signin")} style={{marginBottom:20}}>
           Login Plese
         </Button>
       );

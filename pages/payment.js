@@ -1,4 +1,4 @@
-import { Form, Button, Select, InputNumber, message, Rate,Input } from "antd";
+import { Form, Button, Select, InputNumber, message, Rate, Input } from "antd";
 const FormItem = Form.Item;
 import React, { useState, useEffect } from "react";
 import { DeleteOutlined } from "@ant-design/icons";
@@ -45,9 +45,12 @@ function PaymentPage() {
   const [dayforrent, setDayForRent] = useState(7);
   const [UploadBillShow, setUploadBillShow] = useState("none");
   const [check, setCheck] = useState("block");
-  const [showAddress, setShowAddress] = useState("none")
-  const [address,setAddress] = useState("โมจิ เอนยูสแคว์ซอย 3 ม.1 ต.ท่าโพธิ์ อ.เมือง จ.พิษณุโลก 65000")
-  const [rateValue,setRateValue] = useState(2.5);
+  const [showAddress, setShowAddress] = useState("none");
+  const [address, setAddress] = useState(
+    "โมจิ เอนยูสแคว์ซอย 3 ม.1 ต.ท่าโพธิ์ อ.เมือง จ.พิษณุโลก 65000"
+  );
+  const [rateValue, setRateValue] = useState(2.5);
+  const [showNavbar, setShowNavbar] = useState(0);
 
   useEffect(() => {
     let token = localStorage.getItem("token");
@@ -140,7 +143,7 @@ function PaymentPage() {
             <div style={{ textAlign: "center" }}>
               <h3 style={{ color: "black" }}>จำนวนวันที่เช่า </h3>
               <InputNumber
-                min={7}
+                min={1}
                 defaultValue={dayforrent}
                 onChange={valuedayforrent}
               />
@@ -219,7 +222,7 @@ function PaymentPage() {
           console.log("ทำการซื้อสำเร็จแล้ว", data);
           alert("ทำรายการซื้อสำเร็จแล้ว");
           setCheck("block");
-          //router.push("/shop");
+          router.push("/shop");
         } else if (data.data.code === 101) {
           setfetchLoading(false);
           console.log("รายการของถูกซื้อไปแล้ว", data.data.product);
@@ -254,7 +257,7 @@ function PaymentPage() {
           if (datapost.data.code === 100) {
             alert("ทำการเช่าสำเร็จแล้ว");
             setCheck("block");
-            //router.push("/shop");
+            router.push("/shop");
           } else {
             alert("ไม่สามารถเช่าได้เนื่องจากถูกเช่าไปแล้ว");
             router.push("/shop");
@@ -295,9 +298,7 @@ function PaymentPage() {
         <div className="modal-content">
           <div className="mg-update-track-card">
             <div className="lri-header">
-              <h2 style={{ color: "black" }}>
-                แก้ไขข้อมูลที่อยู่
-              </h2>
+              <h2 style={{ color: "black" }}>แก้ไขข้อมูลที่อยู่</h2>
               <Button
                 onClick={() => {
                   setShowAddress("none");
@@ -307,12 +308,16 @@ function PaymentPage() {
               </Button>
             </div>
             <div className="lri-body" style={{ textAlign: "center" }}>
-              <Input.TextArea value={address} onChange={(e)=>setAddress(e.target.value)} rows="5" />
+              <Input.TextArea
+                value={address}
+                onChange={(e) => setAddress(e.target.value)}
+                rows="5"
+              />
               <Button
                 type="primary"
                 className="mg-btn-update"
                 onClick={() => {
-                  setCheck("none");
+                  setShowAddress("none");
                 }}
               >
                 ยืนยัน
@@ -335,16 +340,33 @@ function PaymentPage() {
             <TitleHeader name={"Payment"} />
             <FormItem style={{ margin: "0px" }}>
               <LoadingComponent type={"fetchloading"} status={fetchLoading} />
-              <div className="br">
-                <HeaderNavbar />
+              <div className="br-res-mobile">
+                <HeaderNavbar page={"Payment"} />
                 <div className="pm-body">
-                  <div className="pm-back">
-                    <Button onClick={() => router.push("/shop")}>Back</Button>
-                    <h2 style={{ color: "black" }}>PAYMENT SELL</h2>
-                    <a style={{ color: "black" }}>Edit</a>
+                  <div className="pm-back pay-font-hd">
+                    <a
+                      onClick={() => router.push("/shop")}
+                      style={{ color: "#AFAFAF", margin: "0px" }}
+                    >
+                      Back
+                    </a>
+                    <h2
+                      style={{
+                        color: "black",
+                        fontSize: "18px",
+                        margin: "0px",
+                      }}
+                    >
+                      PAYMENT
+                    </h2>
+                    <a
+                      style={{ color: "#AFAFAF", margin: "0px" }}
+                    >
+                      Edit
+                    </a>
                   </div>
-                  <div className="pm-address" style={{ textAlign: "center" }}>
-                    <h1 style={{ color: "black" }}>ตระกร้าของคุณไม่มีสินค้า</h1>
+                  <div style={{textAlign:"center",marginTop:20}}>
+                    <h2>ไม่มีสินค้าอยู่ในตระกร้า</h2>
                   </div>
                 </div>
               </div>
@@ -372,6 +394,7 @@ function PaymentPage() {
               UploadBillShow={UploadBillShow}
               setUploadBillShow={setUploadBillShow}
               address={address}
+              setShowAddress={setShowAddress}
             />
           </>
         );
@@ -384,16 +407,33 @@ function PaymentPage() {
             <TitleHeader name={"Payment"} />
             <FormItem style={{ margin: "0px" }}>
               <LoadingComponent type={"fetchloading"} status={fetchLoading} />
-              <div className="br">
-                <HeaderNavbar />
+              <div className="br-res-mobile">
+                <HeaderNavbar page={"Payment"} />
                 <div className="pm-body">
-                  <div className="pm-back">
-                    <Button onClick={() => router.push("/shop")}>Back</Button>
-                    <h2 style={{ color: "black" }}>PAYMENT SELL</h2>
-                    <a style={{ color: "black" }}>Edit</a>
+                  <div className="pm-back pay-font-hd">
+                    <a
+                      onClick={() => router.push("/shop")}
+                      style={{ color: "#AFAFAF", margin: "0px" }}
+                    >
+                      Back
+                    </a>
+                    <h2
+                      style={{
+                        color: "black",
+                        fontSize: "18px",
+                        margin: "0px",
+                      }}
+                    >
+                      PAYMENT
+                    </h2>
+                    <a
+                      style={{ color: "#AFAFAF", margin: "0px" }}
+                    >
+                      Edit
+                    </a>
                   </div>
-                  <div className="pm-address" style={{ textAlign: "center" }}>
-                    <h1 style={{ color: "black" }}>ตระกร้าของคุณไม่มีสินค้า</h1>
+                  <div style={{textAlign:"center",marginTop:20}}>
+                    <h2>ไม่มีสินค้าอยู่ในตระกร้า</h2>
                   </div>
                 </div>
               </div>
@@ -418,6 +458,11 @@ function PaymentPage() {
               UploadBillShow={UploadBillShow}
               setUploadBillShow={setUploadBillShow}
               address={address}
+              setShowAddress={setShowAddress}
+              user={user}
+              showNavbar={showNavbar}
+              setShowNavbar={setShowNavbar}
+              checkLogin={checkLogin}
             />
           </>
         );

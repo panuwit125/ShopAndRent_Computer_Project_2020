@@ -6,6 +6,7 @@ import NavbarManage from "./componentManage/NavbarManage";
 import HeaderManage from "./componentManage/HeaderManage";
 import router from "next/router"
 import LoadingComponent from "../../components/component.loading"
+import Axios from "axios"
 
 function InsertProductRent() {
   const [nameProduct, setNameProduct] = useState("");
@@ -36,6 +37,8 @@ function InsertProductRent() {
 
   const [readyToPost, setReadyToPost] = useState(false);
 
+  const [blandlist, setBlandList] = useState([]);
+
   useEffect(() => {
     if (
       localStorage.getItem("tokenmanage") &&
@@ -43,7 +46,7 @@ function InsertProductRent() {
     ) {
       setToken(localStorage.getItem("tokenmanage"));
       setUser(JSON.parse(localStorage.getItem("usermanage")));
-      setisLoading(true);
+      getBlandData();
     } else {
       router.push("/shop/loginSeller");
     }
@@ -51,7 +54,7 @@ function InsertProductRent() {
 
   useEffect(() => {
     if (url1) {
-      fetch("https://tranquil-beach-43094.herokuapp.com/insertproductrent", {
+      fetch("http://localhost:5000/insertproductrent", {
         method: "post",
         headers: {
           "Content-Type": "application/json",
@@ -209,6 +212,18 @@ function InsertProductRent() {
     }
   };
 
+  const getBlandData = () => {
+    Axios.get("https://tranquil-beach-43094.herokuapp.com/showbland")
+      .then((response) => {
+        console.log(response);
+        setBlandList(response.data);
+        setisLoading(true);
+      })
+      .catch((error) => {
+        console.log(error.response);
+      });
+  };
+
   if (!isLoading) {
     return <LoadingComponent type={"pageloading"} status={true} />;
   } else {
@@ -290,12 +305,13 @@ function InsertProductRent() {
               className="ip-iuput"
               onChange={(e) => setBlandProduct(e)}
             >
-              <Option value="ACER">ACER</Option>
-              <Option value="LENOVO">LENOVO</Option>
-              <Option value="disabled" disabled>
-                Disabled
-              </Option>
-              <Option value="DELL">DELL</Option>
+              {blandlist.map((data, index) => {
+                return (
+                  <Option key={index} value={`${data.name_bland}`}>
+                    {data.name_bland}
+                  </Option>
+                );
+              })}
             </Select>
             <h2 style={{ color: "black" }}>รูปสินค้า</h2>
             <div>

@@ -21,7 +21,7 @@ const HeaderComponent = (props) => {
           <div>
             <DehazeIcon
               style={{ color: "white" }}
-              onClick={() => console.log("dfd")}
+              onClick={() => props.setshow(160)}
             />
           </div>
           <div>

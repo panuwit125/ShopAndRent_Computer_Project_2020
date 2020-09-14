@@ -59,6 +59,8 @@ function InsertProduct() {
 
   const [readyToPost, setReadyToPost] = useState(false);
 
+  const [blandlist, setBlandList] = useState([]);
+
   //const { id } = router.query;
   //const Id = id;
 
@@ -100,7 +102,7 @@ function InsertProduct() {
             setHarddiskProduct(res.data.harddisk_product);
             setSsdProduct(res.data.ssd_product);
             setMonitorProduct(res.data.monitor_product);
-            setisLoading(true);
+            getBlandData();
           })
           .catch((err) => {
             console.log(err);
@@ -129,7 +131,7 @@ function InsertProduct() {
             setHarddiskProduct(res.data.harddisk_product);
             setSsdProduct(res.data.ssd_product);
             setMonitorProduct(res.data.monitor_product);
-            setisLoading(true);
+            getBlandData();
           })
           .catch((err) => {
             console.log(err);
@@ -304,6 +306,18 @@ function InsertProduct() {
     }
   };
 
+  const getBlandData = () => {
+    Axios.get("https://tranquil-beach-43094.herokuapp.com/showbland")
+      .then((response) => {
+        console.log(response);
+        setBlandList(response.data);
+        setisLoading(true);
+      })
+      .catch((error) => {
+        console.log(error.response);
+      });
+  };
+
   useEffect(() => {
     if (url1) {
       if (typeUpdate === "Shop") {
@@ -389,6 +403,7 @@ function InsertProduct() {
   if (!isLoading) {
     return null;
   } else {
+    console.log(blandlist)
     return (
       <FormItem style={{ margin: "0px" }}>
         <div className="br">
@@ -467,9 +482,13 @@ function InsertProduct() {
               className="ip-iuput"
               onChange={(e) => setBlandProduct(e.target.value)}
             >
-              <Option value="ACER">ACER</Option>
-              <Option value="LENOVO">LENOVO</Option>
-              <Option value="DELL">DELL</Option>
+              {blandlist.map((data, index) => {
+                return (
+                  <Option key={index} value={`${data.name_bland}`}>
+                    {data.name_bland}
+                  </Option>
+                );
+              })}
             </Select>
             <h2 style={{ color: "black" }}>รูปสินค้า</h2>
             <div

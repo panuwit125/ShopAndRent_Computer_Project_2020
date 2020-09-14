@@ -43,42 +43,51 @@ function NavbarComponent(props) {
             <i className="fa fa-fw fa-wrench">Login</i>
           </a>
         )}
-        {type === "Shop" ? (
-          <a
-            onClick={() => {
-              localStorage.setItem("type", "Rent");
-              router.push("/shop");
-              location.reload();
-            }}
-          >
-            <i className="fa fa-fw fa-wrench">Go Rent</i>
-          </a>
-        ) : (
-          <a
-            onClick={() => {
-              localStorage.setItem("type", "Shop");
-              router.push("/shop");
-              location.reload();
-            }}
-          >
-            <i className="fa fa-fw fa-wrench">Go Shop</i>
-          </a>
-        )}
+        {props.shop ? (
+          <>
+            {type === "Shop" ? (
+              <a
+                onClick={() => {
+                  localStorage.setItem("type", "Rent");
+                  router.push("/shop");
+                  location.reload();
+                }}
+              >
+                <i className="fa fa-fw fa-wrench">Go Rent</i>
+              </a>
+            ) : (
+              <a
+                onClick={() => {
+                  localStorage.setItem("type", "Shop");
+                  router.push("/shop");
+                  location.reload();
+                }}
+              >
+                <i className="fa fa-fw fa-wrench">Go Shop</i>
+              </a>
+            )}
+          </>
+        ) : null}
         {props.status && props.type === "Shop" ? (
           <a href="/payment">
             <i className="fa fa-fw fa-user">Inventory</i>
           </a>
         ) : null}
-        {props.status ? (
-          <a
-            onClick={() => {
-              props.setshow(0);
-              props.click("block");
-            }}
-          >
-            <i className="fa fa-fw fa-user">ShowList</i>
-          </a>
+        {props.shop ? (
+          <>
+            {props.status ? (
+              <a
+                onClick={() => {
+                  props.setshow(0);
+                  props.click("block");
+                }}
+              >
+                <i className="fa fa-fw fa-user">ShowList</i>
+              </a>
+            ) : null}
+          </>
         ) : null}
+
         {props.status ? (
           <a
             onClick={() => {

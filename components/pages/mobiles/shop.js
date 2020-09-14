@@ -59,6 +59,7 @@ function Shop({
           user={user}
           type={type}
           click={setCheckListShow}
+          shop={"shop"}
         />
         <div className="sp">
           <HeaderNavbar page={"Shop"} setshow={setShowNavbar} />

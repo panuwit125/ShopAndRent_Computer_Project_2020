@@ -6,6 +6,7 @@ import NavbarManage from "./componentManage/NavbarManage";
 import HeaderManage from "./componentManage/HeaderManage";
 import router from "next/router";
 import LoadingComponent from "../../components/component.loading";
+import Axios from "axios";
 
 function InsertProduct() {
   const [nameProduct, setNameProduct] = useState("");
@@ -34,6 +35,8 @@ function InsertProduct() {
   const [user, setUser] = useState();
   const [token, setToken] = useState();
 
+  const [blandlist, setBlandList] = useState([]);
+
   const [readyToPost, setReadyToPost] = useState(false);
 
   useEffect(() => {
@@ -43,7 +46,7 @@ function InsertProduct() {
     ) {
       setToken(localStorage.getItem("tokenmanage"));
       setUser(JSON.parse(localStorage.getItem("usermanage")));
-      setisLoading(true);
+      getBlandData();
     } else {
       router.push("/shop/loginSeller");
     }
@@ -112,7 +115,7 @@ function InsertProduct() {
 
   const image1fetch = (image2, seturl) => {
     if (!image2) {
-      set2Url("")
+      set2Url("");
       image2fetch(image3Product, set3Url);
     } else {
       const data = new FormData();
@@ -137,7 +140,7 @@ function InsertProduct() {
 
   const image2fetch = (image3, seturl) => {
     if (!image3) {
-      set3Url("")
+      set3Url("");
       image3fetch(image4Product, set4Url);
     } else {
       const data = new FormData();
@@ -162,8 +165,8 @@ function InsertProduct() {
 
   const image3fetch = (image4, seturl) => {
     if (!image4) {
-      set4Url("")
-      setReadyToPost(true)
+      set4Url("");
+      setReadyToPost(true);
     } else {
       const data = new FormData();
       data.append("file", image4);
@@ -177,12 +180,24 @@ function InsertProduct() {
         .then((data) => {
           console.log(data);
           set4Url(data.url);
-          setReadyToPost(true)
+          setReadyToPost(true);
         })
         .catch((err) => {
           console.log(err);
         });
     }
+  };
+
+  const getBlandData = () => {
+    Axios.get("https://tranquil-beach-43094.herokuapp.com/showbland")
+      .then((response) => {
+        console.log(response);
+        setBlandList(response.data);
+        setisLoading(true);
+      })
+      .catch((error) => {
+        console.log(error.response);
+      });
   };
 
   const postproduct = () => {
@@ -213,6 +228,7 @@ function InsertProduct() {
   if (!isLoading) {
     return <LoadingComponent type={"pageloading"} status={true} />;
   } else {
+    console.log(blandlist);
     return (
       <FormItem style={{ margin: "0px" }}>
         <div className="br">
@@ -293,12 +309,13 @@ function InsertProduct() {
                 setBlandProduct(e);
               }}
             >
-              <Option value="ACER">ACER</Option>
-              <Option value="LENOVO">LENOVO</Option>
-              <Option value="disabled" disabled>
-                Disabled
-              </Option>
-              <Option value="DELL">DELL</Option>
+              {blandlist.map((data, index) => {
+                return (
+                  <Option key={index} value={`${data.name_bland}`}>
+                    {data.name_bland}
+                  </Option>
+                );
+              })}
             </Select>
             <h2 style={{ color: "black" }}>รูปสินค้า</h2>
             <div>

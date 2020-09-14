@@ -41,7 +41,8 @@ function PaymentMobile({
   user,
   UploadBillShow,
   setUploadBillShow,
-  address
+  address,
+  setShowAddress
 }) {
   const [isLoading, setisLoading] = useState(false);
   useEffect(() => {
@@ -87,7 +88,7 @@ function PaymentMobile({
               >
                 <Button onClick={() => router.push("/shop")}>Back</Button>
                 <h2 style={{ color: "black", margin: "0px" }}>PAYMENT SELL</h2>
-                <a style={{ color: "black" }}>Edit</a>
+                <a onClick={()=>{setShowAddress("block")}} style={{ color: "black" }}>Edit</a>
               </div>
               <div className="pm-address">
                 <EnvironmentOutlined

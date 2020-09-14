@@ -54,7 +54,7 @@ function DescriptionPage() {
         .then((res) => {
           console.log(res);
           setProduct(res.data);
-          setisLoading(true);
+          getRateData(res.data);
         })
         .catch((err) => {
           console.log(err);
@@ -131,7 +131,10 @@ function DescriptionPage() {
       if(data.data.data[0].under_number === 0) {
         setRate(0)
       } else {
-        setRate(data.data.data[0].on_number/data.data.data[0].under_number)
+        console.log("asd")
+        let number = (data.data.data[0].on_number/data.data.data[0].under_number)
+        number = number.toFixed(1)
+        setRate(number)
       }
       setisLoading(true);
     }).catch(err=>{

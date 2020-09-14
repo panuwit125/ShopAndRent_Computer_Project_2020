@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Layout} from "antd";
+import { Layout } from "antd";
 import router from "next/router";
 import { useSelector, useDispatch } from "react-redux";
 
@@ -47,33 +47,38 @@ function NavbarComponent(props) {
             </a>
           </li>
         )}
-        {type === "Shop" ? (
-          <li
-            className="show-res-navbar-li show-res-li-border"
-            onClick={() => {
-              localStorage.setItem("type", "Rent");
-              router.push("/shop");
-              location.reload();
-            }}
-          >
-            <a className="show-res-navbar-li" href="#">
-              GoRent
-            </a>
-          </li>
-        ) : (
-          <li
-            className="show-res-navbar-li show-res-li-border"
-            onClick={() => {
-              localStorage.setItem("type", "Shop");
-              router.push("/shop");
-              location.reload();
-            }}
-          >
-            <a className="show-res-navbar-li" href="#">
-              GoShop
-            </a>
-          </li>
-        )}
+        {props.shop ? (
+          <>
+            {type === "Shop" ? (
+              <li
+                className="show-res-navbar-li show-res-li-border"
+                onClick={() => {
+                  localStorage.setItem("type", "Rent");
+                  router.push("/shop");
+                  location.reload();
+                }}
+              >
+                <a className="show-res-navbar-li" href="#">
+                  GoRent
+                </a>
+              </li>
+            ) : (
+              <li
+                className="show-res-navbar-li show-res-li-border"
+                onClick={() => {
+                  localStorage.setItem("type", "Shop");
+                  router.push("/shop");
+                  location.reload();
+                }}
+              >
+                <a className="show-res-navbar-li" href="#">
+                  GoShop
+                </a>
+              </li>
+            )}
+          </>
+        ) : null}
+
         {props.status && props.type === "Shop" ? (
           <li className="show-res-navbar-li show-res-li-border">
             <a className="show-res-navbar-li" href="/payment">
@@ -81,17 +86,22 @@ function NavbarComponent(props) {
             </a>
           </li>
         ) : null}
-        {props.status ? (
-          <li
-            className="show-res-navbar-li show-res-li-border"
-            onClick={() => {
-              props.setshow(0);
-              props.click("block");
-            }}
-          >
-            <a className="show-res-navbar-li">ShowList</a>
-          </li>
+        {props.shop ? (
+          <>
+            {props.status ? (
+              <li
+                className="show-res-navbar-li show-res-li-border"
+                onClick={() => {
+                  props.setshow(0);
+                  props.click("block");
+                }}
+              >
+                <a className="show-res-navbar-li">ShowList</a>
+              </li>
+            ) : null}
+          </>
         ) : null}
+
         {props.status ? (
           <li className="show-res-navbar-li show-res-li-border">
             <a

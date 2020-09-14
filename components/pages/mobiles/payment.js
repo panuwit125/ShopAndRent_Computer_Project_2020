@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Form, Button, Select, Upload, message } from "antd";
 import LoadingComponent from "../../component.loading";
 import HeaderNavbar from "../../HeaderNavbar";
+import NavbarSide from "../../Navbar";
 import UploadBillComponent from "../../component.UploadBill";
 import router from "next/router";
 import { EnvironmentOutlined, UploadOutlined } from "@ant-design/icons";
@@ -39,7 +40,12 @@ function PaymentMobile({
   postRentProduct,
   UploadBillShow,
   setUploadBillShow,
-  address
+  address,
+  setShowAddress,
+  user,
+  showNavbar,
+  setShowNavbar,
+  checkLogin
 }) {
   const [isLoading, setisLoading] = useState(false);
   useEffect(() => {
@@ -63,6 +69,7 @@ function PaymentMobile({
   if (!isLoading) {
     return null;
   } else {
+    console.log(user)
     return (
       <FormItem style={{ margin: "0px" }}>
         <LoadingComponent type={"fetchloading"} status={fetchLoading} />
@@ -73,8 +80,15 @@ function PaymentMobile({
           type={type}
           postRentProduct={postRentProduct}
         />
+        <NavbarSide
+          show={showNavbar}
+          setshow={setShowNavbar}
+          status={checkLogin}
+          user={user.user_name}
+          type={type}
+        />
         <div className="br-res-mobile">
-          <HeaderNavbar page={"Payment"} />
+          <HeaderNavbar page={"Payment"} setshow={setShowNavbar} />
           <div className="pm-body">
             <div className="pm-back pay-font-hd">
               <a
@@ -92,7 +106,7 @@ function PaymentMobile({
               >
                 PAYMENT
               </h2>
-              <a style={{ color: "#AFAFAF", margin: "0px" }}>Edit</a>
+              <a onClick={()=>{setShowAddress("block")}} style={{ color: "#AFAFAF", margin: "0px" }}>Edit</a>
             </div>
             <div className="pm-address pay-font-hd">
               <EnvironmentOutlined

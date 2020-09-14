@@ -57,6 +57,7 @@ function ShopPC({
             click={setCheckListShow}
             setshow={setShowNavbar}
             status={checkLogin}
+            shop={"shop"}
           />
           <div className="shop-res-body">
             <div className="shop-res-body-header">
