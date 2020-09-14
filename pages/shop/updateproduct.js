@@ -61,9 +61,6 @@ function InsertProduct() {
 
   const [blandlist, setBlandList] = useState([]);
 
-  //const { id } = router.query;
-  //const Id = id;
-
   useEffect(() => {
     const { id } = router.query;
     const Id = id;
@@ -472,11 +469,6 @@ function InsertProduct() {
               onChange={(e) => setPriceProduct(e.target.value)}
             />
             <h2 style={{ color: "black" }}>แบรน์สินค้า</h2>
-            {/*<Input
-            className="ip-iuput"
-            value={blandProduct}
-            onChange={(e) => setBlandProduct(e.target.value)}
-          />*/}
             <Select
               defaultValue={blandProduct}
               className="ip-iuput"
@@ -499,21 +491,6 @@ function InsertProduct() {
                 justifyContent: "flex-start",
               }}
             >
-              {/*<input
-                type="file"
-                onChange={(e) => setIamge2Product(e.target.files[0])}
-                style={{ color: "black", marginBottom: "10px" }}
-              />
-              <input
-                type="file"
-                onChange={(e) => setIamge3Product(e.target.files[0])}
-                style={{ color: "black", marginBottom: "10px" }}
-              />
-              <input
-                type="file"
-                onChange={(e) => setIamge4Product(e.target.files[0])}
-                style={{ color: "black", marginBottom: "10px" }}
-              />*/}
               <div>
                 <Upload
                   name="avatar"
@@ -540,7 +517,6 @@ function InsertProduct() {
                   listType="picture-card"
                   className="avatar-uploader"
                   showUploadList={false}
-                  //beforeUpload={beforeUpload}
                   onChange={(e) => handleChange(e, 2)}
                 >
                   {image2Product ? (
@@ -560,7 +536,6 @@ function InsertProduct() {
                   listType="picture-card"
                   className="avatar-uploader"
                   showUploadList={false}
-                  //beforeUpload={beforeUpload}
                   onChange={(e) => handleChange(e, 3)}
                 >
                   {image3Product ? (
@@ -580,7 +555,6 @@ function InsertProduct() {
                   listType="picture-card"
                   className="avatar-uploader"
                   showUploadList={false}
-                  //beforeUpload={beforeUpload}
                   onChange={(e) => handleChange(e, 4)}
                 >
                   {image4Product ? (

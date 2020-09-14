@@ -184,7 +184,7 @@ function ShopPage() {
           console.log("11");
           Axios({
             method: "put",
-            url: "http://localhost:5000/updateratesolditem",
+            url: "https://tranquil-beach-43094.herokuapp.com/updateratesolditem",
             data,
           })
             .then((response) => {
@@ -199,7 +199,7 @@ function ShopPage() {
           console.log("22");
           Axios({
             method: "put",
-            url: "http://localhost:5000/updateraterentitem",
+            url: "https://tranquil-beach-43094.herokuapp.com/updateraterentitem",
             data,
           })
             .then((response) => {

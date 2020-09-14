@@ -36,27 +36,11 @@ export default function CenteredTabs({ loading, bland, page }) {
                 key={index}
                 label={data.name_bland}
                 onClick={() => {
-                  //dispatch(updateTypeBland("ACER"));
                   dispatch(updateNavbarres(index));
                 }}
               />
             );
           })}
-
-          {/*<Tab
-            label="DELL"
-            onClick={() => {
-              //dispatch(updateTypeBland("DELL"));
-              dispatch(updateNavbarres(1));
-            }}
-          />
-          <Tab
-            label="LENOVO"
-            onClick={() => {
-              //dispatch(updateTypeBland("LENOVO"));
-              dispatch(updateNavbarres(2));
-            }}
-          />*/}
           </Tabs>
       </Paper>
     );
@@ -76,7 +60,6 @@ export default function CenteredTabs({ loading, bland, page }) {
                 key={index}
                 label={data.name_bland}
                 onClick={() => {
-                  //dispatch(updateTypeBland("ACER"));
                   dispatch(updateNavbarres(index));
                 }}
               />
