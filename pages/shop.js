@@ -159,42 +159,62 @@ function ShopPage() {
   };
 
   const updateRate = () => {
-    console.log("1")
+    setisLoading(false);
+    console.log("1");
     let data = {
       id_seller: idRate,
       on_number: rateValue,
       under_number: 1,
       id_solditem: idproduct,
     };
-    if (type === "Shop") {
-      console.log("11")
-      Axios({
-        method: "put",
-        url: "http://localhost:5000/updateratesolditem",
-        data,
+    Axios({
+      method: "post",
+      url: "https://tranquil-beach-43094.herokuapp.com/showrate",
+      data,
+    })
+      .then((res) => {
+        console.log(res);
+        let data = {
+          id_seller: idRate,
+          on_number: res.data.data[0].on_number+rateValue,
+          under_number: res.data.data[0].under_number+1,
+          id_solditem: idproduct,
+        };
+        if (type === "Shop") {
+          console.log("11");
+          Axios({
+            method: "put",
+            url: "http://localhost:5000/updateratesolditem",
+            data,
+          })
+            .then((response) => {
+              console.log(response);
+              setCheckShowRate("none");
+              setisLoading(true);
+            })
+            .catch((error) => {
+              console.log(error.response);
+            });
+        } else if (type === "Rent") {
+          console.log("22");
+          Axios({
+            method: "put",
+            url: "http://localhost:5000/updateraterentitem",
+            data,
+          })
+            .then((response) => {
+              console.log(response);
+              setCheckShowRate("none");
+              setisLoading(true);
+            })
+            .catch((error) => {
+              console.log(error.response);
+            });
+        }
       })
-        .then((response) => {
-          console.log(response);
-          setCheckShowRate("none");
-        })
-        .catch((error) => {
-          console.log(error.response);
-        });
-    } else if (type === "Rent") {
-      console.log("22")
-      Axios({
-        method: "put",
-        url: "http://localhost:5000/updateraterentitem",
-        data,
-      })
-        .then((response) => {
-          console.log(response);
-          setCheckShowRate("none");
-        })
-        .catch((error) => {
-          console.log(error.response);
-        });
-    }
+      .catch((err) => {
+        console.log(err.response);
+      });
   };
 
   if (!isLoading) {
