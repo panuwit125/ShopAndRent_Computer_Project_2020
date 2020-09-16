@@ -4,7 +4,7 @@ import Axios from "axios";
 import LoadingComponent from "../components/component.loading";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { CloseOutlined } from "@ant-design/icons";
-import { Rate } from "antd";
+import { Rate, message } from "antd";
 import TitleHeader from "../components/component.titleheader";
 
 // import page -> start
@@ -27,7 +27,7 @@ function DescriptionPage() {
   const [showNavbar, setShowNavbar] = useState(0);
   const [imageExpand, setImageExpand] = useState("none");
   const [imageForExpand, setImageForExpand] = useState();
-  const [rate,setRate] = useState();
+  const [rate, setRate] = useState();
 
   useEffect(() => {
     if (Id) {
@@ -43,6 +43,8 @@ function DescriptionPage() {
           setCheckLogin(true);
         }
         getProductByid(typePage);
+      } else {
+        router.push("/")
       }
     }
   }, [Id]);
@@ -82,7 +84,9 @@ function DescriptionPage() {
       localStorage.setItem("itemforrent", JSON.stringify(product));
       router.push("/payment");
     } else {
-      alert("สินค้าไม่พร้อมให้เช่า");
+      errormessage();
+      //error;
+      //alert("สินค้าไม่พร้อมให้เช่า");
     }
   };
 
@@ -121,26 +125,29 @@ function DescriptionPage() {
   };
 
   const getRateData = (id) => {
-    let data = {id_seller:id.owner_product}
+    let data = { id_seller: id.owner_product };
     Axios({
-      method:"post",
-      url:"https://tranquil-beach-43094.herokuapp.com/showrate",
-      data
-    }).then(data=>{
-      console.log(data);
-      if(data.data.data[0].under_number === 0) {
-        setRate(0)
-      } else {
-        console.log("asd")
-        let number = (data.data.data[0].on_number/data.data.data[0].under_number)
-        number = number.toFixed(1)
-        setRate(number)
-      }
-      setisLoading(true);
-    }).catch(err=>{
-      console.log(err.response)
+      method: "post",
+      url: "https://tranquil-beach-43094.herokuapp.com/showrate",
+      data,
     })
-  }
+      .then((data) => {
+        console.log(data);
+        if (data.data.data[0].under_number === 0) {
+          setRate(0);
+        } else {
+          console.log("asd");
+          let number =
+            data.data.data[0].on_number / data.data.data[0].under_number;
+          number = number.toFixed(1);
+          setRate(number);
+        }
+        setisLoading(true);
+      })
+      .catch((err) => {
+        console.log(err.response);
+      });
+  };
 
   const saveDataInventory = (check) => {
     setfetchLoading(true);
@@ -157,7 +164,7 @@ function DescriptionPage() {
           router.push("/payment");
         } else {
           console.log("เก็บสินค้าในตระกร้าเรียบร้อยแล้ว");
-          router.push("/shop");
+          router.push("/");
         }
       })
       .catch((err) => {
@@ -185,13 +192,19 @@ function DescriptionPage() {
   };
 
   const RateShow = () => {
-    console.log(rate)
+    console.log(rate);
     return (
       <span>
         <Rate allowHalf disabled defaultValue={rate} />
         <span className="ant-rate-text">({rate})</span>
       </span>
     );
+  };
+
+  const errormessage = () => {
+    message.error({
+      content: "สินค้าไม่พร้อมให้เช่าในขณะนี้"
+    });
   };
 
   if (!isLoading) {

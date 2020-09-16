@@ -2,6 +2,16 @@ import React, { useEffect, useState } from "react";
 import { Layout } from "antd";
 import router from "next/router";
 import { useSelector, useDispatch } from "react-redux";
+import {
+  CloseOutlined,
+  UserOutlined,
+  HomeOutlined,
+  ShopOutlined,
+  AppstoreOutlined,
+  LoginOutlined,
+  LogoutOutlined,
+  UnorderedListOutlined,
+} from "@ant-design/icons";
 
 let type;
 function NavbarComponent(props) {
@@ -21,29 +31,28 @@ function NavbarComponent(props) {
   } else {
     return (
       <ul className="show-res-navbar-ul">
-        <div className="show-res-navbar-header">
+        <div
+          className="show-res-navbar-header"
+          style={{ cursor: "pointer" }}
+          onClick={() => router.push("/")}
+        >
           SECONDHAND
           <br />
           NOTEBOOK
         </div>
         <li className="show-res-navbar-li show-res-li-border">
-          <a className="show-res-navbar-li" href="/shop">
-            Home
-          </a>
-        </li>
-        <li className="show-res-navbar-li show-res-li-border">
-          <a className="show-res-navbar-li" href="/compare">
-            Compare
+          <a className="show-res-navbar-li" href="/">
+          Home (เริ่มต้น)
           </a>
         </li>
         {props.status ? (
           <li className="show-res-navbar-li show-res-li-border">
-            <a className="show-res-navbar-li">ID : {props.user}</a>
+            <a className="show-res-navbar-li"><UserOutlined style={{ marginRight: 10 }} /> {props.user}</a>
           </li>
         ) : (
           <li className="show-res-navbar-li show-res-li-border">
             <a className="show-res-navbar-li" href="/signin">
-              Login
+              Login (เข้าสู่ระบบ)
             </a>
           </li>
         )}
@@ -54,12 +63,12 @@ function NavbarComponent(props) {
                 className="show-res-navbar-li show-res-li-border"
                 onClick={() => {
                   localStorage.setItem("type", "Rent");
-                  router.push("/shop");
+                  router.push("/");
                   location.reload();
                 }}
               >
                 <a className="show-res-navbar-li" href="#">
-                  GoRent
+                  Rent (เช่า)
                 </a>
               </li>
             ) : (
@@ -67,12 +76,12 @@ function NavbarComponent(props) {
                 className="show-res-navbar-li show-res-li-border"
                 onClick={() => {
                   localStorage.setItem("type", "Shop");
-                  router.push("/shop");
+                  router.push("/");
                   location.reload();
                 }}
               >
                 <a className="show-res-navbar-li" href="#">
-                  GoShop
+                  Shop (ซื้อ)
                 </a>
               </li>
             )}
@@ -82,7 +91,7 @@ function NavbarComponent(props) {
         {props.status && props.type === "Shop" ? (
           <li className="show-res-navbar-li show-res-li-border">
             <a className="show-res-navbar-li" href="/payment">
-              Inventory
+              Inventory (ตระกร้า)
             </a>
           </li>
         ) : null}
@@ -96,7 +105,9 @@ function NavbarComponent(props) {
                   props.click("block");
                 }}
               >
-                <a className="show-res-navbar-li">ShowList</a>
+                <a className="show-res-navbar-li">
+                  ShowList (รายการที่ทำสำเร็จ)
+                </a>
               </li>
             ) : null}
           </>
@@ -111,10 +122,15 @@ function NavbarComponent(props) {
                 router.push("/");
               }}
             >
-              LogOut
+              LogOut (ออกจากระบบ)
             </a>
           </li>
         ) : null}
+        <li className="show-res-navbar-li show-res-li-border">
+          <a className="show-res-navbar-li" href="/compare">
+            Compare (เปรียบเทียบสินค้า)
+          </a>
+        </li>
       </ul>
     );
   }

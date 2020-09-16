@@ -2,6 +2,8 @@ import React from "react";
 import { Form, Button, Input } from "antd";
 import LoadingComponent from "../../component.loading";
 const FormItem = Form.Item;
+import { LeftOutlined } from "@ant-design/icons";
+import Router from "next/router";
 
 function SignInPC({
   fetchLoading,
@@ -26,6 +28,21 @@ function SignInPC({
     return (
       <FormItem style={{ margin: "0px" }}>
         <div className="lg" style={{ background: "#f2f2f2" }}>
+          <div style={{ maxWidth: "495px", width: "100%" }}>
+            <h3
+              style={{
+                margin: 0,
+                color: "rgb(154 154 154)",
+                cursor: "pointer",
+              }}
+              onClick={() => {
+                Router.push("/");
+              }}
+            >
+              <LeftOutlined />
+              BACK
+            </h3>
+          </div>
           <div className="lg-res-card-pc">
             <div className="lg-res-header-name" style={{ marginBottom: 20 }}>
               <h2 className="lg-res-name">SECONDHAND</h2>
@@ -38,7 +55,7 @@ function SignInPC({
                 className="lg-res-input"
                 onChange={(e) => setNameLogin(e.target.value)}
               />
-              <Input
+              <Input.Password
                 value={passwordlogin}
                 type="password"
                 placeholder="Password"
@@ -68,6 +85,21 @@ function SignInPC({
     return (
       <FormItem style={{ margin: "0px" }}>
         <div className="lg" style={{ background: "#f2f2f2" }}>
+          <div style={{ maxWidth: "495px", width: "100%" }}>
+            <h3
+              style={{
+                margin: 0,
+                color: "rgb(154 154 154)",
+                cursor: "pointer",
+              }}
+              onClick={() => {
+                Router.push("/");
+              }}
+            >
+              <LeftOutlined />
+              BACK
+            </h3>
+          </div>
           <div className="lg-res-card-pc">
             <div className="lg-res-header-name" style={{ marginBottom: 20 }}>
               <h2 className="lg-res-name">SECONDHAND</h2>
@@ -80,7 +112,7 @@ function SignInPC({
                 className="lg-res-input"
                 onChange={(e) => setName(e.target.value)}
               />
-              <Input
+              <Input.Password
                 value={password}
                 type="password"
                 placeholder="Password"
@@ -113,7 +145,7 @@ function SignInPC({
                 onClick={() => setMode("login")}
                 style={{ textAlign: "center" }}
               >
-                Don't have an account.
+                Back to login.
               </h2>
             </div>
           </div>

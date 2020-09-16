@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import Axios from "axios";
 import router from "next/router";
 import TitleHeader from "../components/component.titleheader";
+import NumberFormat from "react-number-format";
 
 function ComparePage() {
   const { TypeBland } = useSelector((state) => state.post);
@@ -38,7 +39,7 @@ function ComparePage() {
       }
       postProduct(typePage);
     } else {
-      router.push("/page.home");
+      router.push("/");
     }
   }, []);
 
@@ -68,6 +69,7 @@ function ComparePage() {
                   src={product1.image_product}
                   style={{
                     width: 300,
+                    height: 225,
                     border: "1px solid black",
                     borderRadius: "10px",
                     cursor: "pointer",
@@ -78,19 +80,24 @@ function ComparePage() {
                   }}
                 />
               ) : (
-                <img
-                  src={"/noimage.jpg"}
+                <div
                   style={{
                     width: 300,
+                    height: 225,
                     border: "1px solid black",
                     borderRadius: "10px",
                     cursor: "pointer",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
                   }}
                   onClick={() => {
                     setSelectCompare("ProductOne");
                     setCompareSelectShow("block");
                   }}
-                />
+                >
+                  <h4>คลิกที่นี้/เพิ่มข้อมูล</h4>
+                </div>
               )}
 
               {product2 ? (
@@ -98,6 +105,7 @@ function ComparePage() {
                   src={product2.image_product}
                   style={{
                     width: 300,
+                    height: 225,
                     border: "1px solid black",
                     borderRadius: "10px",
                     cursor: "pointer",
@@ -108,19 +116,24 @@ function ComparePage() {
                   }}
                 />
               ) : (
-                <img
-                  src={"/noimage.jpg"}
+                <div
                   style={{
                     width: 300,
+                    height: 225,
                     border: "1px solid black",
                     borderRadius: "10px",
                     cursor: "pointer",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
                   }}
                   onClick={() => {
                     setSelectCompare("ProductTwo");
                     setCompareSelectShow("block");
                   }}
-                />
+                >
+                  <h4>คลิกที่นี้/เพิ่มข้อมูล</h4>
+                </div>
               )}
             </>
           ) : (
@@ -130,6 +143,7 @@ function ComparePage() {
                   src={product1.image_product}
                   style={{
                     width: 150,
+                    height: 113,
                     border: "1px solid black",
                     borderRadius: "10px",
                     cursor: "pointer",
@@ -140,19 +154,24 @@ function ComparePage() {
                   }}
                 />
               ) : (
-                <img
-                  src={"/noimage.jpg"}
+                <div
                   style={{
                     width: 150,
+                    height: 113,
                     border: "1px solid black",
                     borderRadius: "10px",
                     cursor: "pointer",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
                   }}
                   onClick={() => {
                     setSelectCompare("ProductOne");
                     setCompareSelectShow("block");
                   }}
-                />
+                >
+                  <h4>คลิกที่นี้/เพิ่มข้อมูล</h4>
+                </div>
               )}
 
               {product2 ? (
@@ -160,20 +179,7 @@ function ComparePage() {
                   src={product2.image_product}
                   style={{
                     width: 150,
-                    border: "1px solid black",
-                    borderRadius: "10px",
-                    cursor: "pointer",
-                  }}
-                  onClick={() => {
-                    setSelectCompare("ProductOne");
-                    setCompareSelectShow("block");
-                  }}
-                />
-              ) : (
-                <img
-                  src={"/noimage.jpg"}
-                  style={{
-                    width: 150,
+                    height: 113,
                     border: "1px solid black",
                     borderRadius: "10px",
                     cursor: "pointer",
@@ -183,6 +189,25 @@ function ComparePage() {
                     setCompareSelectShow("block");
                   }}
                 />
+              ) : (
+                <div
+                  style={{
+                    width: 150,
+                    height: 113,
+                    border: "1px solid black",
+                    borderRadius: "10px",
+                    cursor: "pointer",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                  onClick={() => {
+                    setSelectCompare("ProductTwo");
+                    setCompareSelectShow("block");
+                  }}
+                >
+                  <h4>คลิกที่นี้/เพิ่มข้อมูล</h4>
+                </div>
               )}
             </>
           )}
@@ -260,16 +285,26 @@ function ComparePage() {
               {type === "Shop" ? <td>Price</td> : <td>PricePerDay</td>}
 
               {product1 ? (
-                <td style={{ color: "red" }}>
-                  {product1.price_product + " THB"}
-                </td>
+                <NumberFormat
+                  value={product1.price_product}
+                  displayType={"text"}
+                  thousandSeparator={true}
+                  renderText={(value) => (
+                    <td style={{ color: "red" }}>{value + " THB"}</td>
+                  )}
+                />
               ) : (
                 <td></td>
               )}
               {product2 ? (
-                <td style={{ color: "red" }}>
-                  {product2.price_product + " THB"}
-                </td>
+                <NumberFormat
+                  value={product2.price_product}
+                  displayType={"text"}
+                  thousandSeparator={true}
+                  renderText={(value) => (
+                    <td style={{ color: "red" }}>{value + " THB"}</td>
+                  )}
+                />
               ) : (
                 <td></td>
               )}

@@ -87,12 +87,12 @@ const HeaderComponent = (props) => {
             ) : (
               <DehazeIcon
                 style={{ color: "white" }}
-                onClick={() => props.setshow(160)}
+                onClick={() => props.setshow("100%")}
               />
             )}
           </div>
           <div style={{ margin: "auto 0" }}>
-            <h1 style={{ marginBottom: 0 }} className="br-header-font">
+            <h1 onClick={()=>router.push("/")} style={{ marginBottom: 0,cursor:"pointer" }} className="br-header-font">
               SECONDHAND
               <br />
               NOTEBOOK

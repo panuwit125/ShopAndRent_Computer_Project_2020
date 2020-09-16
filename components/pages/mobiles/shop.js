@@ -65,7 +65,7 @@ function Shop({
           <HeaderNavbar page={"Shop"} setshow={setShowNavbar} type={type} status={checkLogin} />
           <div className="br-body">
             <div className="sp-body-2" style={{paddingTop:"20px"}}>
-              <div className="sp-body-2-header" style={{width:"100%"}}>
+              <div className="sp-body-2-header" style={{width:"100%",display:"flex",justifyContent:"center"}}>
                 <Tabs loading={setisLoading} bland={bland} page={"Mobile"} />
               </div>
               <div className="sp-body-2-body">

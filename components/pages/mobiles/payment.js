@@ -7,6 +7,7 @@ import UploadBillComponent from "../../component.UploadBill";
 import router from "next/router";
 import { EnvironmentOutlined, UploadOutlined } from "@ant-design/icons";
 import MonetizationOnIcon from "@material-ui/icons/MonetizationOn";
+import NumberFormat from "react-number-format";
 const FormItem = Form.Item;
 const { Option } = Select;
 
@@ -45,7 +46,8 @@ function PaymentMobile({
   user,
   showNavbar,
   setShowNavbar,
-  checkLogin
+  checkLogin,
+  error,
 }) {
   const [isLoading, setisLoading] = useState(false);
   useEffect(() => {
@@ -69,7 +71,7 @@ function PaymentMobile({
   if (!isLoading) {
     return null;
   } else {
-    console.log(user)
+    console.log(user);
     return (
       <FormItem style={{ margin: "0px" }}>
         <LoadingComponent type={"fetchloading"} status={fetchLoading} />
@@ -79,6 +81,7 @@ function PaymentMobile({
           postBuyProduct={postBuyProduct}
           type={type}
           postRentProduct={postRentProduct}
+          inventory={inventory}
         />
         <NavbarSide
           show={showNavbar}
@@ -92,7 +95,7 @@ function PaymentMobile({
           <div className="pm-body">
             <div className="pm-back pay-font-hd">
               <a
-                onClick={() => router.push("/shop")}
+                onClick={() => router.push("/")}
                 style={{ color: "#AFAFAF", margin: "auto 0px" }}
               >
                 Back
@@ -106,7 +109,14 @@ function PaymentMobile({
               >
                 PAYMENT
               </h2>
-              <a onClick={()=>{setShowAddress("block")}} style={{ color: "#AFAFAF", margin: "auto 0px" }}>Edit</a>
+              <a
+                onClick={() => {
+                  setShowAddress("block");
+                }}
+                style={{ color: "#AFAFAF", margin: "auto 0px" }}
+              >
+                Edit
+              </a>
             </div>
             <div className="pm-address pay-font-hd">
               <EnvironmentOutlined
@@ -126,9 +136,7 @@ function PaymentMobile({
                 >
                   ที่อยู่ในการจัดส่ง
                 </h2>
-                <h3 style={{ color: "black", fontSize: "16px" }}>
-                  {address}
-                </h3>
+                <h3 style={{ color: "black", fontSize: "16px" }}>{address}</h3>
               </div>
             </div>
             <ShowProduct />
@@ -176,12 +184,14 @@ function PaymentMobile({
                 )}
               </div>
               <div className="pm-payment-body1">
-                <div className="pm-payment-body2" style={{marginRight:5}}>
+                <div className="pm-payment-body2" style={{ marginRight: 5 }}>
                   <MonetizationOnIcon style={{ fontSize: "34px" }} />
                 </div>
                 <div className="pm-payment-body3">
                   <div className="pm-payment-header">
-                    <h3 style={{ color: "black",margin:"5px 0px 5px 0px" }}>วิธีการชำระเงิน</h3>
+                    <h3 style={{ color: "black", margin: "5px 0px 5px 0px" }}>
+                      วิธีการชำระเงิน
+                    </h3>
                   </div>
                   <div className="pm-payment-body-1">
                     {type === "Shop" ? (
@@ -189,18 +199,32 @@ function PaymentMobile({
                         <h3 style={{ color: "black", margin: "0px" }}>
                           รวมการสั่งซื้อ
                         </h3>
-                        <h3 style={{ color: "black", margin: "0px" }}>
-                          {price} THB
-                        </h3>
+                        <NumberFormat
+                          value={price}
+                          displayType={"text"}
+                          thousandSeparator={true}
+                          renderText={(value) => (
+                            <h3 style={{ color: "black", margin: "0px" }}>
+                              {value} THB
+                            </h3>
+                          )}
+                        />
                       </>
                     ) : (
                       <>
                         <h3 style={{ color: "black", margin: "0px" }}>
                           ยอดการเช่า( x{dayforrent}DAYS)
                         </h3>
-                        <h3 style={{ color: "black", margin: "0px" }}>
-                          {inventory.price_product * dayforrent} THB
-                        </h3>
+                        <NumberFormat
+                          value={inventory.price_product * dayforrent}
+                          displayType={"text"}
+                          thousandSeparator={true}
+                          renderText={(value) => (
+                            <h3 style={{ color: "black", margin: "0px" }}>
+                              {value} THB
+                            </h3>
+                          )}
+                        />
                       </>
                     )}
                   </div>
@@ -243,13 +267,27 @@ function PaymentMobile({
                   ยอดชำระทั้งหมด
                 </h2>
                 {type === "Shop" ? (
-                  <h2 style={{ color: "red", fontSize: "18px", margin: 0 }}>
-                    {price + 600 + 600} THB
-                  </h2>
+                  <NumberFormat
+                    value={price + 600}
+                    displayType={"text"}
+                    thousandSeparator={true}
+                    renderText={(value) => (
+                      <h2 style={{ color: "red", fontSize: "18px", margin: 0 }}>
+                        {value} THB
+                      </h2>
+                    )}
+                  />
                 ) : (
-                  <h2 style={{ color: "red", fontSize: "18px", margin: 0 }}>
-                    {inventory.price_product * dayforrent + 600 + 600} THB
-                  </h2>
+                  <NumberFormat
+                    value={inventory.price_product * dayforrent + 600 + 600}
+                    displayType={"text"}
+                    thousandSeparator={true}
+                    renderText={(value) => (
+                      <h2 style={{ color: "red", fontSize: "18px", margin: 0 }}>
+                        {value} THB
+                      </h2>
+                    )}
+                  />
                 )}
               </div>
               <div>

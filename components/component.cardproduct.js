@@ -2,6 +2,7 @@ import { Card } from "antd";
 const { Meta } = Card;
 import React, { useState, useEffect } from "react";
 import router from "next/router";
+import NumberFormat from "react-number-format";
 
 const CardProductComponent = (props) => {
   const [isLoading, setisLoading] = useState(false);
@@ -27,34 +28,51 @@ const CardProductComponent = (props) => {
     return null;
   } else {
     return (
-      <Card
-        hoverable
-        style={{ width: "240px",minWidth:"240px", overflowY: "hidden", overflowX: "hidden" }}
-        cover={
-          <img
-            alt="example"
-            style={{ height: "152px", width: "242px", background: "white" }}
-            src={props.data.image_product}
-          />
-        }
-        className="sp-card"
-        onClick={() => router.push("/description?id=" + props.data._id)}
-      >
+      <>
+        <Card
+          hoverable
+          style={{
+            width: "240px",
+            minWidth: "240px",
+            overflowY: "hidden",
+            overflowX: "hidden",
+          }}
+          cover={
+            <img
+              alt="example"
+              style={{ height: "152px", width: "242px", background: "white" }}
+              src={props.data.image_product}
+            />
+          }
+          className="sp-card"
+          onClick={() => router.push("/description?id=" + props.data._id)}
+        >
           <h3 style={{ color: "black" }}>{props.data.name_product}</h3>
           <StatusShow />
           {props.page === "Shop" ? (
-            <Meta
-              className="sp-meta-font"
-              description={"Price " + props.data.price_product + " THB. "}
+            <NumberFormat
+              value={props.data.price_product}
+              displayType={"text"}
+              thousandSeparator={true}
+              renderText={(value) => (
+                <Meta
+                  className="sp-meta-font"
+                  description={"Price " + value + " THB. "}
+                />
+              )}
             />
           ) : (
-            <Meta
-              description={
-                "ราคาเช่า " + props.data.price_product + " บาทต่อวัน "
-              }
+            <NumberFormat
+              value={props.data.price_product}
+              displayType={"text"}
+              thousandSeparator={true}
+              renderText={(value) => (
+                <Meta description={"ราคาเช่า " + value + " บาทต่อวัน "} />
+              )}
             />
           )}
-      </Card>
+        </Card>
+      </>
     );
   }
 };

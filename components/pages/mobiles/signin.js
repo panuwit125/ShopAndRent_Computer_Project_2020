@@ -1,6 +1,7 @@
 import React from "react";
-import { Form, Button, Input } from "antd";
+import { Form, Button, Input, Space } from "antd";
 const FormItem = Form.Item;
+import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
 
 function SignInMobile({
   fetchLoading,
@@ -36,7 +37,7 @@ function SignInMobile({
               className="lg-res-input"
               onChange={(e) => setNameLogin(e.target.value)}
             />
-            <Input
+            <Input.Password
               value={passwordlogin}
               type="password"
               placeholder="Password"
@@ -73,9 +74,8 @@ function SignInMobile({
               className="lg-res-input"
               onChange={(e) => setName(e.target.value)}
             />
-            <Input
+            <Input.Password
               value={password}
-              type="password"
               placeholder="Password"
               className="lg-res-input lg-res-ip-mg"
               onChange={(e) => setPassword(e.target.value)}
@@ -99,10 +99,7 @@ function SignInMobile({
             <Button className="lg-res-btn" onClick={() => postData()}>
               REGISTER
             </Button>
-            <h2
-              className="lg-res-under-btn"
-              onClick={() => setMode("login")}
-            >
+            <h2 className="lg-res-under-btn" onClick={() => setMode("login")}>
               Back to login.
             </h2>
           </div>

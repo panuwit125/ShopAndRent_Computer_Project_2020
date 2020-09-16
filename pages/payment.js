@@ -1,4 +1,4 @@
-import { Form, Button, Select, InputNumber, message, Rate, Input } from "antd";
+import { Form, Button, Select, InputNumber, message, Input } from "antd";
 const FormItem = Form.Item;
 import React, { useState, useEffect } from "react";
 import { DeleteOutlined } from "@ant-design/icons";
@@ -9,6 +9,7 @@ import LoadingComponent from "../components/component.loading";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import HeaderNavbar from "../components/HeaderNavbar";
 import TitleHeader from "../components/component.titleheader";
+import NumberFormat from "react-number-format";
 
 //import page -> start
 import PaymentMobile from "../components/pages/mobiles/payment";
@@ -65,6 +66,8 @@ function PaymentPage() {
       } else {
         router.push("/signin");
       }
+    } else {
+      router.push("/");
     }
   }, []);
 
@@ -134,7 +137,14 @@ function PaymentPage() {
           <h2 style={{ color: "black" }}>{props.data.name_product}</h2>
           <div className="pm-product-des-1">
             <div>
-              <h3 style={{ color: "red" }}>ราคา {props.data.price_product}</h3>
+              <NumberFormat
+                value={props.data.price_product}
+                displayType={"text"}
+                thousandSeparator={true}
+                renderText={(value) => (
+                  <h3 style={{ color: "red" }}>ราคา {value}</h3>
+                )}
+              />
               <h3 style={{ color: "black" }}>
                 สถานะ :{" "}
                 {inventory.status_product ? "พร้อมให้เช่า" : "ไม่พร้อมให้เช่า"}
@@ -172,11 +182,21 @@ function PaymentPage() {
             </h2>
             <div className="pm-product-des-1">
               <div>
-                <h3
-                  style={{ color: "red", marginLeft: "8px", fontSize: "14px" }}
-                >
-                  {props.data.price_product} THB
-                </h3>
+                <NumberFormat
+                  value={props.data.price_product}
+                  displayType={"text"}
+                  thousandSeparator={true}
+                  renderText={(value) => (
+                    <h3
+                      style={{
+                        color: "red",
+                        marginLeft: "8px",
+                        fontSize: "14px",
+                      }}
+                    >{value}
+                    </h3>
+                  )}
+                />
                 {type === "Shop" ? null : (
                   <h3 style={{ color: "black" }}>
                     สถานะ :{" "}
@@ -220,13 +240,13 @@ function PaymentPage() {
         if (data.data.code === 100) {
           setfetchLoading(false);
           console.log("ทำการซื้อสำเร็จแล้ว", data);
-          alert("ทำรายการซื้อสำเร็จแล้ว");
+          successMessage("ทำรายการซื้อสำเร็จแล้ว");
           setCheck("block");
-          router.push("/shop");
+          router.push("/");
         } else if (data.data.code === 101) {
           setfetchLoading(false);
           console.log("รายการของถูกซื้อไปแล้ว", data.data.product);
-          alert(
+          warningMessage(
             `รายการ ${data.data.product} ถูกซื้อไปแล้วกรุณาลบออกและทำรายการใหม่`
           );
         }
@@ -234,6 +254,18 @@ function PaymentPage() {
       .catch((error) => {
         console.log("ทำรายการซื้อไม่สำเร็จ", error);
       });
+  };
+
+  const successMessage = (word) => {
+    message.success(word);
+  };
+
+  const errorMessage = (word) => {
+    message.error(word);
+  };
+
+  const warningMessage = (word) => {
+    message.warning(word);
   };
 
   const postRentProduct = () => {
@@ -255,20 +287,20 @@ function PaymentPage() {
         .then((datapost) => {
           console.log(datapost);
           if (datapost.data.code === 100) {
-            alert("ทำการเช่าสำเร็จแล้ว");
+            successMessage("ทำการเช่าสำเร็จแล้ว");
             setCheck("block");
-            router.push("/shop");
+            router.push("/");
           } else {
-            alert("ไม่สามารถเช่าได้เนื่องจากถูกเช่าไปแล้ว");
-            router.push("/shop");
+            errorMessage("ไม่สามารถเช่าได้เนื่องจากถูกเช่าไปแล้ว");
+            router.push("/");
           }
         })
         .catch((error) => {
           console.log(error);
         });
     } else {
-      alert("ไม่พร้อมให้เช่า");
-      router.push("/shop");
+      errorMessage("ไม่พร้อมให้เช่า");
+      router.push("/");
     }
   };
 
@@ -331,6 +363,10 @@ function PaymentPage() {
     );
   };
 
+  const error = () => {
+    message.error("This is an error message");
+  };
+
   if (!isLoading) {
     return <LoadingComponent type={"pageloading"} status={true} />;
   } else {
@@ -347,7 +383,7 @@ function PaymentPage() {
                 <div className="pm-body">
                   <div className="pm-back pay-font-hd">
                     <a
-                      onClick={() => router.push("/shop")}
+                      onClick={() => router.push("/")}
                       style={{ color: "#AFAFAF", margin: "0px" }}
                     >
                       Back
@@ -361,13 +397,9 @@ function PaymentPage() {
                     >
                       PAYMENT
                     </h2>
-                    <a
-                      style={{ color: "#AFAFAF", margin: "0px" }}
-                    >
-                      Edit
-                    </a>
+                    <a style={{ color: "#AFAFAF", margin: "0px" }}>Edit</a>
                   </div>
-                  <div style={{textAlign:"center",marginTop:20}}>
+                  <div style={{ textAlign: "center", marginTop: 20 }}>
                     <h2>ไม่มีสินค้าอยู่ในตระกร้า</h2>
                   </div>
                 </div>
@@ -397,6 +429,7 @@ function PaymentPage() {
               setUploadBillShow={setUploadBillShow}
               address={address}
               setShowAddress={setShowAddress}
+              error={error}
             />
           </>
         );
@@ -414,7 +447,7 @@ function PaymentPage() {
                 <div className="pm-body">
                   <div className="pm-back pay-font-hd">
                     <a
-                      onClick={() => router.push("/shop")}
+                      onClick={() => router.push("/")}
                       style={{ color: "#AFAFAF", margin: "0px" }}
                     >
                       Back
@@ -428,13 +461,9 @@ function PaymentPage() {
                     >
                       PAYMENT
                     </h2>
-                    <a
-                      style={{ color: "#AFAFAF", margin: "0px" }}
-                    >
-                      Edit
-                    </a>
+                    <a style={{ color: "#AFAFAF", margin: "0px" }}>Edit</a>
                   </div>
-                  <div style={{textAlign:"center",marginTop:20}}>
+                  <div style={{ textAlign: "center", marginTop: 20 }}>
                     <h2>ไม่มีสินค้าอยู่ในตระกร้า</h2>
                   </div>
                 </div>
@@ -465,6 +494,7 @@ function PaymentPage() {
               showNavbar={showNavbar}
               setShowNavbar={setShowNavbar}
               checkLogin={checkLogin}
+              error={error}
             />
           </>
         );

@@ -1,4 +1,4 @@
-import { Form, Button, Input, Select } from "antd";
+import { Form, Button, Input, Select,message } from "antd";
 const FormItem = Form.Item;
 const { Option } = Select;
 import React, { useState, useEffect } from "react";
@@ -84,8 +84,7 @@ function InsertProductRent() {
             console.log(data.err);
           } else {
             console.log("create succussfull");
-            alert("เพิ่มสินค้าสำเร็จ")
-            setisLoading(true);
+            successMessage("เพิ่มสินค้าสำเร็จ")
             router.push("/shop/homemanage")
           }
         })
@@ -205,12 +204,25 @@ function InsertProductRent() {
       !ssdProduct ||
       !monitorProduct
     ) {
-      alert("กรุณาใส่ข้อมูลหรือเลือกรูปภาพ");
+      errorMessage("กรุณาใส่ข้อมูลหรือเลือกรูปภาพ");
       setisLoading(true);
     } else {
       imagefetch(image1Product, set1Url);
     }
   };
+
+  const successMessage = (word) => {
+    message.success(word);
+  };
+  
+  const errorMessage = (word) => {
+    message.error(word);
+  };
+  
+  const warningMessage = (word) => {
+    message.warning(word);
+  };
+
 
   const getBlandData = () => {
     Axios.get("https://tranquil-beach-43094.herokuapp.com/showbland")
@@ -231,8 +243,9 @@ function InsertProductRent() {
       <FormItem style={{ margin: "0px" }}>
         <div className="br">
           <NavbarManage show={show} setShow={setShow} />
-          <HeaderManage setShow={setShow} user={user} />
-          <div style={{ padding: "20px 50px" }}>
+          <HeaderManage setShow={setShow} user={user} />1
+          <div style={{ padding: "0px 50px 20px 50px" }}>
+          <h1 style={{ textAlign:"center" }}>เพิ่มสินค้าขาย</h1>
             <h2 style={{ color: "black" }}>ชื่อสินค้า</h2>
             <Input
               className="ip-iuput"

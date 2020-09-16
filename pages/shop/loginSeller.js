@@ -1,4 +1,4 @@
-import { Form, Button, Input,Layout } from "antd";
+import { Form, Button, Input,Layout,message } from "antd";
 const { Header, Sider, Content } = Layout;
 const FormItem = Form.Item;
 import React, { useEffect, useState } from "react";
@@ -15,7 +15,7 @@ function LoginSeller() {
 
   const postSignIn = () => {
     if (!username || !password) {
-      console.log("กรุณากรอกข้อมูลให้ครบ")
+      warningMessage("กรุณากรอกข้อมูลให้ครบ")
     } else {
       let data = {
         user_name: username,
@@ -30,14 +30,26 @@ function LoginSeller() {
           console.log(res);
           localStorage.setItem("tokenmanage", res.data.token);
           localStorage.setItem("usermanage", JSON.stringify(res.data.savedUser));
+          successMessage("เข้าสู่ระบบเรียบร้อย")
           router.push("/shop/homemanage");
         })
         .catch((err) => {
           console.log(err.response);
-          alert(err.response.data.error)
+          errorMessage(""+err.response.data.error+"")
         });
     }
   }
+  const successMessage = (word) => {
+    message.success(word);
+  };
+  
+  const errorMessage = (word) => {
+    message.error(word);
+  };
+  
+  const warningMessage = (word) => {
+    message.warning(word);
+  };
 
   return (
     <FormItem style={{ margin: "0px" }}>

@@ -25,10 +25,10 @@ export default function CenteredTabs({ loading, bland, page }) {
   const menu = (
     <Menu onClick={handleMenuClick} style={{ width: "100%" }}>
       <style jsx>{`
-          .ant-btn {
-            width: 100% !important;
-          }
-        `}</style>
+        .ant-btn {
+          width: 100% !important;
+        }
+      `}</style>
       {bland.map((data, index) => {
         return (
           <Menu.Item
@@ -58,24 +58,80 @@ export default function CenteredTabs({ loading, bland, page }) {
   if (page === "Mobile") {
     return (
       <>
-        <style jsx>{`
-          .ant-btn {
-            width: 100% !important;
-          }
-        `}</style>
-        <Dropdown.Button
+        {/*<Dropdown.Button
           style={{ width: "100%" }}
           onClick={handleButtonClick}
           overlay={menu}
           placement="bottomRight"
         >
           {TypeBland}
-        </Dropdown.Button>
+        </Dropdown.Button>*/}
+        <AppBar
+          position="static"
+          color="default"
+          style={{ borderRadius: "20px", width: "235px",zIndex:0,background:"white" }}
+        >
+          <Tabs
+            value={Navbarres}
+            //onChange={handleChange}
+            indicatorColor="primary"
+            textColor="primary"
+            variant="scrollable"
+            scrollButtons="auto"
+            aria-label="scrollable auto tabs example"
+            style={{ borderRadius: "20px" }}
+          >
+            {bland.map((data, index) => {
+              return (
+                <Tab
+                  key={index}
+                  label={data.name_bland}
+                  onClick={() => {
+                    dispatch(updateNavbarres(index));
+                  }}
+                />
+              );
+            })}
+          </Tabs>
+        </AppBar>
       </>
     );
   } else {
     return (
-      <Paper className={classes.root} style={{ borderRadius: "20px" }}>
+      <AppBar
+        position="static"
+        color="default"
+        style={{ borderRadius: "20px", width: "500px",zIndex:0,background:"white" }}
+      >
+        <Tabs
+          value={Navbarres}
+          //onChange={handleChange}
+          indicatorColor="primary"
+          textColor="primary"
+          variant="scrollable"
+          scrollButtons="auto"
+          aria-label="scrollable auto tabs example"
+          style={{ borderRadius: "20px" }}
+        >
+          {bland.map((data, index) => {
+            return (
+              <Tab
+                key={index}
+                label={data.name_bland}
+                onClick={() => {
+                  dispatch(updateNavbarres(index));
+                }}
+              />
+            );
+          })}
+        </Tabs>
+      </AppBar>
+    );
+  }
+}
+
+/*backup
+/*<Paper className={classes.root} style={{ borderRadius: "20px" }}>
         <Tabs
           value={Navbarres}
           indicatorColor="primary"
@@ -95,7 +151,4 @@ export default function CenteredTabs({ loading, bland, page }) {
             );
           })}
         </Tabs>
-      </Paper>
-    );
-  }
-}
+        </Paper>*/

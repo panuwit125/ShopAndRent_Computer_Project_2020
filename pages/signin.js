@@ -1,4 +1,4 @@
-import { Form, Button, Input } from "antd";
+import { Form, Button, Input,message } from "antd";
 const FormItem = Form.Item;
 import React, { useState, useEffect } from "react";
 import router from "next/router";
@@ -35,7 +35,8 @@ function loginPage() {
     setfetchLoading(true);
     if (!namelogin || !passwordlogin) {
       setfetchLoading(false);
-      alert("กรุณากรอกข้อมูลให้ครบ");
+      //alert("กรุณากรอกข้อมูลให้ครบ");
+      warning();
     } else {
       let data = {
         user_name: namelogin,
@@ -50,22 +51,35 @@ function loginPage() {
           console.log(res);
           localStorage.setItem("token", res.data.token);
           localStorage.setItem("user", JSON.stringify(res.data.savedUser));
+          localStorage.setItem("type","Shop")
           setfetchLoading(false);
-          router.push("/shop");
+          router.push("/");
         })
         .catch((err) => {
           setfetchLoading(false);
           console.log(err.response);
-          alert(err.response.data.error);
+          error(err.response.data.error);
         });
     }
+  };
+
+  const success = () => {
+    message.success('This is a success message');
+  };
+  
+  const error = (word) => {
+    message.error(""+word+"");
+  };
+  
+  const warning = () => {
+    message.warning('กรุณากรอกข้อมูลให้ครบ');
   };
 
   const postData = () => {
     setfetchLoading(true);
     if (!name || !password || !firstname || !lastname) {
       setfetchLoading(false);
-      alert("กรุณากรอกข้อมูลให้ครบ");
+      warning();
     } else {
       let data = {
         user_name: name,
@@ -96,16 +110,17 @@ function loginPage() {
               console.log(res);
               localStorage.setItem("token", res.data.token);
               localStorage.setItem("user", JSON.stringify(res.data.savedUser));
+              localStorage.setItem("type","Shop")
               setfetchLoading(false);
-              router.push("/shop");
+              router.push("/");
             })
             .catch((err) => {
               console.log(err);
             });
         })
-        .catch((error) => {
-          console.log("ERROR", error.response);
-          alert(error.response.data.error);
+        .catch((err) => {
+          console.log("ERROR", err.response);
+          error(err.response.data.error)
         });
     }
   };

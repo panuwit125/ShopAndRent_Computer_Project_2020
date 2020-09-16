@@ -37,27 +37,16 @@ function NavbarComponent(props) {
             onClick={() => props.setshow(0)}
           />
         </div>
-        <a href="/shop">
-          <i className="fa fa-fw fa-home">
-            <HomeOutlined style={{ marginRight: 10 }} /> Home
-          </i>
-        </a>
-        <a href="/compare">
-          <i className="fa fa-fw fa-home">
-            <AppstoreOutlined style={{ marginRight: 10 }} /> Compare
-          </i>
+        <a href="/" style={{ minWidth: 500 }}>
+          <HomeOutlined style={{ marginRight: 10 }} />Home (เริ่มต้น)
         </a>
         {props.status ? (
-          <a href="#">
-            <i className="fa fa-fw fa-wrench">
-              <UserOutlined style={{ marginRight: 10 }} /> {props.user}
-            </i>
+          <a href="#" style={{ minWidth: 500 }}>
+            <UserOutlined style={{ marginRight: 10 }} />{props.user}
           </a>
         ) : (
-          <a href="/signin">
-            <i className="fa fa-fw fa-wrench">
-              <LoginOutlined style={{ marginRight: 10 }} /> Login
-            </i>
+          <a href="/signin" style={{ minWidth: 500 }}>
+            <LoginOutlined style={{ marginRight: 10 }} />Login (เข้าสู่ระบบ)
           </a>
         )}
         {props.shop ? (
@@ -66,34 +55,27 @@ function NavbarComponent(props) {
               <a
                 onClick={() => {
                   localStorage.setItem("type", "Rent");
-                  router.push("/shop");
+                  router.push("/");
                   location.reload();
                 }}
+                style={{ minWidth: 500 }}
               >
-                <i className="fa fa-fw fa-wrench">
-                  <ShopOutlined style={{ marginRight: 10 }} />
-                  Go Rent
-                </i>
+                <ShopOutlined style={{ marginRight: 10 }} />Rent (เช่า)
               </a>
             ) : (
               <a
                 onClick={() => {
                   localStorage.setItem("type", "Shop");
-                  router.push("/shop");
+                  router.push("/");
                   location.reload();
                 }}
+                style={{ minWidth: 500 }}
               >
-                <i className="fa fa-fw fa-wrench">
-                  <ShopOutlined style={{ marginRight: 10 }} />
-                  Go Shop
-                </i>
+                <ShopOutlined style={{ marginRight: 10 }} />Shop (ซื้อ)
               </a>
             )}
           </>
         ) : null}
-        <a>
-          <i className="fa fa-fw fa-user">{props.type}</i>
-        </a>
         {props.shop ? (
           <>
             {props.status ? (
@@ -102,11 +84,9 @@ function NavbarComponent(props) {
                   props.setshow(0);
                   props.click("block");
                 }}
+                style={{ minWidth: 500 }}
               >
-                <i className="fa fa-fw fa-user">
-                  <UnorderedListOutlined style={{ marginRight: 10 }} />
-                  ShowList
-                </i>
+                <UnorderedListOutlined style={{ marginRight: 10 }} />ShowList (รายการที่ทำสำเร็จ)
               </a>
             ) : null}
           </>
@@ -118,12 +98,16 @@ function NavbarComponent(props) {
               localStorage.clear();
               router.push("/");
             }}
+            style={{ minWidth: 500 }}
           >
-            <i className="fa fa-fw fa-user">
-              <LogoutOutlined style={{ marginRight: 10 }} /> LogOut
-            </i>
+            <LogoutOutlined style={{ marginRight: 10 }} />LogOut (ออกจากระบบ)
           </a>
         ) : null}
+        <a href="/compare" style={{ minWidth: 500 }}>
+          <AppstoreOutlined style={{ marginRight: 10 }} />Compare
+          (เปรียบเทียบสินค้า)
+        </a>
+        {/*<a style={{ textAlign: "center", minWidth: 160 }}>{props.type}</a>*/}
       </div>
     );
   }

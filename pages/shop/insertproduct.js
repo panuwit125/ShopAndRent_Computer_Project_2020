@@ -1,4 +1,4 @@
-import { Form, Button, Input, Select } from "antd";
+import { Form, Button, Input, Select,message } from "antd";
 const FormItem = Form.Item;
 const { Option } = Select;
 import React, { useState, useEffect } from "react";
@@ -84,7 +84,7 @@ function InsertProduct() {
             console.log(data.err);
           } else {
             console.log("create succussfull");
-            alert("เพิ่มสินค้าเรียบร้อย");
+            successMessage("เพิ่มสินค้าเรียบร้อย");
             setisLoading(true);
             router.push("/shop/homemanage");
           }
@@ -138,6 +138,17 @@ function InsertProduct() {
     }
   };
 
+  const successMessage = () => {
+    message.success('อัพโหลดสำเร็จแล้ว');
+  };
+  
+  const errorMessage = () => {
+    message.error('เกิดข้อผิดพลาด');
+  };
+  
+  const warningMessage = () => {
+    message.warning('This is a warning message');
+  };
   const image2fetch = (image3, seturl) => {
     if (!image3) {
       set3Url("");
@@ -218,7 +229,7 @@ function InsertProduct() {
       !monitorProduct
     ) {
       console.log("กรุณาใส่ข้อมูลหรือเลือกรูปภาพ");
-      alert("กรุณาใส่ข้อมูลหรือเลือกรูปภาพ");
+      errorMessage("กรุณาใส่ข้อมูลหรือเลือกรูปภาพ");
       setisLoading(true);
     } else {
       imagefetch(image1Product, set1Url);
@@ -234,7 +245,8 @@ function InsertProduct() {
         <div className="br">
           <NavbarManage show={show} setShow={setShow} />
           <HeaderManage setShow={setShow} user={user} />
-          <div style={{ padding: "20px 50px" }}>
+          <div style={{ padding: "0px 50px 20px 50px" }}>
+            <h1 style={{ textAlign:"center" }}>เพิ่มสินค้าขาย</h1>
             <h2 style={{ color: "black" }}>ชื่อสินค้า</h2>
             <Input
               className="ip-iuput"

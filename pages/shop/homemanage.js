@@ -5,6 +5,7 @@ import NavbarManage from "./componentManage/NavbarManage";
 import HeaderManage from "./componentManage/HeaderManage";
 import router from "next/router";
 import Axios from "axios"
+import LoadingComponent from "../../components/component.loading"
 
 function homeSeller() {
   const [show, setShow] = useState(0);
@@ -54,7 +55,7 @@ function homeSeller() {
   };
 
   if (!isLoading) {
-    return null;
+    return <LoadingComponent />;
   } else {
     return (
       <FormItem style={{ margin: "0px" }}>

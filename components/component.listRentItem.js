@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import router from "next/router";
 import { Button, Rate, Tag } from "antd";
 import Axios from "axios";
+import { CheckCircleTwoTone, CloseCircleTwoTone } from "@ant-design/icons";
 
 const ListRentItem = ({
   user,
@@ -10,7 +11,7 @@ const ListRentItem = ({
   type,
   setCheckShowRate,
   setIdRate,
-  setIdProduct
+  setIdProduct,
 }) => {
   const [isLoading, setisLoading] = useState(false);
   const [productlist, setProductList] = useState([]);
@@ -80,6 +81,8 @@ const ListRentItem = ({
                     >
                       <h4 style={{ color: "black" }}>
                         {index + 1}. {data.name_product}{" "}
+                      </h4>
+                      <h4 style={{ color: "black" }}>
                         {data.status_rent ? (
                           <Tag color="green">ให้คะแนนแล้ว</Tag>
                         ) : (
@@ -102,14 +105,31 @@ const ListRentItem = ({
                         }}
                       >
                         <h4 style={{ color: "black" }}>
-                          หมายเลข EMS :{" "}
+                          EMS Tracking :{" "}
                           {data.track_product
                             ? `${data.track_product}`
                             : "ยังไม่ได้ระบุ"}
                         </h4>
+                      </div>
+                      <div
+                        style={{
+                          display: "flex",
+                          justifyContent: "space-between",
+                        }}
+                      >
                         <h4 style={{ color: "black" }}>
                           สถานะ :{" "}
-                          {data.status_rent ? "คืนสินค้าแล้ว" : "ยังไม่ได้คืน"}
+                          {data.status_rent ? (
+                            <>
+                              <CheckCircleTwoTone twoToneColor="#52c41a" />{" "}
+                              คืนสินค้าแล้ว
+                            </>
+                          ) : (
+                            <>
+                              <CloseCircleTwoTone twoToneColor="#eb2f96" />{" "}
+                              ยังไม่ได้คืน
+                            </>
+                          )}
                         </h4>
                       </div>
                     </div>
@@ -146,6 +166,8 @@ const ListRentItem = ({
                     >
                       <h4 style={{ color: "black" }}>
                         {index + 1}. {data.name_product}
+                      </h4>
+                      <h4 style={{ color: "black" }}>
                         {data.status_rent ? (
                           <Tag color="green">ให้คะแนนแล้ว</Tag>
                         ) : (
@@ -162,7 +184,7 @@ const ListRentItem = ({
                         )}
                       </h4>
                       <h4 style={{ color: "black" }}>
-                        หมายเลข EMS :{" "}
+                        EMS Tracking :{" "}
                         {data.track_product
                           ? `${data.track_product}`
                           : "ยังไม่ได้ระบุ"}

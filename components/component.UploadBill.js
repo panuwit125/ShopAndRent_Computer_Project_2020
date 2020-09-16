@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Button, Upload, message, Input } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
+import Axios from "axios"
 
 const ListRentItem = ({
   UploadBillShow,
@@ -8,10 +9,31 @@ const ListRentItem = ({
   postBuyProduct,
   type,
   postRentProduct,
+  inventory
 }) => {
   const [isLoading, setisLoading] = useState(true);
   const [imageBill, setImageBill] = useState();
   const [textalerg, setTextAlerg] = useState("กรุณาอัพโหลดใบเสร็จ");
+  const [image,setImage] = useState();
+
+  useEffect(()=>{
+    console.log(inventory)
+    let data = { id_seller: inventory[0].owner_product};
+    Axios({
+      method: "post",
+      url: "https://tranquil-beach-43094.herokuapp.com/showrate",
+      data,
+    })
+      .then((data) => {
+        console.log(data);
+        console.log(data.data.data[0].image_bill)
+        setImage(data.data.data[0].image_bill);
+        setisLoading(true);
+      })
+      .catch((err) => {
+        console.log(err.response);
+      });
+  })
 
   const props = (e) => {
     console.log(e);
@@ -60,7 +82,7 @@ const ListRentItem = ({
             >
               <div style={{ flexBasis: "auto", display: "flex" }}>
                 <img
-                  src={"/unnamed.png"}
+                  src={image}
                   style={{ width: "100%", marginBottom: 10 }}
                 />
               </div>

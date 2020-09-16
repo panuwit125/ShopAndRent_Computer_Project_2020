@@ -6,6 +6,7 @@ import router from "next/router";
 import UploadBillComponent from "../../component.UploadBill";
 import { EnvironmentOutlined, UploadOutlined } from "@ant-design/icons";
 import MonetizationOnIcon from "@material-ui/icons/MonetizationOn";
+import NumberFormat from "react-number-format";
 const FormItem = Form.Item;
 const { Option } = Select;
 
@@ -42,7 +43,7 @@ function PaymentMobile({
   UploadBillShow,
   setUploadBillShow,
   address,
-  setShowAddress
+  setShowAddress,
 }) {
   const [isLoading, setisLoading] = useState(false);
   useEffect(() => {
@@ -53,7 +54,7 @@ function PaymentMobile({
     if (type === "Shop") {
       return (
         <>
-          {inventory.map((data,index) => {
+          {inventory.map((data, index) => {
             return <CardShowProductRes key={index} data={data} />;
           })}
         </>
@@ -73,6 +74,7 @@ function PaymentMobile({
             postBuyProduct={postBuyProduct}
             type={type}
             postRentProduct={postRentProduct}
+            inventory={inventory}
           />
           <Navbar
             status={checkLogin}
@@ -86,9 +88,16 @@ function PaymentMobile({
                 className="pm-back"
                 style={{ display: "flex", alignItems: "center" }}
               >
-                <Button onClick={() => router.push("/shop")}>Back</Button>
+                <Button onClick={() => router.push("/")}>Back</Button>
                 <h2 style={{ color: "black", margin: "0px" }}>PAYMENT SELL</h2>
-                <a onClick={()=>{setShowAddress("block")}} style={{ color: "black" }}>Edit</a>
+                <a
+                  onClick={() => {
+                    setShowAddress("block");
+                  }}
+                  style={{ color: "black" }}
+                >
+                  Edit
+                </a>
               </div>
               <div className="pm-address">
                 <EnvironmentOutlined
@@ -158,12 +167,19 @@ function PaymentMobile({
                     )}
                   </div>
                   <div className="pm-payment-body1">
-                    <div className="pm-payment-body2" style={{marginRight:5}}>
+                    <div
+                      className="pm-payment-body2"
+                      style={{ marginRight: 5 }}
+                    >
                       <MonetizationOnIcon style={{ fontSize: "34px" }} />
                     </div>
                     <div className="pm-payment-body3">
                       <div className="pm-payment-header">
-                        <h3 style={{ color: "black",margin:"5px 0px 5px 0px" }}>วิธีการชำระเงิน</h3>
+                        <h3
+                          style={{ color: "black", margin: "5px 0px 5px 0px" }}
+                        >
+                          วิธีการชำระเงิน
+                        </h3>
                       </div>
                       <div className="pm-payment-body-1">
                         {type === "Shop" ? (
@@ -171,18 +187,32 @@ function PaymentMobile({
                             <h3 style={{ color: "black", margin: "0px" }}>
                               รวมการสั่งซื้อ
                             </h3>
-                            <h3 style={{ color: "black", margin: "0px" }}>
-                              {price} THB
-                            </h3>
+                            <NumberFormat
+                              value={price}
+                              displayType={"text"}
+                              thousandSeparator={true}
+                              renderText={(value) => (
+                                <h3 style={{ color: "black", margin: "0px" }}>
+                                  {value} THB
+                                </h3>
+                              )}
+                            />
                           </>
                         ) : (
                           <>
                             <h3 style={{ color: "black", margin: "0px" }}>
                               ยอดการเช่า( x{dayforrent}DAYS)
                             </h3>
-                            <h3 style={{ color: "black", margin: "0px" }}>
-                              {inventory.price_product * dayforrent} THB
-                            </h3>
+                            <NumberFormat
+                              value={inventory.price_product * dayforrent}
+                              displayType={"text"}
+                              thousandSeparator={true}
+                              renderText={(value) => (
+                                <h3 style={{ color: "black", margin: "0px" }}>
+                                  {value} THB
+                                </h3>
+                              )}
+                            />
                           </>
                         )}
                       </div>
@@ -230,13 +260,31 @@ function PaymentMobile({
                     ยอดชำระทั้งหมด
                   </h2>
                   {type === "Shop" ? (
-                    <h2 style={{ color: "red", fontSize: "18px", margin: 0 }}>
-                      {price + 600 + 600} THB
-                    </h2>
+                    <NumberFormat
+                      value={price + 600}
+                      displayType={"text"}
+                      thousandSeparator={true}
+                      renderText={(value) => (
+                        <h2
+                          style={{ color: "red", fontSize: "18px", margin: 0 }}
+                        >
+                          {value} THB
+                        </h2>
+                      )}
+                    />
                   ) : (
-                    <h2 style={{ color: "red", fontSize: "18px", margin: 0 }}>
-                      {inventory.price_product * dayforrent + 600 + 600} THB
-                    </h2>
+                    <NumberFormat
+                      value={inventory.price_product * dayforrent + 600 + 600}
+                      displayType={"text"}
+                      thousandSeparator={true}
+                      renderText={(value) => (
+                        <h2
+                          style={{ color: "red", fontSize: "18px", margin: 0 }}
+                        >
+                          {value} THB
+                        </h2>
+                      )}
+                    />
                   )}
                 </div>
                 <div>
@@ -263,82 +311,7 @@ function PaymentMobile({
       </FormItem>
     );
   } else {
-    return (
-      <FormItem style={{ margin: "0px" }}>
-        <LoadingComponent type={"fetchloading"} status={fetchLoading} />
-        <div className="br">
-          <div className="br-header">
-            <h1>Header</h1>
-          </div>
-          <div className="pm-body">
-            <div className="pm-back">
-              <Button onClick={() => router.push("/shop")}>Back</Button>
-              <h2 style={{ color: "black" }}>PAYMENT SELL</h2>
-              <a style={{ color: "black" }}>Edit</a>
-            </div>
-            <div className="pm-address">
-              <div className="pm-address-1">
-                <EnvironmentOutlined
-                  style={{ color: "black", fontSize: "30px" }}
-                />
-                <h2 style={{ color: "black" }}>Address</h2>
-              </div>
-              <div className="pm-address-2">
-                <h3 style={{ color: "black" }}>โมจิ กิ้นกิ้น 096-0000000</h3>
-                <h3 style={{ color: "black" }}>
-                  เอนยูสแคว์ ซอย 3 ม.1 จ.พิษณุโลก 65000
-                </h3>
-              </div>
-            </div>
-            {inventory.map((data) => {
-              return <CardShowProduct data={data} />;
-            })}
-            <div className="pm-option">
-              <div className="pm-option-1">
-                <h3 style={{ color: "black" }}>ตัวเลือกการจัดส่ง</h3>
-                <h2 style={{ color: "black" }}>THAI POST (EMS)</h2>
-              </div>
-              <div className="pm-option-2">100 THB.</div>
-            </div>
-            <div className="pm-payment">
-              <div className="pm-payment-header">
-                <h3 style={{ color: "black" }}>วิธีการชำระเงิน</h3>
-              </div>
-              <div className="pm-payment-body">
-                <div className="pm-payment-body-1">
-                  <h3 style={{ color: "black" }}>
-                    ยอดการเช่า/ซื้อ ( x3 days )
-                  </h3>
-                  <h3 style={{ color: "black" }}>{price} THB</h3>
-                </div>
-                <div className="pm-payment-body-1">
-                  <h3 style={{ color: "black" }}>ค่าจัดส่ง</h3>
-                  <h3 style={{ color: "black" }}>600 THB</h3>
-                </div>
-                <div className="pm-payment-body-1">
-                  <h3 style={{ color: "black" }}>
-                    ค่ามัดจำสินค้า( ได้คืนหลังการส่งคืนสินค้า )
-                  </h3>
-                  <h3 style={{ color: "black" }}>600 THB</h3>
-                </div>
-              </div>
-            </div>
-            <div className="pm-footer">
-              <h2 style={{ color: "black", margin: "10px" }}>ยอดชำระทั้งหมด</h2>
-              <h2 style={{ color: "red", margin: "10px" }}>
-                {price + 600 + 600} THB.
-              </h2>
-              <Button
-                className="pm-footer-btn"
-                onClick={() => postBuyProduct()}
-              >
-                ทำรายการซื้อ
-              </Button>
-            </div>
-          </div>
-        </div>
-      </FormItem>
-    );
+    return null;
   }
 }
 

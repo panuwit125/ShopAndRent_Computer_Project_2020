@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import NumberFormat from "react-number-format";
 
 export default function DescriptionProduct(props) {
   const [swipht, setSwipht] = useState(true);
@@ -106,9 +107,16 @@ export default function DescriptionProduct(props) {
         <h2 className="des-res-price" style={{ color: "#62646A" }}>
           PRICE :{" "}
         </h2>
-        <h2 className="des-res-price" style={{ color: "#FFC700" }}>
-          {props.price}
-        </h2>
+        <NumberFormat
+          value={props.price}
+          displayType={"text"}
+          thousandSeparator={true}
+          renderText={(value) => (
+            <h2 className="des-res-price" style={{ color: "#FFC700" }}>
+              {value}
+            </h2>
+          )}
+        />
         {props.type === "Shop" ? (
           <h2 className="des-res-price" style={{ color: "#62646A" }}>
             THB

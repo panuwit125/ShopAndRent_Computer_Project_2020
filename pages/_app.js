@@ -8,7 +8,7 @@ import * as gtag from "../lib/gtag";
 import "../styles/global.scss";
 
 const MyApp = ({ Component, pageProps }) => {
-  useEffect(() => {
+  /*useEffect(() => {
     const handleRouteChange = (url) => {
       gtag.pageview(url);
     };
@@ -16,7 +16,7 @@ const MyApp = ({ Component, pageProps }) => {
     return () => {
       Router.events.off("routeChangeComplete", handleRouteChange);
     };
-  }, []);
+  }, []);*/
 
   return (
     <Provider store={store}>
