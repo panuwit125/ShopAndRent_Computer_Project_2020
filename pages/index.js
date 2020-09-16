@@ -118,7 +118,7 @@ function ShopPage() {
       <Button
         shape="circle"
         className="cb-fixed"
-        onClick={() => alert("เข้าไป Chatbot (จำลอง)")}
+        onClick={() => location.href='http://line.me/ti/p/~%20@539sojyh?fbclid=IwAR0Zb5DpIsdWDScYVmV6BnxzYwnvoRc6-8V2BQz9nn8PniEuSWVuF2rI7qg'}
         icon={
           <WechatOutlined
             style={{ fontSize: "30px", margin: "10px", color: "white" }}

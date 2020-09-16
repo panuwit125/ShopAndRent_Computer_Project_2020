@@ -38,15 +38,18 @@ function NavbarComponent(props) {
           />
         </div>
         <a href="/" style={{ minWidth: 500 }}>
-          <HomeOutlined style={{ marginRight: 10 }} />Home (เริ่มต้น)
+          <HomeOutlined style={{ marginRight: 10 }} />
+          Home (เริ่มต้น)
         </a>
         {props.status ? (
           <a href="#" style={{ minWidth: 500 }}>
-            <UserOutlined style={{ marginRight: 10 }} />{props.user}
+            <UserOutlined style={{ marginRight: 10 }} />
+            {props.user}
           </a>
         ) : (
           <a href="/signin" style={{ minWidth: 500 }}>
-            <LoginOutlined style={{ marginRight: 10 }} />Login (เข้าสู่ระบบ)
+            <LoginOutlined style={{ marginRight: 10 }} />
+            Login (เข้าสู่ระบบ)
           </a>
         )}
         {props.shop ? (
@@ -60,7 +63,8 @@ function NavbarComponent(props) {
                 }}
                 style={{ minWidth: 500 }}
               >
-                <ShopOutlined style={{ marginRight: 10 }} />Rent (เช่า)
+                <ShopOutlined style={{ marginRight: 10 }} />
+                Rent (เช่า)
               </a>
             ) : (
               <a
@@ -71,7 +75,8 @@ function NavbarComponent(props) {
                 }}
                 style={{ minWidth: 500 }}
               >
-                <ShopOutlined style={{ marginRight: 10 }} />Shop (ซื้อ)
+                <ShopOutlined style={{ marginRight: 10 }} />
+                Shop (ซื้อ)
               </a>
             )}
           </>
@@ -86,27 +91,29 @@ function NavbarComponent(props) {
                 }}
                 style={{ minWidth: 500 }}
               >
-                <UnorderedListOutlined style={{ marginRight: 10 }} />ShowList (รายการที่ทำสำเร็จ)
+                <UnorderedListOutlined style={{ marginRight: 10 }} />
+                ShowList (รายการที่ทำสำเร็จ)
               </a>
             ) : null}
           </>
         ) : null}
 
+        <a href="/compare" style={{ minWidth: 500 }}>
+          <AppstoreOutlined style={{ marginRight: 10 }} />
+          Compare (เปรียบเทียบสินค้า)
+        </a>
         {props.status ? (
           <a
             onClick={() => {
               localStorage.clear();
-              router.push("/");
+              location.reload();
             }}
             style={{ minWidth: 500 }}
           >
-            <LogoutOutlined style={{ marginRight: 10 }} />LogOut (ออกจากระบบ)
+            <LogoutOutlined style={{ marginRight: 10 }} />
+            LogOut (ออกจากระบบ)
           </a>
         ) : null}
-        <a href="/compare" style={{ minWidth: 500 }}>
-          <AppstoreOutlined style={{ marginRight: 10 }} />Compare
-          (เปรียบเทียบสินค้า)
-        </a>
         {/*<a style={{ textAlign: "center", minWidth: 160 }}>{props.type}</a>*/}
       </div>
     );

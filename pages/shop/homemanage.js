@@ -6,6 +6,7 @@ import HeaderManage from "./componentManage/HeaderManage";
 import router from "next/router";
 import Axios from "axios"
 import LoadingComponent from "../../components/component.loading"
+import NumberFormat from "react-number-format";
 
 function homeSeller() {
   const [show, setShow] = useState(0);
@@ -14,6 +15,7 @@ function homeSeller() {
   const [token, setToken] = useState();
   const [productShop, setProductShop] = useState();
   const [productRent, setProductRent] = useState();
+  const [sumall , setSumall ] = useState();
 
   useEffect(() => {
     if (
@@ -47,12 +49,44 @@ function homeSeller() {
       .then((response) => {
         console.log(response);
         setProductRent(response.data);
-        setisLoading(true);
+        getPriceSum();
       })
       .catch((error) => {
         console.log(error.response);
       });
   };
+
+  const getPriceSum = () => {
+    Axios({
+      method: "post",
+      url: "https://tranquil-beach-43094.herokuapp.com/sumpricerentitem",
+      headers: { Authorization: `Bearer ${localStorage.getItem("tokenmanage")}` },
+    })
+      .then((response) => {
+        console.log(response.data.sum);
+        getPriceSumsolditem(response.data.sum);
+      })
+      .catch((error) => {
+        console.log(error.response);
+      });
+  }
+  
+  const getPriceSumsolditem = (sum) => {
+    Axios({
+      method: "post",
+      url: "https://tranquil-beach-43094.herokuapp.com/sumpricesolditem",
+      headers: { Authorization: `Bearer ${localStorage.getItem("tokenmanage")}` },
+    })
+      .then((response) => {
+        console.log(response.data.sum);
+        console.log(sum+response.data.sum)
+        setSumall(sum+response.data.sum);
+        setisLoading(true);
+      })
+      .catch((error) => {
+        console.log(error.response);
+      });
+  }
 
   if (!isLoading) {
     return <LoadingComponent />;
@@ -86,9 +120,16 @@ function homeSeller() {
             >
               {productRent.length} ชิ้น 
             </Card>
-            <Card title="รายได้ทั้งหมด" className="mg-card" bordered={true}>
-              200,000 บาท (ข้อมูลจำลอง)
+            <NumberFormat
+              value={sumall}
+              displayType={"text"}
+              thousandSeparator={true}
+              renderText={(value) => (
+                <Card title="รายได้ทั้งหมด" className="mg-card" bordered={true}>
+              {value} บาท 
             </Card>
+              )}
+            />
           </div>
         </div>
       </FormItem>

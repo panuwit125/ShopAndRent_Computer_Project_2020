@@ -42,12 +42,14 @@ function NavbarComponent(props) {
         </div>
         <li className="show-res-navbar-li show-res-li-border">
           <a className="show-res-navbar-li" href="/">
-          Home (เริ่มต้น)
+            Home (เริ่มต้น)
           </a>
         </li>
         {props.status ? (
           <li className="show-res-navbar-li show-res-li-border">
-            <a className="show-res-navbar-li"><UserOutlined style={{ marginRight: 10 }} /> {props.user}</a>
+            <a className="show-res-navbar-li">
+              <UserOutlined style={{ marginRight: 10 }} /> {props.user}
+            </a>
           </li>
         ) : (
           <li className="show-res-navbar-li show-res-li-border">
@@ -112,25 +114,24 @@ function NavbarComponent(props) {
             ) : null}
           </>
         ) : null}
-
+        <li className="show-res-navbar-li show-res-li-border">
+          <a className="show-res-navbar-li" href="/compare">
+            Compare (เปรียบเทียบสินค้า)
+          </a>
+        </li>
         {props.status ? (
           <li className="show-res-navbar-li show-res-li-border">
             <a
               className="show-res-navbar-li"
               onClick={() => {
                 localStorage.clear();
-                router.push("/");
+                location.reload();
               }}
             >
               LogOut (ออกจากระบบ)
             </a>
           </li>
         ) : null}
-        <li className="show-res-navbar-li show-res-li-border">
-          <a className="show-res-navbar-li" href="/compare">
-            Compare (เปรียบเทียบสินค้า)
-          </a>
-        </li>
       </ul>
     );
   }

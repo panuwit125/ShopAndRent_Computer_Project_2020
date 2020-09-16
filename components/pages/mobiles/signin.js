@@ -2,6 +2,7 @@ import React from "react";
 import { Form, Button, Input, Space } from "antd";
 const FormItem = Form.Item;
 import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
+import Router from "next/router";
 
 function SignInMobile({
   fetchLoading,
@@ -50,10 +51,16 @@ function SignInMobile({
               LOGIN
             </Button>
             <h2
-              className="lg-res-under-btn"
+              className="lg-res-under-btn" style={{marginBottom:0}}
               onClick={() => setMode("register")}
             >
               Don't have an account.
+            </h2>
+            <h2
+              className="lg-res-under-btn"  style={{margin:0}}
+              onClick={() => Router.push("/")}
+            >
+              Back to shop.
             </h2>
           </div>
         </div>
