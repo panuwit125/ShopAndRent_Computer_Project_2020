@@ -93,7 +93,7 @@ function PaymentMobile({
             <div className="pm-back pay-font-hd">
               <a
                 onClick={() => router.push("/shop")}
-                style={{ color: "#AFAFAF", margin: "0px" }}
+                style={{ color: "#AFAFAF", margin: "auto 0px" }}
               >
                 Back
               </a>
@@ -101,12 +101,12 @@ function PaymentMobile({
                 style={{
                   color: "black",
                   fontSize: "18px",
-                  margin: "0px",
+                  margin: "auto 0px",
                 }}
               >
                 PAYMENT
               </h2>
-              <a onClick={()=>{setShowAddress("block")}} style={{ color: "#AFAFAF", margin: "0px" }}>Edit</a>
+              <a onClick={()=>{setShowAddress("block")}} style={{ color: "#AFAFAF", margin: "auto 0px" }}>Edit</a>
             </div>
             <div className="pm-address pay-font-hd">
               <EnvironmentOutlined
@@ -176,24 +176,12 @@ function PaymentMobile({
                 )}
               </div>
               <div className="pm-payment-body1">
-                <div className="pm-payment-body2">
+                <div className="pm-payment-body2" style={{marginRight:5}}>
                   <MonetizationOnIcon style={{ fontSize: "34px" }} />
                 </div>
                 <div className="pm-payment-body3">
                   <div className="pm-payment-header">
-                    <h3 style={{ color: "black" }}>วิธีการชำระเงิน</h3>
-                    <Select
-                      defaultValue="lucy"
-                      style={{ width: "auto" }}
-                      //onChange={handleChange}
-                    >
-                      <Option value="jack">ธนาคารกสิกร</Option>
-                      <Option value="lucy">ธนาคารกรุงไทย</Option>
-                      <Option value="disabled" disabled>
-                        Disabled
-                      </Option>
-                      <Option value="Yiminghe">ธนาคารกรุงเทพ</Option>
-                    </Select>
+                    <h3 style={{ color: "black",margin:"5px 0px 5px 0px" }}>วิธีการชำระเงิน</h3>
                   </div>
                   <div className="pm-payment-body-1">
                     {type === "Shop" ? (

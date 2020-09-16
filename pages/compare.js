@@ -221,8 +221,8 @@ function ComparePage() {
             </tr>
             <tr>
               <td>VGACard</td>
-              {product1 ? <td>{product1.vgaCard_product}</td> : <td></td>}
-              {product2 ? <td>{product2.vgaCard_product}</td> : <td></td>}
+              {product1 ? <td>{product1.vgacard_product}</td> : <td></td>}
+              {product2 ? <td>{product2.vgacard_product}</td> : <td></td>}
             </tr>
             <tr>
               <td>Mainboard</td>

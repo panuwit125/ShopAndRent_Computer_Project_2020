@@ -43,7 +43,7 @@ function CompareMobile({
         click={setCheckListShow}
       />
       <div className="sp">
-        <HeaderNavbar page={"Shop"} setshow={setShowNavbar} />
+        <HeaderNavbar page={"Shop"} setshow={setShowNavbar} type={type} status={checkLogin} />
         <div className="des-res-body" style={{ padding: "10px" }}>
           <ShowTableCompare />
         </div>

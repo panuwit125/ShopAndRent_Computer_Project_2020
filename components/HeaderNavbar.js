@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import router from "next/router";
+import { ShoppingCartOutlined } from "@ant-design/icons";
 import DehazeIcon from "@material-ui/icons/Dehaze";
 
 const HeaderComponent = (props) => {
@@ -17,33 +18,70 @@ const HeaderComponent = (props) => {
   } else {
     if (props.page === "Payment") {
       return (
-        <div className="br-header" style={{ marginBottom: "0px" }}>
-          <div>
+        <div className="br-header" style={{ padding: "15px 10px 15px 10px", height: "auto",marginBottom:0 }}>
+          <div
+            style={{
+              margin: "auto 0",
+              display: "flex",
+              justifyContent: "center",
+            }}
+          >
             <DehazeIcon
               style={{ color: "white" }}
               onClick={() => props.setshow(160)}
             />
           </div>
-          <div>
-            <h1 className="br-header-font">SECONDHAND</h1>
-            <h1 className="br-header-font">NOTEBOOK</h1>
+          <div style={{ margin: "auto 0" }}>
+            <h1 style={{ marginBottom: 0 }} className="br-header-font">
+              SECONDHAND
+              <br />
+              NOTEBOOK
+            </h1>
           </div>
-          <div>
+          <div
+            style={{
+              margin: "auto 0",
+              display: "flex",
+              justifyContent: "center",
+            }}
+          >
             {props.page === "Home" ? (
-              <DehazeIcon style={{ opacity: "0" }} />
+              <ShoppingCartOutlined
+                style={{ color: "white", fontSize: "22px", opacity: 0 }}
+              />
             ) : (
-              <h1 className="header-typepage">{type}</h1>
+              <>
+                {props.status && props.type === "Shop" ? (
+                  <ShoppingCartOutlined
+                    style={{ color: "white", fontSize: "22px" }}
+                    onClick={() => router.push("/payment")}
+                  />
+                ) : (
+                  <ShoppingCartOutlined
+                    style={{ color: "white", fontSize: "22px", opacity: 0 }}
+                  />
+                )}
+              </>
             )}
           </div>
         </div>
       );
     } else {
       return (
-        <div className="br-header">
-          <div>
+        <div
+          className="br-header"
+          style={{ padding: "15px 10px 15px 10px", height: "auto" }}
+        >
+          <div
+            style={{
+              margin: "auto 0",
+              display: "flex",
+              justifyContent: "center",
+            }}
+          >
             {props.page === "Home" ? (
               <DehazeIcon
-                style={{ color: "white",opacity: "0" }}
+                style={{ color: "white", opacity: "0" }}
                 onClick={() => props.setshow(160)}
               />
             ) : (
@@ -53,15 +91,37 @@ const HeaderComponent = (props) => {
               />
             )}
           </div>
-          <div>
-            <h1 className="br-header-font">SECONDHAND</h1>
-            <h1 className="br-header-font">NOTEBOOK</h1>
+          <div style={{ margin: "auto 0" }}>
+            <h1 style={{ marginBottom: 0 }} className="br-header-font">
+              SECONDHAND
+              <br />
+              NOTEBOOK
+            </h1>
           </div>
-          <div>
+          <div
+            style={{
+              margin: "auto 0",
+              display: "flex",
+              justifyContent: "center",
+            }}
+          >
             {props.page === "Home" ? (
-              <DehazeIcon style={{ opacity: "0" }} />
+              <ShoppingCartOutlined
+                style={{ color: "white", fontSize: "22px", opacity: 0 }}
+              />
             ) : (
-              <h1 className="header-typepage">{type}</h1>
+              <>
+                {props.status && props.type === "Shop" ? (
+                  <ShoppingCartOutlined
+                    style={{ color: "white", fontSize: "22px" }}
+                    onClick={() => router.push("/payment")}
+                  />
+                ) : (
+                  <ShoppingCartOutlined
+                    style={{ color: "white", fontSize: "22px", opacity: 0 }}
+                  />
+                )}
+              </>
             )}
           </div>
         </div>

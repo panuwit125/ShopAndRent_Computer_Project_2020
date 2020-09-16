@@ -49,7 +49,7 @@ function PaymentPage() {
   const [address, setAddress] = useState(
     "โมจิ เอนยูสแคว์ซอย 3 ม.1 ต.ท่าโพธิ์ อ.เมือง จ.พิษณุโลก 65000"
   );
-  const [rateValue, setRateValue] = useState(2.5);
+  const [addressEditing, setAddressEditing] = useState("");
   const [showNavbar, setShowNavbar] = useState(0);
 
   useEffect(() => {
@@ -293,6 +293,7 @@ function PaymentPage() {
   };
 
   const EditAddress = () => {
+    const [addressEditing, setAddressEditing] = useState(address);
     return (
       <div style={{ display: showAddress }} className="modal md-bg">
         <div className="modal-content">
@@ -309,14 +310,15 @@ function PaymentPage() {
             </div>
             <div className="lri-body" style={{ textAlign: "center" }}>
               <Input.TextArea
-                value={address}
-                onChange={(e) => setAddress(e.target.value)}
+                value={addressEditing}
+                onChange={(e) => setAddressEditing(e.target.value)}
                 rows="5"
               />
               <Button
                 type="primary"
                 className="mg-btn-update"
                 onClick={() => {
+                  setAddress(addressEditing);
                   setShowAddress("none");
                 }}
               >

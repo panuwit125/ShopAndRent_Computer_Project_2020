@@ -115,11 +115,12 @@ function ShopPage() {
   const ChatbotShow = () => {
     return (
       <Button
+        shape="circle"
         className="cb-fixed"
         onClick={() => alert("เข้าไป Chatbot (จำลอง)")}
-      >
-        <WechatOutlined style={{ fontSize: "30px" }} />
-      </Button>
+        icon={<WechatOutlined style={{ fontSize: "30px",margin:"10px",color:"white" }} />}
+        size="large"
+      />
     );
   };
 
@@ -167,6 +168,7 @@ function ShopPage() {
       under_number: 1,
       id_solditem: idproduct,
     };
+    console.log(data)
     Axios({
       method: "post",
       url: "https://tranquil-beach-43094.herokuapp.com/showrate",

@@ -158,24 +158,12 @@ function PaymentMobile({
                     )}
                   </div>
                   <div className="pm-payment-body1">
-                    <div className="pm-payment-body2">
+                    <div className="pm-payment-body2" style={{marginRight:5}}>
                       <MonetizationOnIcon style={{ fontSize: "34px" }} />
                     </div>
                     <div className="pm-payment-body3">
                       <div className="pm-payment-header">
-                        <h3 style={{ color: "black" }}>วิธีการชำระเงิน</h3>
-                        <Select
-                          defaultValue="lucy"
-                          style={{ width: "auto" }}
-                          //onChange={handleChange}
-                        >
-                          <Option value="jack">ธนาคารกสิกร</Option>
-                          <Option value="lucy">ธนาคารกรุงไทย</Option>
-                          <Option value="disabled" disabled>
-                            Disabled
-                          </Option>
-                          <Option value="Yiminghe">ธนาคารกรุงเทพ</Option>
-                        </Select>
+                        <h3 style={{ color: "black",margin:"5px 0px 5px 0px" }}>วิธีการชำระเงิน</h3>
                       </div>
                       <div className="pm-payment-body-1">
                         {type === "Shop" ? (
@@ -315,18 +303,6 @@ function PaymentMobile({
             <div className="pm-payment">
               <div className="pm-payment-header">
                 <h3 style={{ color: "black" }}>วิธีการชำระเงิน</h3>
-                <Select
-                  defaultValue="lucy"
-                  style={{ width: "auto" }}
-                  //onChange={handleChange}
-                >
-                  <Option value="jack">ธนาคารกสิกร</Option>
-                  <Option value="lucy">ธนาคารกรุงไทย</Option>
-                  <Option value="disabled" disabled>
-                    Disabled
-                  </Option>
-                  <Option value="Yiminghe">ธนาคารกรุงเทพ</Option>
-                </Select>
               </div>
               <div className="pm-payment-body">
                 <div className="pm-payment-body-1">

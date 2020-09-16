@@ -1,5 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { CloseOutlined } from "@ant-design/icons";
+import {
+  CloseOutlined,
+  UserOutlined,
+  HomeOutlined,
+  ShopOutlined,
+  AppstoreOutlined,
+  LoginOutlined,
+  LogoutOutlined,
+  UnorderedListOutlined,
+} from "@ant-design/icons";
 import router from "next/router";
 import { useSelector, useDispatch } from "react-redux";
 
@@ -29,18 +38,26 @@ function NavbarComponent(props) {
           />
         </div>
         <a href="/shop">
-          <i className="fa fa-fw fa-home">Home</i>
+          <i className="fa fa-fw fa-home">
+            <HomeOutlined style={{ marginRight: 10 }} /> Home
+          </i>
         </a>
         <a href="/compare">
-          <i className="fa fa-fw fa-home">Compare</i>
+          <i className="fa fa-fw fa-home">
+            <AppstoreOutlined style={{ marginRight: 10 }} /> Compare
+          </i>
         </a>
         {props.status ? (
           <a href="#">
-            <i className="fa fa-fw fa-wrench">ID : {props.user}</i>
+            <i className="fa fa-fw fa-wrench">
+              <UserOutlined style={{ marginRight: 10 }} /> {props.user}
+            </i>
           </a>
         ) : (
           <a href="/signin">
-            <i className="fa fa-fw fa-wrench">Login</i>
+            <i className="fa fa-fw fa-wrench">
+              <LoginOutlined style={{ marginRight: 10 }} /> Login
+            </i>
           </a>
         )}
         {props.shop ? (
@@ -53,7 +70,10 @@ function NavbarComponent(props) {
                   location.reload();
                 }}
               >
-                <i className="fa fa-fw fa-wrench">Go Rent</i>
+                <i className="fa fa-fw fa-wrench">
+                  <ShopOutlined style={{ marginRight: 10 }} />
+                  Go Rent
+                </i>
               </a>
             ) : (
               <a
@@ -63,16 +83,17 @@ function NavbarComponent(props) {
                   location.reload();
                 }}
               >
-                <i className="fa fa-fw fa-wrench">Go Shop</i>
+                <i className="fa fa-fw fa-wrench">
+                  <ShopOutlined style={{ marginRight: 10 }} />
+                  Go Shop
+                </i>
               </a>
             )}
           </>
         ) : null}
-        {props.status && props.type === "Shop" ? (
-          <a href="/payment">
-            <i className="fa fa-fw fa-user">Inventory</i>
-          </a>
-        ) : null}
+        <a>
+          <i className="fa fa-fw fa-user">{props.type}</i>
+        </a>
         {props.shop ? (
           <>
             {props.status ? (
@@ -82,7 +103,10 @@ function NavbarComponent(props) {
                   props.click("block");
                 }}
               >
-                <i className="fa fa-fw fa-user">ShowList</i>
+                <i className="fa fa-fw fa-user">
+                  <UnorderedListOutlined style={{ marginRight: 10 }} />
+                  ShowList
+                </i>
               </a>
             ) : null}
           </>
@@ -95,7 +119,9 @@ function NavbarComponent(props) {
               router.push("/");
             }}
           >
-            <i className="fa fa-fw fa-user">LogOut</i>
+            <i className="fa fa-fw fa-user">
+              <LogoutOutlined style={{ marginRight: 10 }} /> LogOut
+            </i>
           </a>
         ) : null}
       </div>
