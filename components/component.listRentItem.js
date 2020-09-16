@@ -63,12 +63,20 @@ const ListRentItem = ({
           onClick={() => click("none")}
         >
           <div className="modal-content">
-            <div className="lri-card">
+            <div className="lri-card" style={{ minWidth: "300px", maxWidth: "500px", overflow: "auto" }}>
               <div className="lri-header">
                 <h2 style={{ color: "black" }}>รายการยืมสินค้า</h2>
                 <Button onClick={() => click("none")}>ย้อนกลับ</Button>
               </div>
-              <div className="lri-body">
+              <div
+                className="lri-body"
+                style={{
+                  overflow: "auto",
+                  display: "flex",
+                  flexDirection: "column",
+                  height: "100%",
+                }}
+              >
                 {productlist.map((data, index) => {
                   return (
                     <div
@@ -148,12 +156,23 @@ const ListRentItem = ({
           onClick={() => click("none")}
         >
           <div className="modal-content">
-            <div className="lri-card">
+            <div
+              className="lri-card"
+              style={{ minWidth: "300px", maxWidth: "500px", overflow: "auto" }}
+            >
               <div className="lri-header">
                 <h2 style={{ color: "black" }}>รายการของที่ซื้อ</h2>
                 <Button onClick={() => click("none")}>ย้อนกลับ</Button>
               </div>
-              <div className="lri-body">
+              <div
+                className="lri-body"
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  height: "100%",
+                  overflow: "auto",
+                }}
+              >
                 {productlist.map((data, index) => {
                   return (
                     <div

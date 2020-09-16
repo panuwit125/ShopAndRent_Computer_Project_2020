@@ -173,7 +173,7 @@ function PaymentMobile({
                     >
                       <MonetizationOnIcon style={{ fontSize: "34px" }} />
                     </div>
-                    <div className="pm-payment-body3">
+                    <div className="pm-payment-body3" >
                       <div className="pm-payment-header">
                         <h3
                           style={{ color: "black", margin: "5px 0px 5px 0px" }}

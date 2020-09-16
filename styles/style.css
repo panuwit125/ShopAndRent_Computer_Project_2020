@@ -1,0 +1,7 @@
+.pm-back {
+    justify-content: space-between;
+    display: flex;
+    display: flex;
+    padding: 12px 20px 12px 20px;
+    -webkit-border-bottom: 1px solid #dadbdd !important;
+  }

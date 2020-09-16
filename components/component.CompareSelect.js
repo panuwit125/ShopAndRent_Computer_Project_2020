@@ -45,6 +45,7 @@ const CompareSelectShow = ({
                 display: "flex",
                 flexDirection: "column",
                 height: "100%",
+                overflow:"auto"
               }}
             >
               {productAll.map((product, index) => {
@@ -57,6 +58,10 @@ const CompareSelectShow = ({
                       margin: "10px",
                       cursor: "pointer",
                       display: "flex",
+                      minHeight:"100px",
+                      height:"100%",
+                      textOverflow: "ellipsis",
+                      overflow: "hidden"
                     }}
                     key={index}
                     onClick={() => {

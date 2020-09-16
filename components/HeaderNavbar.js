@@ -28,7 +28,7 @@ const HeaderComponent = (props) => {
           >
             <DehazeIcon
               style={{ color: "white" }}
-              onClick={() => props.setshow(160)}
+              onClick={() => props.setshow("100%")}
             />
           </div>
           <div style={{ margin: "auto 0" }}>

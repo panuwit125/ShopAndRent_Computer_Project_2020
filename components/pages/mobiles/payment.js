@@ -73,7 +73,7 @@ function PaymentMobile({
   } else {
     console.log(user);
     return (
-      <FormItem style={{ margin: "0px" }}>
+      <div style={{ margin: "0px",minHeight:"100%" }}>
         <LoadingComponent type={"fetchloading"} status={fetchLoading} />
         <UploadBillComponent
           UploadBillShow={UploadBillShow}
@@ -118,7 +118,7 @@ function PaymentMobile({
                 Edit
               </a>
             </div>
-            <div className="pm-address pay-font-hd">
+            <div className="pm-address pay-font-hd" >
               <EnvironmentOutlined
                 style={{
                   color: "black",
@@ -139,8 +139,9 @@ function PaymentMobile({
                 <h3 style={{ color: "black", fontSize: "16px" }}>{address}</h3>
               </div>
             </div>
-            <ShowProduct />
-
+            <div>
+              <ShowProduct />
+            </div>
             <div className="pm-option pay-font-hd">
               <h3
                 style={{
@@ -170,6 +171,7 @@ function PaymentMobile({
                   display: "flex",
                   justifyContent: "space-between",
                   padding: "11px 26px 5px 26px",
+                  height: "100%",
                 }}
               >
                 {type === "Shop" ? null : (
@@ -183,6 +185,12 @@ function PaymentMobile({
                   </>
                 )}
               </div>
+            </div>
+            <div
+              className="pm-payment pay-font-hd"
+              style={{ height:"160px" }}
+            >
+              
               <div className="pm-payment-body1">
                 <div className="pm-payment-body2" style={{ marginRight: 5 }}>
                   <MonetizationOnIcon style={{ fontSize: "34px" }} />
@@ -247,74 +255,74 @@ function PaymentMobile({
                 </div>
               </div>
             </div>
-            <div className="pm-footer">
-              <div
+          </div>
+          <div className="pm-footer">
+            <div
+              style={{
+                width: "100%",
+                display: "flex",
+                flexDirection: "row",
+                padding: "15px 14px",
+              }}
+            >
+              <h2
                 style={{
-                  width: "100%",
-                  display: "flex",
-                  flexDirection: "row",
-                  padding: "15px 14px",
+                  color: "black",
+                  fontSize: "18px",
+                  marginBottom: 0,
+                  marginRight: 5,
                 }}
               >
-                <h2
-                  style={{
-                    color: "black",
-                    fontSize: "18px",
-                    marginBottom: 0,
-                    marginRight: 5,
-                  }}
+                ยอดชำระทั้งหมด
+              </h2>
+              {type === "Shop" ? (
+                <NumberFormat
+                  value={price + 600}
+                  displayType={"text"}
+                  thousandSeparator={true}
+                  renderText={(value) => (
+                    <h2 style={{ color: "red", fontSize: "18px", margin: 0 }}>
+                      {value} THB
+                    </h2>
+                  )}
+                />
+              ) : (
+                <NumberFormat
+                  value={inventory.price_product * dayforrent + 600 + 600}
+                  displayType={"text"}
+                  thousandSeparator={true}
+                  renderText={(value) => (
+                    <h2 style={{ color: "red", fontSize: "18px", margin: 0 }}>
+                      {value} THB
+                    </h2>
+                  )}
+                />
+              )}
+            </div>
+            <div>
+              {type === "Shop" ? (
+                <Button
+                  className="btn-res-pm"
+                  onClick={() =>
+                    /*postBuyProduct()*/ setUploadBillShow("block")
+                  }
                 >
-                  ยอดชำระทั้งหมด
-                </h2>
-                {type === "Shop" ? (
-                  <NumberFormat
-                    value={price + 600}
-                    displayType={"text"}
-                    thousandSeparator={true}
-                    renderText={(value) => (
-                      <h2 style={{ color: "red", fontSize: "18px", margin: 0 }}>
-                        {value} THB
-                      </h2>
-                    )}
-                  />
-                ) : (
-                  <NumberFormat
-                    value={inventory.price_product * dayforrent + 600 + 600}
-                    displayType={"text"}
-                    thousandSeparator={true}
-                    renderText={(value) => (
-                      <h2 style={{ color: "red", fontSize: "18px", margin: 0 }}>
-                        {value} THB
-                      </h2>
-                    )}
-                  />
-                )}
-              </div>
-              <div>
-                {type === "Shop" ? (
-                  <button
-                    className="btn-res-pm"
-                    onClick={() =>
-                      /*postBuyProduct()*/ setUploadBillShow("block")
-                    }
-                  >
-                    สั่งซื้อสินค้า
-                  </button>
-                ) : (
-                  <button
-                    className="btn-res-pm"
-                    onClick={() =>
-                      /*postRentProduct()*/ setUploadBillShow("block")
-                    }
-                  >
-                    เช่าสินค้า
-                  </button>
-                )}
-              </div>
+                  สั่งซื้อสินค้า
+                </Button>
+              ) : (
+                <button
+                  className="btn-res-pm"
+                  onClick={() =>
+                    /*postRentProduct()*/ setUploadBillShow("block")
+                  }
+                >
+                  เช่าสินค้า
+                </button>
+              )}
             </div>
           </div>
         </div>
-      </FormItem>
+      </div>
     );
   }
 }

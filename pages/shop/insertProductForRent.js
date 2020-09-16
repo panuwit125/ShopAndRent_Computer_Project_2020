@@ -243,9 +243,9 @@ function InsertProductRent() {
       <FormItem style={{ margin: "0px" }}>
         <div className="br">
           <NavbarManage show={show} setShow={setShow} />
-          <HeaderManage setShow={setShow} user={user} />1
+          <HeaderManage setShow={setShow} user={user} />
           <div style={{ padding: "0px 50px 20px 50px" }}>
-          <h1 style={{ textAlign:"center" }}>เพิ่มสินค้าขาย</h1>
+          <h1 style={{ textAlign:"center" }}>เพิ่มสินค้าเช่า</h1>
             <h2 style={{ color: "black" }}>ชื่อสินค้า</h2>
             <Input
               className="ip-iuput"
