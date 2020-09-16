@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Button, Upload, message, Input } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
-import Axios from "axios"
+import Axios from "axios";
 
 const ListRentItem = ({
   UploadBillShow,
@@ -9,31 +9,49 @@ const ListRentItem = ({
   postBuyProduct,
   type,
   postRentProduct,
-  inventory
+  inventory,
 }) => {
   const [isLoading, setisLoading] = useState(true);
   const [imageBill, setImageBill] = useState();
   const [textalerg, setTextAlerg] = useState("กรุณาอัพโหลดใบเสร็จ");
-  const [image,setImage] = useState();
+  const [image, setImage] = useState();
 
-  useEffect(()=>{
-    console.log(inventory)
-    let data = { id_seller: inventory[0].owner_product};
-    Axios({
-      method: "post",
-      url: "https://tranquil-beach-43094.herokuapp.com/showrate",
-      data,
-    })
-      .then((data) => {
-        console.log(data);
-        console.log(data.data.data[0].image_bill)
-        setImage(data.data.data[0].image_bill);
-        setisLoading(true);
+  useEffect(() => {
+    console.log(inventory);
+    if (type === "Shop") {
+      let data = { id_seller: inventory[0].owner_product };
+      Axios({
+        method: "post",
+        url: "https://tranquil-beach-43094.herokuapp.com/showrate",
+        data,
       })
-      .catch((err) => {
-        console.log(err.response);
-      });
-  })
+        .then((data) => {
+          console.log(data);
+          console.log(data.data.data[0].image_bill);
+          setImage(data.data.data[0].image_bill);
+          setisLoading(true);
+        })
+        .catch((err) => {
+          console.log(err.response);
+        });
+    } else if (type === "Rent") {
+      let data = { id_seller: inventory.owner_product };
+      Axios({
+        method: "post",
+        url: "https://tranquil-beach-43094.herokuapp.com/showrate",
+        data,
+      })
+        .then((data) => {
+          console.log(data);
+          console.log(data.data.data[0].image_bill);
+          setImage(data.data.data[0].image_bill);
+          setisLoading(true);
+        })
+        .catch((err) => {
+          console.log(err.response);
+        });
+    }
+  });
 
   const props = (e) => {
     console.log(e);
@@ -44,10 +62,10 @@ const ListRentItem = ({
   const checkImage = () => {
     if (imageBill) {
       if (type === "Shop") {
-        setUploadBillShow("none")
+        setUploadBillShow("none");
         postBuyProduct();
       } else if (type === "Rent") {
-        setUploadBillShow("none")
+        setUploadBillShow("none");
         postRentProduct();
       }
     } else {
@@ -59,12 +77,12 @@ const ListRentItem = ({
     return null;
   } else {
     return (
-      <div
-        style={{ display: UploadBillShow }}
-        className="modal md-bg"
-      >
+      <div style={{ display: UploadBillShow }} className="modal md-bg">
         <div className="modal-content">
-          <div className="lri-card" style={{minWidth:"300px",maxWidth:"500px"}}>
+          <div
+            className="lri-card"
+            style={{ minWidth: "300px", maxWidth: "500px" }}
+          >
             <div className="lri-header">
               <h2 style={{ color: "black" }}>กระบวนการจ่ายเงิน</h2>
               <Button onClick={() => setUploadBillShow("none")}>
@@ -81,10 +99,7 @@ const ListRentItem = ({
               }}
             >
               <div style={{ flexBasis: "auto", display: "flex" }}>
-                <img
-                  src={image}
-                  style={{ width: "100%", marginBottom: 10 }}
-                />
+                <img src={image} style={{ width: "100%", marginBottom: 10 }} />
               </div>
               <div
                 style={{
