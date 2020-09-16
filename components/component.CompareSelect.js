@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Button, Upload, message, Input } from "antd";
+import NumberFormat from "react-number-format";
 
 const CompareSelectShow = ({
   UploadBillShow,
@@ -55,6 +56,7 @@ const CompareSelectShow = ({
                       padding: "10px",
                       margin: "10px",
                       cursor: "pointer",
+                      display: "flex",
                     }}
                     key={index}
                     onClick={() => {
@@ -62,10 +64,19 @@ const CompareSelectShow = ({
                       SelectProduct(product);
                     }}
                   >
-                    <h4 style={{ color: "black" }}>
+                    <h4 style={{ color: "black", textAlign: "left" }}>
                       {index + 1}. {product.name_product}
                     </h4>
-                    <h4 style={{ color: "black" }}>{product.bland_product}</h4>
+                    <NumberFormat
+                      value={product.price_product}
+                      displayType={"text"}
+                      thousandSeparator={true}
+                      renderText={(value) => (
+                        <h4 style={{ color: "black", marginLeft: 5 }}>
+                          {value + "THB"}
+                        </h4>
+                      )}
+                    />
                   </div>
                 );
               })}
